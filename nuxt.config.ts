@@ -5,9 +5,14 @@ export default defineNuxtConfig({
     typescript: {
         strict: true
     },
-    css: [
-        "~/styles/main.scss"
-    ],
+    head: {
+        title: APP_NAME,
+        titleTemplate: `%s - ${APP_NAME}`,
+        meta: [
+            { charset: 'utf-8' },
+            { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        ],
+    },
     modules: [
         ['@nuxtjs/google-fonts', {
             families: {
@@ -19,6 +24,9 @@ export default defineNuxtConfig({
             useStylesheet: true
         }],
         'nuxt-svgo'
+    ],
+    css: [
+        "~/styles/main.scss"
     ],
     vite: {
         css: {

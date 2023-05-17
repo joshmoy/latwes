@@ -4,6 +4,7 @@
   <div>
     Offside
   </div>
+  <FrequentlyAskedQuestions />
   <Footer />
 </template>
 
