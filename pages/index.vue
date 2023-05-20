@@ -1,9 +1,8 @@
 <script setup lang="ts">
 </script>
 <template>
-  <div>
-    Offside
-  </div>
+  <HeroHeader />
+  <Leaderboard />
   <FrequentlyAskedQuestions />
   <Footer />
 </template>

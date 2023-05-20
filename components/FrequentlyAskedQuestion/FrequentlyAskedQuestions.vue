@@ -1,8 +1,8 @@
 <template>
     <section class="faq-wrapper">
         <div class="faq-header">
-            <h3 class="faq-title">Frequently asked questions.</h3>
-            <p class="faq-subtitle">Everything you need to know about {{ state.appName }}.</p>
+            <h3 class="section-title">Frequently asked questions.</h3>
+            <p class="section-subtitle">Everything you need to know about {{ state.appName }}.</p>
         </div>
         <div class="container">
             <AccordionGroup />

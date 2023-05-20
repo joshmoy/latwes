@@ -1,0 +1,62 @@
+.hero-header {
+    background: $light-blue;
+    min-height: 100vh;
+    display: flex;
+
+    &-container {
+        margin: auto;
+        text-align: center;
+    }
+
+    &-title {
+        font-size: 120px;
+        font-weight: 800;
+        letter-spacing: -5px;
+        span {
+            transform: rotate(7deg) translateY(21px);
+            display: inline-block;
+            background: $yellow;
+            padding: 10px 50px;
+            border: 8px solid black;
+        }
+    }
+
+    &-subtitle {
+        font-size: 24px;
+        line-height: 33px;
+        margin-top: 40px;
+    }
+    &-input {
+        &-wrapper {
+            margin-top: 60px;
+            background: $white;
+            border-radius: 40px;
+            overflow: hidden;
+            padding: 10px 16px;
+            max-width: 816px;
+            margin: 60px auto 0 auto;
+            display: flex;
+        }
+        border: none;
+        flex: 1;
+        font-size: 18px;
+        padding: 10px 16px;
+        &:focus {
+            outline: 0;
+        }
+    }
+    &-button {
+        background: $black;
+        color: $white;
+        border: none;
+        padding: 16px 24px;
+        border-radius: 40px;
+        transition: all 300ms ease-in-out;
+        font-size: 16px;
+        line-height: 25px;
+        font-weight: 600;
+        &:hover {
+            background: $light-blue;
+        }
+    }
+}

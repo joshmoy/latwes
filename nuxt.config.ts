@@ -16,7 +16,9 @@ export default defineNuxtConfig({
     modules: [
         ['@nuxtjs/google-fonts', {
             families: {
-                'Nunito Sans': true,
+                'Nunito Sans': {
+                    wght: [300,400,500,600,700,800,900]
+                },
             },
             download: true,
             inject: true,

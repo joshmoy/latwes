@@ -1,0 +1,21 @@
+<template>
+    <header class="hero-header">
+        <div class="container hero-header-container">
+            <h1 class="hero-header-title">
+                Compete With </h1>
+            <h1 class="hero-header-title second">
+                Other Fans & <span>Win!*</span>
+            </h1>
+            <p class="hero-header-subtitle">
+                Predict match results & rack up points!
+                <br />
+                Get the winner takes all prize when you put money in the pool!
+            </p>
+            <div class="hero-header-input-wrapper">
+                <input type="email" name="email" id="email" placeholder="Enter your email" class="hero-header-input">
+                <button type="submit" class="hero-header-button">Register <svgo-arrowright /></button>
+            </div>
+        </div>
+    </header>
+</template>
+<style lang="scss" scoped src="./HeroHeader.scss"></style>
