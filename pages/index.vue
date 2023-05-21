@@ -1,5 +1,6 @@
 <template>
   <HeroHeader />
+  <PredictionStats />
   <Leaderboard />
   <FrequentlyAskedQuestions />
   <Footer />
