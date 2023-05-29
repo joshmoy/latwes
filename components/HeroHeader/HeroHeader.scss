@@ -19,12 +19,18 @@
             padding: 10px 50px;
             border: 8px solid black;
         }
+        @media screen and (max-width: 768px) {
+            font-size: 60px;
+        }
     }
 
     &-subtitle {
         font-size: 24px;
         line-height: 33px;
         margin-top: 40px;
+        @media screen and (max-width: 768px) {
+            font-size: 16px;
+        }
     }
     &-input {
         &-wrapper {

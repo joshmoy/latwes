@@ -1,6 +1,7 @@
 <template>
   <HeroHeader />
   <PredictionStats />
+  <LandingUpcomingFixtures />
   <Leaderboard />
   <FrequentlyAskedQuestions />
   <Footer />
