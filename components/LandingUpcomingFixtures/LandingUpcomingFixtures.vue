@@ -29,6 +29,12 @@
             </div>
         </div>
     </div>
+    <DateScroll />
+    <div class="prediction-cards">
+      <div class="prediction-cards__child" v-for="(n, index) in 10" :key="index">
+        <PredictionCard />
+      </div>
+    </div>
   </div>
 </template>
 

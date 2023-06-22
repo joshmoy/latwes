@@ -2,6 +2,7 @@
   <HeroHeader />
   <PredictionStats />
   <LandingUpcomingFixtures />
+  <MoneyPool />
   <Leaderboard />
   <FrequentlyAskedQuestions />
   <Footer />
