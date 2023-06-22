@@ -2,6 +2,7 @@
     padding-top: 145px;
     @media screen and (max-width: 768px) {
         padding-top: 50px;
+        padding: 20px;
     }
     position: relative;
     &::before {
@@ -94,5 +95,23 @@
                 color: #fff;
             }
         }
+    }
+}
+.prediction-cards {
+    display: grid; 
+    grid-template-columns: 1fr 1fr;
+    max-width: 1352px;
+    margin: 50px auto;
+    gap: 60px;
+    @media screen and (max-width: 768px) {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+    }
+    &__child {
+        display: block;
+        margin: auto;
+        width: 100%;
     }
 }
