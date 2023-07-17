@@ -82,8 +82,11 @@ import { ref } from "vue";
 import { Form } from "vee-validate";
 import * as yup from "yup";
 import { signUpService } from "../../services/auth";
+import { useRouter } from "vue-router";
+const { $toast } = useNuxtApp();
 
 const isLoading = ref(false);
+const router = useRouter();
 
 const locations = [{ label: "Nigeria", value: "nigeria" }];
 
@@ -125,11 +128,17 @@ async function onSubmit(values, { resetForm }) {
     delete values?.confirmPassword;
     delete values?.acceptTerms;
     delete values?.over18;
-    const response = await signUpService(values);
+    await signUpService(values);
+    $toast.success("Signup successful!", {
+      duration: 5000,
+    });
     resetForm();
     isLoading.value = false;
+    router.push('/login');
   } catch (error) {
-    // Handle the error here
+    $toast.error(error?.response?.data?.message, {
+      duration: 5000,
+    });
     isLoading.value = false;
   }
 }

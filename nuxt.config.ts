@@ -30,7 +30,7 @@ export default defineNuxtConfig({
     ],
     "nuxt-svgo",
   ],
-  css: ["~/styles/main.scss"],
+  css: ["~/styles/main.scss", "vue-toast-notification/dist/theme-sugar.css"],
   vite: {
     css: {
       preprocessorOptions: {

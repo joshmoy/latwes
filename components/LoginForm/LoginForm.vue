@@ -34,6 +34,8 @@ import { Form } from "vee-validate";
 import * as yup from "yup";
 import { logInService } from "../../services/auth";
 
+const { $toast } = useNuxtApp();
+
 const isLoading = ref(false);
 
 const schema = yup.object().shape({
@@ -47,11 +49,16 @@ const schema = yup.object().shape({
 async function onSubmit(values, { resetForm }) {
   try {
     isLoading.value = true;
-    const response = await logInService(values);
+    await logInService(values);
+    $toast.success("Login successful!", {
+      duration: 5000,
+    });
     resetForm();
     isLoading.value = false;
   } catch (error) {
-    // Handle the error here
+    $toast.error(error?.response?.data?.message, {
+      duration: 5000,
+    });
     isLoading.value = false;
   }
 }
