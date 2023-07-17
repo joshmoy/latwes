@@ -1,4 +1,4 @@
-import { APP_NAME } from './config/index';
+import { APP_NAME } from "./config/index";
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   globalName: APP_NAME,
@@ -40,8 +40,5 @@ export default defineNuxtConfig({
         },
       },
     },
-  },
-  env: {
-    baseUrl: process.env.BASEURL,
   },
 });

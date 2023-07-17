@@ -3,9 +3,9 @@
     <h1 class="login-title">Sign into your account</h1>
     <Form @submit="onSubmit" :validation-schema="schema">
       <CustomInput
-        label="Username"
-        placeholder="Enter username"
-        name="username"
+        label="Email"
+        placeholder="Enter email"
+        name="email"
         type="text"
         rightError
       />
@@ -17,12 +17,17 @@
         helperText="8+ characters, can include symbols."
         rightError
       />
-        <p class="login-desc">
-          <NuxtLink to="/forgot-password">Forgot Password?</NuxtLink>
-        </p>
-      <button type="submit" class="login-button">
-        Sign in
-        <img src="/icons/chevronright.svg" alt="" />
+      <p class="login-desc">
+        <NuxtLink to="/forgot-password">Forgot Password?</NuxtLink>
+      </p>
+      <button type="submit" class="login-button" :disabled="isLoading">
+        <template v-if="isLoading">
+          <div class="loadingspinner"></div>
+        </template>
+        <template v-else>
+          Sign in
+          <img src="/icons/chevronright.svg" alt="" />
+        </template>
       </button>
     </Form>
   </div>
@@ -35,23 +40,33 @@
 <script setup>
 import { Form } from "vee-validate";
 import * as yup from "yup";
+import { logInService } from "../../services/auth";
+
+const isLoading = ref(false);
 
 const schema = yup.object().shape({
-  username: yup
-    .string()
-    .required("Username is required")
-    .matches(
-      /^[a-zA-Z0-9]+$/,
-      "Invalid username format. Only alphanumeric characters are allowed."
-    ),
+  email: yup.string().required("Email is a required field").email("Input a valid email address"),
   password: yup
     .string()
     .required("Password is a required field")
     .min(8, "Password can not be less than 8 characters"),
 });
 
-function onSubmit(values) {
-  console.log(JSON.stringify(values, null, 2));
+async function onSubmit(values, { resetForm }) {
+  try {
+    isLoading.value = true;
+    console.log(JSON.stringify(values, null, 2));
+
+    const response = await logInService(values);
+    console.log(response?.data);
+    resetForm();
+    isLoading.value = false;
+  } catch (error) {
+    console.error(error);
+    // Handle the error here
+
+    isLoading.value = false;
+  }
 }
 </script>
 

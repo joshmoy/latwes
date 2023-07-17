@@ -42,13 +42,13 @@
       </div>
       <div class="signup-flex">
         <CustomSelect
-          label="Location (optional)"
+          label="Location"
           placeholder="Select location"
           name="location"
           :options="locations"
         />
         <CustomSelect
-          label="Gender (optional)"
+          label="Gender"
           placeholder="Select gender"
           name="gender"
           :options="genders"
@@ -65,18 +65,27 @@
         />
       </div>
 
-      <button type="submit" class="signup-button">
-        Start predicting
-        <img src="/icons/chevronright.svg" alt="" />
+      <button type="submit" class="signup-button" :disabled="isLoading">
+        <template v-if="isLoading">
+          <div class="loadingspinner"></div>
+        </template>
+        <template v-else>
+          Start predicting
+          <img src="/icons/chevronright.svg" alt="" />
+        </template>
       </button>
     </Form>
   </div>
-  <img src="/icons/signup-bg.svg" alt="" class="signup-img"/>
+  <img src="/icons/signup-bg.svg" alt="" class="signup-img" />
 </template>
 
 <script setup>
+import { ref } from "vue";
 import { Form } from "vee-validate";
 import * as yup from "yup";
+import { signUpService } from "../../services/auth";
+
+const isLoading = ref(false);
 
 const locations = [{ label: "Nigeria", value: "nigeria" }];
 
@@ -106,14 +115,35 @@ const schema = yup.object().shape({
     .required("Please confirm your password")
     .min(8, "Password can not be less than 8 characters")
     .oneOf([yup.ref("password")], "Passwords do not match"),
-  location: yup.string().default(""),
-  gender: yup.string().default(""),
+  location: yup.string().required("Country is a required field"),
+  gender: yup.string().required("Gender is a required field"),
   acceptTerms: yup.boolean().oneOf([true], "You must accept the terms and conditions"),
   over18: yup.boolean().oneOf([true], "You must be above 18 years to sign up"),
 });
 
-function onSubmit(values) {
-  console.log(JSON.stringify(values, null, 2));
+async function onSubmit(values, { resetForm }) {
+  try {
+    isLoading.value = true;
+    const payload = {
+      username: values?.username,
+      email: values?.email,
+      gender: values?.gender,
+      password: values?.password,
+      first_name: values?.firstName,
+      last_name: values?.lastName,
+      country: values?.location,
+    };
+    console.log(JSON.stringify(values, null, 2));
+
+    const response = await signUpService(payload);
+    console.log(response?.data);
+    resetForm()
+    isLoading.value = false;
+  } catch (error) {
+    console.error(error);
+    // Handle the error here
+    isLoading.value = false;
+  }
 }
 </script>
 

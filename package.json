@@ -16,6 +16,8 @@
   "dependencies": {
     "@nuxtjs/google-fonts": "3.0.0-0",
     "axios": "^1.4.0",
+    "install": "^0.13.0",
+    "npm": "^9.8.0",
     "sass": "^1.60.0",
     "vee-validate": "^4.5.2",
     "yup": "^0.32.9"
