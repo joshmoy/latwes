@@ -55,16 +55,11 @@ const schema = yup.object().shape({
 async function onSubmit(values, { resetForm }) {
   try {
     isLoading.value = true;
-    console.log(JSON.stringify(values, null, 2));
-
     const response = await logInService(values);
-    console.log(response?.data);
     resetForm();
     isLoading.value = false;
   } catch (error) {
-    console.error(error);
     // Handle the error here
-
     isLoading.value = false;
   }
 }

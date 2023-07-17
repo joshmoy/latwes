@@ -133,14 +133,10 @@ async function onSubmit(values, { resetForm }) {
       last_name: values?.lastName,
       country: values?.location,
     };
-    console.log(JSON.stringify(values, null, 2));
-
     const response = await signUpService(payload);
-    console.log(response?.data);
     resetForm()
     isLoading.value = false;
   } catch (error) {
-    console.error(error);
     // Handle the error here
     isLoading.value = false;
   }
