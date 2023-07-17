@@ -29,13 +29,13 @@
         <CustomInput
           label="First Name"
           placeholder="Enter first name"
-          name="firstName"
+          name="first_name"
           type="text"
         />
         <CustomInput
           label="Last Name"
           placeholder="Enter last name"
-          name="lastName"
+          name="last_name"
           type="text"
           rightError
         />
@@ -44,7 +44,7 @@
         <CustomSelect
           label="Location"
           placeholder="Select location"
-          name="location"
+          name="country"
           :options="locations"
         />
         <CustomSelect
@@ -66,9 +66,7 @@
       </div>
 
       <button type="submit" class="signup-button" :disabled="isLoading">
-        <template v-if="isLoading">
-          <div class="loadingspinner"></div>
-        </template>
+        <div class="loadingspinner" v-if="isLoading"></div>
         <template v-else>
           Start predicting
           <img src="/icons/chevronright.svg" alt="" />
@@ -103,8 +101,8 @@ const schema = yup.object().shape({
       /^[a-zA-Z0-9]+$/,
       "Invalid username format. Only alphanumeric characters are allowed."
     ),
-  firstName: yup.string().required("First Name is a required field"),
-  lastName: yup.string().required("Last Name is a required field"),
+  first_name: yup.string().required("First Name is a required field"),
+  last_name: yup.string().required("Last Name is a required field"),
   email: yup.string().required("Email is a required field").email("Input a valid email address"),
   password: yup
     .string()
@@ -115,7 +113,7 @@ const schema = yup.object().shape({
     .required("Please confirm your password")
     .min(8, "Password can not be less than 8 characters")
     .oneOf([yup.ref("password")], "Passwords do not match"),
-  location: yup.string().required("Country is a required field"),
+  country: yup.string().required("Country is a required field"),
   gender: yup.string().required("Gender is a required field"),
   acceptTerms: yup.boolean().oneOf([true], "You must accept the terms and conditions"),
   over18: yup.boolean().oneOf([true], "You must be above 18 years to sign up"),
@@ -124,17 +122,11 @@ const schema = yup.object().shape({
 async function onSubmit(values, { resetForm }) {
   try {
     isLoading.value = true;
-    const payload = {
-      username: values?.username,
-      email: values?.email,
-      gender: values?.gender,
-      password: values?.password,
-      first_name: values?.firstName,
-      last_name: values?.lastName,
-      country: values?.location,
-    };
-    const response = await signUpService(payload);
-    resetForm()
+    delete values?.confirmPassword;
+    delete values?.acceptTerms;
+    delete values?.over18;
+    const response = await signUpService(values);
+    resetForm();
     isLoading.value = false;
   } catch (error) {
     // Handle the error here

@@ -2,13 +2,7 @@
   <div class="container login">
     <h1 class="login-title">Sign into your account</h1>
     <Form @submit="onSubmit" :validation-schema="schema">
-      <CustomInput
-        label="Email"
-        placeholder="Enter email"
-        name="email"
-        type="text"
-        rightError
-      />
+      <CustomInput label="Email" placeholder="Enter email" name="email" type="text" rightError />
       <CustomInput
         label="Password"
         placeholder="Enter password"
@@ -21,9 +15,7 @@
         <NuxtLink to="/forgot-password">Forgot Password?</NuxtLink>
       </p>
       <button type="submit" class="login-button" :disabled="isLoading">
-        <template v-if="isLoading">
-          <div class="loadingspinner"></div>
-        </template>
+        <div class="loadingspinner" v-if="isLoading"></div>
         <template v-else>
           Sign in
           <img src="/icons/chevronright.svg" alt="" />
