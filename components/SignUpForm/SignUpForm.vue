@@ -29,26 +29,26 @@
         <CustomInput
           label="First Name"
           placeholder="Enter first name"
-          name="firstName"
+          name="first_name"
           type="text"
         />
         <CustomInput
           label="Last Name"
           placeholder="Enter last name"
-          name="lastName"
+          name="last_name"
           type="text"
           rightError
         />
       </div>
       <div class="signup-flex">
         <CustomSelect
-          label="Location (optional)"
+          label="Location"
           placeholder="Select location"
-          name="location"
+          name="country"
           :options="locations"
         />
         <CustomSelect
-          label="Gender (optional)"
+          label="Gender"
           placeholder="Select gender"
           name="gender"
           :options="genders"
@@ -65,18 +65,25 @@
         />
       </div>
 
-      <button type="submit" class="signup-button">
-        Start predicting
-        <img src="/icons/chevronright.svg" alt="" />
+      <button type="submit" class="signup-button" :disabled="isLoading">
+        <div class="loadingspinner" v-if="isLoading"></div>
+        <template v-else>
+          Start predicting
+          <img src="/icons/chevronright.svg" alt="" />
+        </template>
       </button>
     </Form>
   </div>
-  <img src="/icons/signup-bg.svg" alt="" class="signup-img"/>
+  <img src="/icons/signup-bg.svg" alt="" class="signup-img" />
 </template>
 
 <script setup>
+import { ref } from "vue";
 import { Form } from "vee-validate";
 import * as yup from "yup";
+import { signUpService } from "../../services/auth";
+
+const isLoading = ref(false);
 
 const locations = [{ label: "Nigeria", value: "nigeria" }];
 
@@ -94,8 +101,8 @@ const schema = yup.object().shape({
       /^[a-zA-Z0-9]+$/,
       "Invalid username format. Only alphanumeric characters are allowed."
     ),
-  firstName: yup.string().required("First Name is a required field"),
-  lastName: yup.string().required("Last Name is a required field"),
+  first_name: yup.string().required("First Name is a required field"),
+  last_name: yup.string().required("Last Name is a required field"),
   email: yup.string().required("Email is a required field").email("Input a valid email address"),
   password: yup
     .string()
@@ -106,14 +113,25 @@ const schema = yup.object().shape({
     .required("Please confirm your password")
     .min(8, "Password can not be less than 8 characters")
     .oneOf([yup.ref("password")], "Passwords do not match"),
-  location: yup.string().default(""),
-  gender: yup.string().default(""),
+  country: yup.string().required("Country is a required field"),
+  gender: yup.string().required("Gender is a required field"),
   acceptTerms: yup.boolean().oneOf([true], "You must accept the terms and conditions"),
   over18: yup.boolean().oneOf([true], "You must be above 18 years to sign up"),
 });
 
-function onSubmit(values) {
-  console.log(JSON.stringify(values, null, 2));
+async function onSubmit(values, { resetForm }) {
+  try {
+    isLoading.value = true;
+    delete values?.confirmPassword;
+    delete values?.acceptTerms;
+    delete values?.over18;
+    const response = await signUpService(values);
+    resetForm();
+    isLoading.value = false;
+  } catch (error) {
+    // Handle the error here
+    isLoading.value = false;
+  }
 }
 </script>
 

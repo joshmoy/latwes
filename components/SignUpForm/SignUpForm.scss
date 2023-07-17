@@ -58,8 +58,30 @@
       background: $dark-blue;
     }
 
+    &:disabled {
+      opacity: 0.7;
+      cursor: "pointer";
+    }
+
     img {
       margin-left: 12px;
+    }
+
+    .loadingspinner {
+      pointer-events: none;
+      width: 40px;
+      height: 40px;
+      border: 8px solid transparent;
+      border-color: #eee;
+      border-top-color: #3e67ec;
+      border-radius: 50%;
+      animation: loadingspin 1s linear infinite;
+    }
+
+    @keyframes loadingspin {
+      100% {
+        transform: rotate(360deg);
+      }
     }
   }
 

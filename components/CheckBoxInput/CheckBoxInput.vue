@@ -1,19 +1,19 @@
 <template>
-  <div class="custom-checkbox" :class="{ 'has-error': !!errorMessage, success: meta.valid }">
+  <div class="custom-checkbox" :class="{ 'has-error': !!errorMessage }">
     <div class="custom-checkbox-field">
       <label class="custom-checkbox-div" :for="name">
         <input
           :name="name"
           :id="name"
           type="checkbox"
-          :value="inputValue"
-          @input="handleChange"
+          :checked="checked"
+          @input="handleChange(props.value)"
           @blur="handleBlur"
         />
         <span class="checkmark"></span>
         <p class="custom-checkbox-label">
           {{ label }}
-          <span>
+          <span v-if="linkHref">
             <NuxtLink :to="linkHref">{{ linkText }}</NuxtLink>
           </span>
         </p>
@@ -31,9 +31,11 @@ import { toRef } from "vue";
 import { useField } from "vee-validate";
 
 const props = defineProps({
+  modelValue: {
+    type: null,
+  },
   value: {
     type: String,
-    default: "",
   },
   name: {
     type: String,
@@ -59,15 +61,13 @@ const props = defineProps({
 
 const name = toRef(props, "name");
 
-const {
-  value: inputValue,
-  errorMessage,
-  handleBlur,
-  handleChange,
-  meta,
-} = useField(name, undefined, {
-  initialValue: props.value,
+const { checked, errorMessage, handleBlur, handleChange } = useField(name, undefined, {
+  type: "checkbox",
+  checkedValue: true,
+  uncheckedValue: false,
+  validateOnValueUpdate: true,
 });
+
 </script>
 
 <style lang="scss" scoped src="./CheckBoxInput.scss"></style>

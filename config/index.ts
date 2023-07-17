@@ -1,1 +1,1 @@
-export const APP_NAME: string = 'Offgoal*';
+export const APP_NAME: string = 'Goborr*';
