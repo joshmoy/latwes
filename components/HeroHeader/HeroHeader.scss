@@ -1,3 +1,6 @@
+.hero {
+    background: $light-blue;
+}
 .hero-header {
     background: $light-blue;
     min-height: 100vh;
@@ -13,11 +16,14 @@
         font-weight: 800;
         letter-spacing: -5px;
         span {
-            transform: rotate(7deg) translateY(21px);
+            transform: rotate(3deg) translateY(30px);
             display: inline-block;
-            background: $yellow;
-            padding: 10px 50px;
-            border: 8px solid black;
+            // background: $yellow;
+            background: url(../../assets/icons/hero-win.svg);
+            padding: 30px 50px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            // border: 8px solid black;
         }
         @media screen and (max-width: 768px) {
             font-size: 60px;

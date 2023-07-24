@@ -28,8 +28,17 @@ export default defineNuxtConfig({
         useStylesheet: true,
       },
     ],
+    "@pinia/nuxt",
     "nuxt-svgo",
+    "dayjs-nuxt"
   ],
+  pinia: {
+    autoImports: [
+      // automatically imports `defineStore`
+      'defineStore', // import { defineStore } from 'pinia'
+      ['defineStore', 'definePiniaStore'], // import { defineStore as definePiniaStore } from 'pinia'
+    ],
+  },
   css: ["~/styles/main.scss", "vue-toast-notification/dist/theme-sugar.css"],
   vite: {
     css: {

@@ -10,7 +10,7 @@
               :class="{'english__hover': premierLeagueIsHoverState, 'english__active': premierLeagueIsActiveState}"
               @mouseover="premierLeagueIsHoverState = true"
               @mouseleave="premierLeagueIsHoverState = false"
-              @click="premierLeagueIsActiveState = true; championsLeagueIsActiveState= false">
+              @click="displayFixture('epl')">
               <div class="english_image">
                 <img :src="premierBackgroundUrl" alt="">
               </div>
@@ -21,7 +21,7 @@
               :class="{'champions__hover': championsLeagueIsHoverState, 'champions__active': championsLeagueIsActiveState}"
               @mouseover="championsLeagueIsHoverState = true"
               @mouseleave="championsLeagueIsHoverState = false"
-              @click="championsLeagueIsActiveState = true; premierLeagueIsActiveState= false">
+              @click="displayFixture('cl')">
               <div class="champions_image">
                 <img :src="championsBackgroundUrl" alt="">
               </div>
@@ -31,18 +31,18 @@
     </div>
     <DateScroll />
     <div class="prediction-cards">
-      <div class="prediction-cards__child" v-for="(n, index) in 10" :key="index">
-        <PredictionCard />
+      <div class="prediction-cards__child" v-for="(fixture, index) in fixtures" :key="index">
+        <PredictionCard :fixture="fixture"/>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, watch, onMounted } from 'vue';
+import { useFixturesStore } from '@/store/fixturesStore'
 
-//@ts-ignore
-// import championsLeagueHoverImage from '~/assets/icons/champions-league-hover.svg'
+const fixtureStore = useFixturesStore()
 
 let premierLeagueIsActiveState = ref(true)
 let premierLeagueIsHoverState = ref(false)
@@ -52,6 +52,15 @@ let championsLeagueIsHoverState = ref(false)
 let championsBackgroundUrl = ref('/icons/champions-league-inactive.svg')
 let premierBackgroundUrl = ref('/icons/england-flag.svg')
 
+let leagueFixture = ref('epl')
+
+const fixtures = fixtureStore.getters.getFixtures;
+
+
+onMounted(() => {
+  fixtureStore.action.fetchFixtures(leagueFixture.value, '2')
+})
+
 watch(championsLeagueIsHoverState, (val) => {
   if(val === true && !championsLeagueIsActiveState) {
     championsBackgroundUrl.value = '/icons/champions-league-hover.svg';
@@ -60,13 +69,17 @@ watch(championsLeagueIsHoverState, (val) => {
   )
 }, { immediate: true })
 
-// watch(premierLeagueIsHoverState, (val) => {
-//   if(val === true) {
-//     premierBackgroundUrl.value = '/icons/england-flag.svg';
-//   } else if (val === false) (
-//     premierBackgroundUrl.value = '/icons/england-flag.svg'
-//   )
-// }, { immediate: true })
+const displayFixture = (competition: string) => {
+  if (competition === 'epl') {
+    premierLeagueIsActiveState.value = true; 
+    championsLeagueIsActiveState.value = false;
+    leagueFixture.value = 'epl'
+  } else if (competition === 'cl') {
+    championsLeagueIsActiveState.value = true;
+    premierLeagueIsActiveState.value = false;
+    leagueFixture.value = 'cl'
+  }
+}
 
 </script>
 
