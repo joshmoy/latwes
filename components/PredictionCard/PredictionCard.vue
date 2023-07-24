@@ -71,10 +71,10 @@ const router = useRouter();
 // const date = dayjs('2023-01-01')
 
 interface IFixtures {
-    fixture: IfixturesObject
+    fixture: IFixturesObject
 }
 
-interface IfixturesObject {
+interface IFixturesObject {
     away_team: String
     away_team_color?: String
     away_team_score?: String

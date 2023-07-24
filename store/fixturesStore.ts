@@ -5,11 +5,13 @@ import { computed, ref } from 'vue'
 export const useFixturesStore = defineStore('fixtures', ()  => {
   const state = {
     // data: [] as Array<any>
-    data: ref([])
+    data: ref([]),
+    matchEvents: ref<IEvents>()
   }
 
   const getters = {
-    getFixtures: computed(() => state.data)
+    getFixtures: computed(() => state.data),
+    getMatchEvents: computed(() => state.matchEvents)
   }
 
   const action = {
@@ -17,6 +19,18 @@ export const useFixturesStore = defineStore('fixtures', ()  => {
         try {
           const res =  await axiosInstance.get(`competition/${competition}/fixture?round=${round}`);
           state.data.value = res?.data?.data;
+          return res?.data?.data
+          
+        } catch (error) {
+          console.error(error);
+          return error;
+        }
+      },
+      fetchEvents: async (competition: string) => {
+        try {
+          const res =  await axiosInstance.get(`competition/${competition}/event`);
+          state.matchEvents.value = res?.data?.data;
+          return res?.data?.data
           
         } catch (error) {
           console.error(error);

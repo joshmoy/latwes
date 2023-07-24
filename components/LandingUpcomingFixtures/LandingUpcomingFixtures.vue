@@ -29,7 +29,7 @@
             </div>
         </div>
     </div>
-    <DateScroll />
+    <DateScroll :events="events?.events" :matchRound="events?.current_round" @fetchCurrentMatchesSelected="fetchCurrentMatchesSelected"/>
     <div class="prediction-cards">
       <div class="prediction-cards__child" v-for="(fixture, index) in fixtures" :key="index">
         <PredictionCard :fixture="fixture"/>
@@ -55,11 +55,28 @@ let premierBackgroundUrl = ref('/icons/england-flag.svg')
 let leagueFixture = ref('epl')
 
 const fixtures = fixtureStore.getters.getFixtures;
+const events = fixtureStore.getters.getMatchEvents;
 
 
-onMounted(() => {
-  fixtureStore.action.fetchFixtures(leagueFixture.value, '2')
+onMounted(async() => {
+  try {
+    const res = fixtureStore.action.fetchEvents(leagueFixture.value)
+    res.then((res: any) => {
+      if (res) {
+        fixtureStore.action.fetchFixtures(leagueFixture.value, res?.current_round);
+      }
+    })
+    
+  } catch (error) {
+    console.error(error)
+    return error
+  }
+  
 })
+
+const fetchCurrentMatchesSelected = (round: string) => {
+  fixtureStore.action.fetchFixtures(leagueFixture.value, round);
+}
 
 watch(championsLeagueIsHoverState, (val) => {
   if(val === true && !championsLeagueIsActiveState) {
