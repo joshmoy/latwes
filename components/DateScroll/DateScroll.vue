@@ -7,10 +7,10 @@
       <div
         
         class="fixtures__matches--match"
-        :class="{'fixtures__matches--match__active': Number(match.id) === Number(activeMatch && activeMatch.id)}"
+        :class="{'fixtures__matches--match__active': Number(match.match_day) === Number(activeMatch && activeMatch.match_day)}"
         v-for="match in displayValues()"
         :key="match.id"
-        @click="selectMatch(match.id)">
+        @click="selectMatch(match.match_day)">
         <p class="matchday">Mathday {{ match.match_day }}</p>
         <p class="points">{{ match.points }} pts</p>
         <!-- <p class="matchdate">{{ match.start_at }}</p> -->
@@ -24,23 +24,48 @@
 
 <script  setup lang="ts">
 import { ref, computed } from 'vue';
-import Events from '@/assets/mockData/Events.json'
+
+interface IEventsObject {
+  id: number;
+  competition_slug: string;
+  name: string;
+  short_name: string;
+  start_at: string;
+  end_at: string;
+  created_at: string;
+  updated_at: string;
+  match_day: number;
+  points: number;
+}
+
+const props = defineProps(['events', 'matchRound'])
+const emit = defineEmits(['fetchCurrentMatchesSelected'])
 
 const currentIndex = ref(0)
 const direction = ref(1)
-const activeMatchesShown = ref(Events.data.events.slice(currentIndex.value, currentIndex.value + 9))
 const activeMatch = ref()
-
-const matches = computed(() => {
-  return Events.data.events;
+const visibleMatchEvents = computed(() => {
+  return props.events && props.events.slice(currentIndex.value, currentIndex.value + 9)
 })
+
+watch(visibleMatchEvents, (val) => {
+  if(val) {
+    const id = props.events && props.events.find((val: { match_day: any; }) => val.match_day === props.matchRound)
+    selectMatch(id.match_day)
+  }
+})
+
+watch(activeMatch, (val) => {
+  if(val) {
+    emit('fetchCurrentMatchesSelected', val.match_day)
+  }
+})
+
 const displayValues = () => {
-  const visibleMatches = matches.value.slice(currentIndex.value, currentIndex.value + 9);
+  const visibleMatches = props.events?.slice(currentIndex.value, currentIndex.value + 9);
   return visibleMatches;
 }
 const triggerSliderAnimation = (val: number) => {
-  console.log('called?');
-  
   const sliderElement:any = document.getElementById('match-fixtures');
   if (val === 1) {
     // Trigger sliding animation
@@ -51,8 +76,6 @@ const triggerSliderAnimation = (val: number) => {
       sliderElement.classList.remove('slide-animation-to');
     }, 150);
   } else if (val === -1) {
-    console.log('that');
-    
     // Trigger sliding animation
     sliderElement.classList.add('slide-animation-from');
     
@@ -64,13 +87,13 @@ const triggerSliderAnimation = (val: number) => {
 }
 const slide = (val: number) => {
   if (val === 1) {
-    if (currentIndex.value + 9 < matches.value.length) {
+    if (currentIndex.value + 9 < props.events.length) {
       currentIndex.value++;
       displayValues();
       triggerSliderAnimation(val);
     }
   } else if (val === -1) {
-    if (currentIndex.value !== 0 && currentIndex.value + 9 <= matches.value.length) {
+    if (currentIndex.value !== 0 && currentIndex.value + 9 <= props.events.length) {
       currentIndex.value--;
       displayValues();
       triggerSliderAnimation(val);
@@ -79,8 +102,9 @@ const slide = (val: number) => {
 }
 
 const selectMatch = async (id: number) => {
-  const active = await activeMatchesShown.value.find(val => val.id === id)
+  const active = await visibleMatchEvents.value.find((val: { match_day: number; }) => val.match_day === id)
   activeMatch.value = active
+  
 }
 </script>
 
