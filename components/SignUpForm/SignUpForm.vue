@@ -85,8 +85,8 @@ import { signUpService } from "../../services/auth";
 import { useRouter } from "vue-router";
 import { locations } from "../../data/states";
 import { genders } from "../../data/gender";
-
-const { $toast } = useNuxtApp();
+import { useToast } from "vue-toastification";
+const $toast = useToast();
 
 const isLoading = ref(false);
 const router = useRouter();
@@ -125,14 +125,14 @@ async function onSubmit(values, { resetForm }) {
     delete values?.over18;
     await signUpService(values);
     $toast.success("Signup successful!", {
-      duration: 5000,
+      timeout: 5000,
     });
     resetForm();
     isLoading.value = false;
     router.push("/login");
   } catch (error) {
     $toast.error(error?.response?.data?.message, {
-      duration: 5000,
+      timeout: 5000,
     });
     isLoading.value = false;
   }
