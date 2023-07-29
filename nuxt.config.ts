@@ -39,7 +39,7 @@ export default defineNuxtConfig({
       ['defineStore', 'definePiniaStore'], // import { defineStore as definePiniaStore } from 'pinia'
     ],
   },
-  css: ["~/styles/main.scss", "vue-toast-notification/dist/theme-sugar.css"],
+  css: ["~/styles/main.scss", "vue-toastification/dist/index.css"],
   vite: {
     css: {
       preprocessorOptions: {
