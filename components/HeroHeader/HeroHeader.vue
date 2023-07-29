@@ -19,9 +19,9 @@
                 </div>
             </div>
         </section>
-        <div>
-            <img src="/icons/hero-left.svg" alt="">
-            <img src="/icons/hero-right.svg" alt="">
+        <div class="hero__icons">
+            <img src="../../assets/icons/hero-left.svg" alt="">
+            <img src="../../assets/icons/hero-right.svg" alt="">
         </div>
     </main>
 </template>

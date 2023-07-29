@@ -1,9 +1,16 @@
 .hero {
     background: $light-blue;
+    min-height: 100vh;
+    &__icons {
+        display: flex;
+        justify-content: space-between;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
 }
 .hero-header {
     background: $light-blue;
-    min-height: 100vh;
     display: flex;
 
     &-container {

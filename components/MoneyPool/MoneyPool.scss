@@ -9,6 +9,7 @@
         font-weight: 800;
         line-height: 77px;
         letter-spacing: -2px;
+        color: #fff;
         @media screen and (max-width: 768px) {
             font-size: 36px;
             line-height: 48px;
@@ -21,6 +22,7 @@
         letter-spacing: -1px;
         text-align: center;
         margin-top: 20px;
+        color: #fff;
     }
     &__button {
         background: $black;
@@ -38,5 +40,8 @@
         &:hover {
             background: $light-blue;
         }
+    }
+    &__image {
+        width: 100%;
     }
 }

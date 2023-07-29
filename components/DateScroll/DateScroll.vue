@@ -23,7 +23,7 @@
 </template>
 
 <script  setup lang="ts">
-import { ref, computed, defineProps, reactive, defineEmits } from 'vue';
+import { ref, computed } from 'vue';
 
 interface IEventsObject {
   id: number;
