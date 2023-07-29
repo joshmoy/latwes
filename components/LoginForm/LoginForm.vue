@@ -33,8 +33,8 @@
 import { Form } from "vee-validate";
 import * as yup from "yup";
 import { logInService } from "../../services/auth";
-
-const { $toast } = useNuxtApp();
+import { useToast } from "vue-toastification";
+const $toast = useToast();
 
 const isLoading = ref(false);
 
@@ -51,13 +51,13 @@ async function onSubmit(values, { resetForm }) {
     isLoading.value = true;
     await logInService(values);
     $toast.success("Login successful!", {
-      duration: 5000,
+      timeout: 5000,
     });
     resetForm();
     isLoading.value = false;
   } catch (error) {
     $toast.error(error?.response?.data?.message, {
-      duration: 5000,
+      timeout: 5000,
     });
     isLoading.value = false;
   }
