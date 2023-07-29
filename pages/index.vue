@@ -15,7 +15,7 @@
   background-repeat: no-repeat;
   background-size: auto;
   @media screen and (min-width: 1512px) {
-    background-size: contain;
+    background-size: cover;
   }
 }
 </style>
