@@ -83,18 +83,13 @@ import { Form } from "vee-validate";
 import * as yup from "yup";
 import { signUpService } from "../../services/auth";
 import { useRouter } from "vue-router";
+import { locations } from "../../data/states";
+import { genders } from "../../data/gender";
+
 const { $toast } = useNuxtApp();
 
 const isLoading = ref(false);
 const router = useRouter();
-
-const locations = [{ label: "Nigeria", value: "nigeria" }];
-
-const genders = [
-  { label: "Male", value: "male" },
-  { label: "Female", value: "female" },
-  { label: "Other", value: "other" },
-];
 
 const schema = yup.object().shape({
   username: yup
@@ -134,7 +129,7 @@ async function onSubmit(values, { resetForm }) {
     });
     resetForm();
     isLoading.value = false;
-    router.push('/login');
+    router.push("/login");
   } catch (error) {
     $toast.error(error?.response?.data?.message, {
       duration: 5000,

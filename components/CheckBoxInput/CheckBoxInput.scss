@@ -1,21 +1,17 @@
 .custom-checkbox {
   width: 100%;
-  margin-bottom: 52px;
-
-  @media screen and (max-width: 768px) {
-    margin-bottom: 30px;
-  }
+  margin-bottom: 24px;
 
   &-label {
     display: block !important;
     color: $white;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
     margin: 2px 0 0 40px;
 
     span {
-        text-decoration: underline;
-        color: $light-blue;
+      text-decoration: underline;
+      color: $light-blue;
     }
   }
 
@@ -48,7 +44,7 @@
       width: 24px;
       background-color: transparent;
       border-radius: 7px;
-      border: 2px solid #E3E5E8; /* Customize the border as needed */
+      border: 2px solid #e3e5e8; /* Customize the border as needed */
     }
 
     .checkmark::before {
@@ -64,11 +60,11 @@
       font-size: 18px; /* Customize the font size as needed */
       line-height: 18px; /* Customize the line height as needed */
       color: #fff; /* Customize the color of the checkmark */
-      margin: 3px 0 0 3px
+      margin: 3px 0 0 3px;
     }
   }
 
- &-error {
+  &-error {
     margin-top: 13px;
     color: $red;
     text-align: left;
@@ -77,6 +73,10 @@
   }
 
   .right-error {
-     text-align: right !important;
+    text-align: right !important;
+
+    @media screen and (max-width: 768px) {
+      text-align: left !important;
+    }
   }
 }
