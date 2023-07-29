@@ -1,10 +1,6 @@
 .custom-select {
   width: 100%;
-  margin-bottom: 52px;
-
-  @media screen and (max-width: 768px) {
-     margin-bottom: 30px;
-  }
+  margin-bottom: 24px;
 
   &-label {
     display: block !important;
@@ -17,7 +13,7 @@
 
   &-field {
     width: 100%;
-    height: 73px;
+    height: 50px;
     border-radius: 8px;
     background-color: $white;
     display: flex;
@@ -34,9 +30,9 @@
     select {
       border: none;
       outline: none;
-      height: 50px;
+      height: 40px;
       color: #9ca5b0;
-      font-size: 20px;
+      font-size: 14px;
       font-weight: 400;
       width: 90%;
       background-color: $white;
@@ -47,7 +43,7 @@
     }
   }
 
-   &-error {
+  &-error {
     margin-top: 13px;
     color: $red;
     text-align: left;
@@ -56,6 +52,10 @@
   }
 
   .right-error {
-     text-align: right !important;
+    text-align: right !important;
+
+    @media screen and (max-width: 768px) {
+      text-align: left !important;
+    }
   }
 }
