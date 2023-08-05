@@ -14,13 +14,14 @@
       <p class="login-desc">
         <NuxtLink to="/forgot-password">Forgot Password?</NuxtLink>
       </p>
-      <button type="submit" class="login-button" :disabled="isLoading">
-        <div class="loadingspinner" v-if="isLoading"></div>
-        <template v-else>
-          Sign in
-          <img src="/icons/chevronright.svg" alt="" />
-        </template>
-      </button>
+      <div class="login-submit">
+        <CustomButton
+          :isLoading="isLoading"
+          imageUrl="/icons/chevronright.svg"
+          showImage
+          title="Sign in"
+        />
+      </div>
     </Form>
   </div>
   <div class="login-imgDiv">

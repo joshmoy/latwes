@@ -10,10 +10,9 @@
         type="text"
         rightError
       />
-      <button type="submit" class="forgot-password-button" :disabled="isLoading">
-        <div class="loadingspinner" v-if="isLoading"></div>
-        <template v-else> Reset password </template>
-      </button>
+      <div class="forgot-password-submit">
+        <CustomButton :isLoading="isLoading" imageUrl="" title="Reset password" />
+      </div>
     </Form>
   </div>
   <div class="forgot-password-imgDiv">

@@ -10,10 +10,9 @@
         type="password"
         rightError
       />
-      <button type="submit" class="reset-password-button" :disabled="isLoading">
-        <div class="loadingspinner" v-if="isLoading"></div>
-        <template v-else> Reset password </template>
-      </button>
+      <div class="reset-password-submit">
+        <CustomButton :isLoading="isLoading" imageUrl="" title="Change Password" />
+      </div>
     </Form>
   </div>
   <div class="reset-password-imgDiv">
@@ -47,7 +46,7 @@ async function onSubmit(values, { resetForm }) {
     isLoading.value = true;
     let urlParams = new URLSearchParams(window.location.search);
     let token = urlParams.get("token");
-    const payload = {...values, token};
+    const payload = { ...values, token };
     const res = await resetPasswordService(payload);
     $toast.success(res?.data?.message, {
       timeout: 5000,
