@@ -1,7 +1,9 @@
 <template>
   <NuxtLayout name="dashboard-layout">
     <div>
-      <h1>Dashboard Page 1</h1>
+      <PageTitle title="competitions" />
+      <PredictionBanner />
+      <Leagues />
     </div>
   </NuxtLayout>
 </template>

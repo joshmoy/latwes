@@ -1,18 +1,32 @@
 <template>
   <div class="dashboard-layout">
-   <DashboardNav />
-    <!-- Content slot to inject the page-specific content -->
-    <main class="container">
-      <p>tesr</p>
-      <slot />
+    <DashboardNav />
+    <main class="dashboard-section">
+      <section class="container">
+        <slot />
+      </section>
     </main>
-
-    <!-- Add your common footer or other elements here -->
     <footer>
       <!-- Your footer content -->
     </footer>
   </div>
 </template>
-<!-- 
-<style lang="scss" scoped src="./DashboardLayout.scss"></style> -->
 
+<style lang="scss" scoped>
+.dashboard {
+  &-layout {
+    display: grid;
+    grid-template-rows: 144px 1fr;
+    grid-template-columns: 1fr;
+    min-height: 100vh;
+  }
+
+  &-section {
+    background: #f5f6ff;
+
+    .container {
+      padding: 40px 80px 100px;
+    }
+  }
+}
+</style>
