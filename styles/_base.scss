@@ -4,6 +4,15 @@
   max-width: 1352px;
 }
 
+.dashboard {
+  &-layout {
+    display: grid;
+    grid-template-rows: 144px 1fr;
+    grid-template-columns: 1fr;
+    min-height: 100vh;
+  }
+}
+
 div.v-toast__icon {
   display: none !important;
 }
