@@ -1,0 +1,87 @@
+.dashboard-header {
+  height: 144px;
+
+  &-container {
+    margin: auto;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    padding: 0 80px;
+
+    @media screen and (max-width: 768px) {
+      padding: 0 20px;
+    }
+  }
+
+  &-logo {
+    font-size: 32px;
+    font-weight: 800;
+    color: $black;
+
+    @media screen and (max-width: 768px) {
+      font-size: 20px;
+    }
+  }
+
+  &-flex {
+    display: flex;
+    align-items: center;
+  }
+
+  &-navigation {
+    display: flex;
+    align-items: center;
+    margin-left: 65px;
+
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
+
+    &-links {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      li {
+        padding: 8px 24px;
+        color: $black;
+        font-size: 20px;
+        font-weight: 700;
+        transition: all 300ms ease-in;
+
+        @include on-hover {
+          color: $light-blue;
+        }
+
+        &:not(:last-of-type) {
+          margin-right: 12px;
+        }
+      }
+
+      .active {
+        border-radius: 20px;
+        background-color: $light-blue;
+        color: $white;
+
+        @include on-hover {
+          color: $white;
+        }
+      }
+    }
+  }
+
+  &-avatar {
+    width: 40px;
+    height: 40px;
+    margin-right: 14px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 100%;
+    }
+  }
+}

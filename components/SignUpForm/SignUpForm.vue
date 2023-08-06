@@ -64,14 +64,14 @@
           name="acceptTerms"
         />
       </div>
-
-      <button type="submit" class="signup-button" :disabled="isLoading">
-        <div class="loadingspinner" v-if="isLoading"></div>
-        <template v-else>
-          Start predicting
-          <img src="/icons/chevronright.svg" alt="" />
-        </template>
-      </button>
+      <div class="signup-submit">
+        <CustomButton
+          :isLoading="isLoading"
+          imageUrl="/icons/chevronright.svg"
+          showImage
+          title="Start predicting"
+        />
+      </div>
     </Form>
   </div>
   <img src="/icons/signup-bg.svg" alt="" class="signup-img" />
