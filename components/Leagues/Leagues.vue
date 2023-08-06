@@ -59,9 +59,7 @@
     </div>
   </div>
   <CustomModal v-if="showModal" @close="closeModal">
-    <!-- Content for the modal -->
-    <h2>Modal Title</h2>
-    <p>Modal content goes here.</p>
+    <TeamSelect />
   </CustomModal>
 </template>
 
@@ -70,14 +68,13 @@ import { ref } from "vue";
 const showModal = ref(false);
 
 const openModal = () => {
-  console.log("clicked");
   showModal.value = true;
+  document.body.classList.add('block-modal');
 };
 
 const closeModal = () => {
-  console.log("closed");
-
   showModal.value = false;
+  document.body.classList.remove("block-modal");
 };
 
 const leagueItems = [

@@ -1,21 +1,23 @@
 <template>
   <div class="modal-overlay">
     <div class="modal">
-      <!-- Modal content -->
-      modal opened
-      <slot></slot>
+      <div class="modal-content">
+        <slot></slot>
+      </div>
 
-      <!-- Close button -->
-      <button @click="handleCloseModal">Close</button>
+      <button @click="handleCloseModal" class="modal-button">
+        <img src="/icons/Close.svg" />
+      </button>
     </div>
   </div>
 </template>
 
-<script setup>
-// const { emit } = defineEmits(["close"]);
+<script setup lang="ts">
+const emit = defineEmits(["close"]);
 
-// Emits the 'close' event to parent when the modal is closed
 const handleCloseModal = () => {
-  ctx.emit("close");
+  emit("close");
 };
 </script>
+
+<style lang="scss" scoped src="./CustomModal.scss"></style>
