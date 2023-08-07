@@ -6,7 +6,7 @@
       <button type="submit" class="money-pool__button">Create Your Account <svgo-arrowright /></button>
     </div>
     <div>
-      <img class="money-pool__image" src="../../assets/icons/pool.svg" alt="">
+      <img class="money-pool__image" src="/icons/pool.svg" alt="">
     </div>
   </div>
 </template>
