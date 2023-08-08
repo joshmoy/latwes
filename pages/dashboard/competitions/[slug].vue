@@ -3,6 +3,7 @@
     <div>
       <PageTitle title="competitions" />
       <PredictionBanner />
+      <SingleLeague />
     </div>
   </NuxtLayout>
 </template>
