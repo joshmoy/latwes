@@ -23,7 +23,6 @@
                   @blur="handleBlur"
                   ref="homeInput"
                 />
-                <p v-else-if="homeInputValue">{{ homeInputValue }}</p>
                 <img src="/icons/plus.svg" v-else />
               </div>
             </div>
@@ -31,7 +30,6 @@
             <div class="team-input__b__prediction">
               <div class="plus" @click="handleShowInput">
                 <input type="tel" v-if="showInput" v-model="awayInputValue" @blur="handleBlur" />
-                <p v-else-if="awayInputValue">{{ awayInputValue }}</p>
                 <img src="/icons/plus.svg" v-else />
               </div>
             </div>
@@ -98,6 +96,8 @@
 
 <script setup lang="ts">
 import { ref, nextTick } from "vue";
+import { dateFormatter } from "../../helpers/dataFormatter";
+
 const router = useRouter();
 const showInput = ref(false);
 const homeInput = ref<HTMLInputElement | null>(null);
@@ -111,20 +111,11 @@ const props = defineProps({
   },
 });
 
-const options: Intl.DateTimeFormatOptions = {
-  weekday: "short",
-  month: "short",
-  day: "numeric",
-  hour: "numeric",
-  minute: "numeric",
-  hour12: true,
-};
-
 const currentDate = new Date();
 const matchDate = new Date(props.matchData.kickoff_time);
 const pointsEarned = currentDate < matchDate ? 0 : props.matchData.points;
 
-const formattedDate = new Intl.DateTimeFormat(undefined, options).format(matchDate);
+const formattedDate = dateFormatter(matchDate);
 
 const handleShowInput = () => {
   if (showInput.value === true) return;
@@ -140,7 +131,7 @@ const handleHideInput = () => (showInput.value = false);
 
 const handleSubmit = () => {
   const payload = { home_team_score: homeInputValue.value, away_team_score: awayInputValue.value };
-//   make axions call
+  //   make axions call
 };
 
 const handleBlur = () => {
@@ -158,7 +149,6 @@ const handleBlur = () => {
     // show home prediction is needed
     return;
   }
-  handleHideInput();
   handleSubmit();
 };
 </script>
