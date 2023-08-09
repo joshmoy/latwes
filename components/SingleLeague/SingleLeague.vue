@@ -62,11 +62,13 @@
 </template>
 
 <script setup lang="ts">
+const props = defineProps();
 import { useFixturesStore } from "@/store/fixturesStore";
 
 const fixtureStore = useFixturesStore();
 
-let leagueFixture = ref("epl");
+const slug = ref('');
+let leagueFixture = ref(slug);
 
 const events = fixtureStore.getters.getMatchEvents;
 
@@ -211,6 +213,7 @@ const scoringData = [
   { point: 1, desc: "For predicting who wins" },
 ];
 onMounted(async () => {
+  // slug.value = $route.params.slug;
   try {
     const res = fixtureStore.action.fetchEvents(leagueFixture.value);
     res.then((res: any) => {

@@ -7,4 +7,8 @@ const options: Intl.DateTimeFormatOptions = {
   hour12: true,
 };
 
-export const dateFormatter = (date: Date | undefined) => new Intl.DateTimeFormat(undefined, options).format(date);
+export const dateFormatter = (date: Date | undefined) =>
+  new Intl.DateTimeFormat(undefined, options).format(date);
+
+export const daysDifference = (timeDifference: number) =>
+  Math.floor(timeDifference / (1000 * 60 * 60 * 24));
