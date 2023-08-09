@@ -6,14 +6,14 @@
           <img src="/icons/plLogo.png" />
         </div>
         <div class="select-top-meta-desc">
-          <p class="select-top-meta-desc-name">Premier League</p>
-          <p class="select-top-meta-desc-start">Starts in 4 weeks</p>
+          <p class="select-top-meta-desc-name">{{ singleLeague?.name }}</p>
+          <!-- <p class="select-top-meta-desc-start">Starts in 4 weeks</p> -->
         </div>
       </div>
       <div class="select-top-profile">
         <div>
           <p class="select-top-profile-desc">Hi there</p>
-          <p class="select-top-profile-username">@23rdstreetinthe</p>
+          <p class="select-top-profile-username">{{user?.first_name}} {{user?.last_name}} </p>
         </div>
         <div class="select-top-profile-avatar">
           <img src="/icons/signup-bg.svg" />
@@ -33,7 +33,7 @@
           @click="handleSelectTeam(index)"
         >
           <div class="select-bottom-grid-team-card-top">
-            <p>{{ team?.name }}</p>
+            <p v-if="team?.is_active">{{ team?.short_name }}</p>
           </div>
           <div
             :style="{
@@ -55,33 +55,47 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useToast } from "vue-toastification";
+import { useAuthStore } from '@/store/authStore'
+import { useFixturesStore } from '@/store/fixturesStore'
+
+const authStore = useAuthStore();
+const fixturesStore = useFixturesStore();
+
+
+interface ITeamProps {
+  singleLeague: ITeamSelectProps,
+}
+
+interface ITeamSelectProps {
+  created_at?: string;
+  current_pool_prize?: string;
+  current_position?: number;
+  current_round?: number;
+  id?: number;
+  is_active?: boolean;
+  logo?: string;
+  name?: string;
+  organized_by?: string;
+  player_count?: string;
+  slug?: string;
+  start_date?: string;
+  tag?: string;
+  updated_at?: string;
+}
+
+const props = defineProps<ITeamProps>()
 
 const $toast = useToast();
 const router = useRouter();
 const teamIndex = ref(0);
 
-const teams = [
-  { name: "ARS", color: "#000" },
-  { name: "ARS", color: "#000" },
-  { name: "ARS", color: "#000" },
-  { name: "ARS", color: "#000" },
-  { name: "ARS", color: "#000" },
-  { name: "ARS", color: "#000" },
-  { name: "ARS", color: "#000" },
-  { name: "ARS", color: "#000" },
-  { name: "ARS", color: "#000" },
-  { name: "ARS", color: "#000" },
-  { name: "ARS", color: "#000" },
-  { name: "ARS", color: "#000" },
-  { name: "ARS", color: "#000" },
-  { name: "ARS", color: "#000" },
-  { name: "ARS", color: "#000" },
-  { name: "ARS", color: "#000" },
-  { name: "ARS", color: "#000" },
-  { name: "ARS", color: "#000" },
-  { name: "ARS", color: "#000" },
-  { name: "ARS", color: "#000" },
-];
+const user = authStore.$state.userObject;
+
+const teams = fixturesStore.getters.getTeams;
+
+onMounted(() => {
+  fixturesStore.action.fetchTeams(props.singleLeague.slug as string)
+})
 
 const handleSelectTeam = (id: number) => {
   teamIndex.value = id + 1;

@@ -42,7 +42,7 @@
 import { ref, watch, onMounted } from 'vue';
 import { useFixturesStore } from '@/store/fixturesStore'
 
-const fixtureStore = useFixturesStore()
+const fixtureStore = useFixturesStore();
 
 let premierLeagueIsActiveState = ref(true)
 let premierLeagueIsHoverState = ref(false)
