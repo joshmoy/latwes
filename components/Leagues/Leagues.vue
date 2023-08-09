@@ -4,7 +4,8 @@
       <p>Football Leagues</p>
       <div class="leagues-title-border"></div>
     </div>
-    <div class="leagues-grid">
+    <Spinner v-if="isLoading" isCenter />
+    <div class="leagues-grid" v-else>
       <div
         class="leagues-card"
         v-for="(league, index) in leagueItems"
@@ -17,8 +18,10 @@
               <img :src="league?.logo ? league?.logo : '/icons/plLogo.png'" />
             </div>
             <div class="leagues-card-top-meta">
-              <p v-if="league?.hasStarted" class="leagues-card-top-meta-status">Active</p>
-              <p v-else class="leagues-card-top-meta-status">
+              <p v-if="checkActiveLeague(league.start_date)" class="leagues-card-top-meta-status">
+                Active
+              </p>
+              <p v-else-if="league.is_active" class="leagues-card-top-meta-status">
                 Starts in {{ getStartDate(league.start_date) }}
               </p>
               <p class="leagues-card-top-meta-name">{{ league?.name }}</p>
@@ -32,7 +35,9 @@
                 <div class="leagues-card-top-desc-icon">
                   <img src="/icons/Trophy.svg" />
                 </div>
-                <p class="leagues-card-top-desc-num">{{ formatAmount(league?.current_pool_prize) }}</p>
+                <p class="leagues-card-top-desc-num">
+                  {{ formatAmount(league?.current_pool_prize) }}
+                </p>
               </div>
             </div>
             <div class="leagues-card-top-desc">
@@ -78,6 +83,7 @@ const fixtureStore = useFixturesStore();
 const router = useRouter();
 
 const showModal = ref(false);
+const isLoading = ref(true);
 const singleLeague = ref({});
 const currentDate = new Date();
 
@@ -97,12 +103,21 @@ const leagueItems = fixtureStore.getters.getCompetitions;
 const getStartDate = (startDate) => {
   const leagueStartDate = new Date(startDate);
   const timeDifference = leagueStartDate - currentDate;
+  console.log("sfdsfsa", timeDifference);
   const diff = daysDifference(timeDifference);
   return `${diff} ${diff === 1 ? "day" : "days"}`;
 };
 
-onMounted(() => {
-  fixtureStore.action.fetchCompetitions();
+const checkActiveLeague = (startDate) => {
+  const leagueStartDate = new Date(startDate);
+  const timeDifference = leagueStartDate - currentDate;
+  if (timeDifference <= 0) return true;
+  return false;
+};
+
+onMounted(async () => {
+  await fixtureStore.action.fetchCompetitions();
+  isLoading.value = false;
 });
 </script>
 

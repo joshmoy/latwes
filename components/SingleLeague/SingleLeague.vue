@@ -32,12 +32,12 @@
             <img src="/icons/caretDown.svg" />
           </div>
           <div v>
-            <p class="white-text-value"> {{  `${competitionInfo.current_position} / ${competitionInfo.player_count}` }} </p>
+            <p class="white-text-value"> {{  `${+competitionInfo.current_position === 0 ? '-' : competitionInfo.current_position} / ${competitionInfo.player_count}` }} </p>
           </div>
         </div>
         <div class="single-league-main-actions-pool">
           <p class="single-league-main-actions-pool-title">Current pool amount</p>
-          <p class="white-text-value">{{ formatAmount(competitionInfo.current_pool_prize) }}</p>
+          <p class="white-text-value">{{ formatAmount(+competitionInfo.current_pool_prize) }}</p>
           <button @click="openModal">Put money in the pool</button>
           <NuxtLink to="/dashboard/competitions/epl">
             <p class="single-league-main-actions-pool-helper">What is this?</p>
@@ -88,8 +88,6 @@ const closeModal = () => {
 };
 
 const fixtureStore = useFixturesStore();
-
-const slug = ref('');
 const leagueFixture = ref(`${route.params.slug}`);
 
 const events = fixtureStore.getters.getMatchEvents;
@@ -248,7 +246,7 @@ onMounted(async () => {
       if (res) {
         await fixtureStore.action.fetchCompetitions();
       }
-      const competitions = fixtureStore.getters.getCompetitions;
+      const competitions = fixtureStore.getters.getCompetitions as Record<string, any>;
       competitionInfo = competitions?.value.find((e: any) => e.slug === leagueFixture.value);
     });
   } catch (error) {

@@ -1,4 +1,12 @@
 .select {
+  width: 1085px;
+  max-height: 80vh;
+  overflow-y: auto;
+
+  @media screen and (min-width: 1441px) {
+    max-height: 90vh;
+  }
+
   &-top {
     display: flex;
     align-items: center;

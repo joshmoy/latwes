@@ -13,10 +13,10 @@
       <div class="select-top-profile">
         <div>
           <p class="select-top-profile-desc">Hi there</p>
-          <p class="select-top-profile-username">{{user?.first_name}} {{user?.last_name}} </p>
+          <p class="select-top-profile-username">{{ user?.first_name }} {{ user?.last_name }}</p>
         </div>
         <div class="select-top-profile-avatar">
-          <img src="/icons/signup-bg.svg" />
+          <img src="/icons/people.png" />
         </div>
       </div>
     </div>
@@ -28,7 +28,7 @@
           v-for="(team, index) in teams"
           :key="index"
           :style="{
-            border: index + 1 === teamIndex ? '1px solid' + team?.color : 'none',
+            border: index + 1 === teamIndex ? '1px solid' + team?.image : 'none',
           }"
           @click="handleSelectTeam(index)"
         >
@@ -37,7 +37,7 @@
           </div>
           <div
             :style="{
-              backgroundColor: team?.color,
+              backgroundColor: team?.image,
               height: '40px',
               borderRadius: '0 0 8px 8px',
             }"
@@ -45,8 +45,14 @@
         </div>
       </div>
       <div class="select-bottom-buttons">
-        <button @click="handleRoute">Skip</button>
-        <button @click="handleProceed">Start predicting</button>
+        <button @click="handleRoute" :disabled="isLoading || isSkipLoading">
+          <Spinner v-if="isSkipLoading" />
+          <template v-else> Skip </template>
+        </button>
+        <button @click="handleProceed" :disabled="isLoading || isSkipLoading">
+          <Spinner v-if="isLoading" />
+          <template v-else> Start predicting </template>
+        </button>
       </div>
     </div>
   </div>
@@ -55,15 +61,15 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useToast } from "vue-toastification";
-import { useAuthStore } from '@/store/authStore'
-import { useFixturesStore } from '@/store/fixturesStore'
+import { useAuthStore } from "@/store/authStore";
+import { useFixturesStore } from "@/store/fixturesStore";
+import { joinLeague } from "~~/services/Prediction";
 
 const authStore = useAuthStore();
 const fixturesStore = useFixturesStore();
 
-
 interface ITeamProps {
-  singleLeague: ITeamSelectProps,
+  singleLeague: ITeamSelectProps;
 }
 
 interface ITeamSelectProps {
@@ -83,25 +89,49 @@ interface ITeamSelectProps {
   updated_at?: string;
 }
 
-const props = defineProps<ITeamProps>()
+const props = defineProps<ITeamProps>();
 
 const $toast = useToast();
 const router = useRouter();
 const teamIndex = ref(0);
+const isLoading = ref(false);
+const isSkipLoading = ref(false);
 
-const user = authStore.$state.userObject;
+const user = authStore.$state.userObject as Record<string, string>;
 
-const teams = fixturesStore.getters.getTeams;
+const teams = fixturesStore.getters.getTeams as Record<string, string>[];
 
 onMounted(() => {
-  fixturesStore.action.fetchTeams(props.singleLeague.slug as string)
-})
+  fixturesStore.action.fetchTeams(props.singleLeague.slug as string);
+});
 
 const handleSelectTeam = (id: number) => {
   teamIndex.value = id + 1;
 };
 
-const handleRoute = () => router.push("/dashboard/competitions/slug");
+const handleRoute = async () => {
+  try {
+    teamIndex.value < 1 ? (isSkipLoading.value = true) : (isLoading.value = true);
+    await joinLeague(
+      props.singleLeague.slug as string,
+      teamIndex.value < 1 ? {} : { fav_team_id: teamIndex.value }
+    );
+    if (teamIndex.value < 1) {
+      $toast.success("Favorite team selected!", {
+        timeout: 5000,
+      });
+    }
+    router.push(`/dashboard/competitions/${props.singleLeague.slug}`);
+    isLoading.value = false;
+    isSkipLoading.value = false;
+  } catch (error) {
+    $toast.error(error?.response?.data?.message, {
+      timeout: 5000,
+    });
+    isLoading.value = false;
+    isSkipLoading.value = false;
+  }
+};
 
 const handleProceed = () => {
   if (teamIndex.value < 1) {
@@ -109,8 +139,8 @@ const handleProceed = () => {
       timeout: 5000,
     });
   }
-  
-  handleRoute()
+
+  handleRoute();
 };
 </script>
 
