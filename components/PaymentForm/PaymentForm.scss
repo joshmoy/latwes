@@ -1,0 +1,29 @@
+.amount-form {
+  max-width: 300px;
+  margin: 0 auto;
+  padding: 41px 0;
+  min-height: 400px;
+
+  @media screen and (max-width: 900px) {
+    max-width: 90%;
+  }
+
+  &-title {
+    text-align: center;
+    margin-bottom: 14px;
+    color: $black;
+    font-size: 32px;
+  }
+
+  &-label {
+    color: $black !important;
+  }
+
+  &-input {
+    border-color: $black !important;
+  }
+
+  &-submit {
+    margin-top: 50px;
+  }
+}

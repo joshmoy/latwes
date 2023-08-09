@@ -4,8 +4,8 @@
 
   &-content {
     background-color: #fff;
-    width: 1184px;
-    height: 600px;
+    min-width: 500px;
+    min-height: 200px;
     overflow-y: auto;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);

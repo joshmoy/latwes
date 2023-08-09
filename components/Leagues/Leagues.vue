@@ -32,7 +32,7 @@
                 <div class="leagues-card-top-desc-icon">
                   <img src="/icons/Trophy.svg" />
                 </div>
-                <p class="leagues-card-top-desc-num">₦{{ league?.current_pool_prize }}</p>
+                <p class="leagues-card-top-desc-num">{{ formatAmount(league?.current_pool_prize) }}</p>
               </div>
             </div>
             <div class="leagues-card-top-desc">
@@ -71,6 +71,7 @@
 <script setup>
 import { ref } from "vue";
 import { useFixturesStore } from "@/store/fixturesStore";
+import { formatAmount } from "../../helpers/moneyformatter";
 import { daysDifference } from "../../helpers/dataFormatter";
 
 const fixtureStore = useFixturesStore();

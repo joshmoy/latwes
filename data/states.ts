@@ -13,7 +13,7 @@ export const locations = [
   { label: "Edo", value: "edo" },
   { label: "Ekiti", value: "ekiti" },
   { label: "Enugu", value: "enugu" },
-  { label: "FCT - Abuja", value: "fct---abuja" },
+  { label: "FCT - Abuja", value: "fct-abuja" },
   { label: "Gombe", value: "gombe" },
   { label: "Imo", value: "imo" },
   { label: "Jigawa", value: "jigawa" },

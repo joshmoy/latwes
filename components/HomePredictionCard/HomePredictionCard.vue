@@ -20,7 +20,7 @@
                   type="tel"
                   v-if="showInput"
                   v-model="homeInputValue"
-                  @blur="handleBlur"
+                  @blur="handleBlur(matchData.id)"
                   ref="homeInput"
                 />
                 <img src="/icons/plus.svg" v-else />
@@ -29,7 +29,7 @@
             <p class="column">-</p>
             <div class="team-input__b__prediction">
               <div class="plus" @click="handleShowInput">
-                <input type="tel" v-if="showInput" v-model="awayInputValue" @blur="handleBlur" />
+                <input type="tel" v-if="showInput" v-model="awayInputValue" @blur="handleBlur(matchData.id)" />
                 <img src="/icons/plus.svg" v-else />
               </div>
             </div>
@@ -97,6 +97,8 @@
 <script setup lang="ts">
 import { ref, nextTick } from "vue";
 import { dateFormatter } from "../../helpers/dataFormatter";
+import { predictMatch } from "../../services/Prediction";
+const route = useRoute();
 
 const router = useRouter();
 const showInput = ref(false);
@@ -114,6 +116,8 @@ const props = defineProps({
 const currentDate = new Date();
 const matchDate = new Date(props.matchData.kickoff_time);
 const pointsEarned = currentDate < matchDate ? 0 : props.matchData.points;
+const homeTeamScore = props.matchData.predicted_home_team_score;
+const awayTeamScore = props.matchData.predicted_away_team_score;
 
 const formattedDate = dateFormatter(matchDate);
 
@@ -129,12 +133,13 @@ const handleShowInput = () => {
 
 const handleHideInput = () => (showInput.value = false);
 
-const handleSubmit = () => {
-  const payload = { home_team_score: homeInputValue.value, away_team_score: awayInputValue.value };
-  //   make axions call
+const handleSubmit = async (id: number) => {
+  const payload = { home_team_score: +homeInputValue.value, away_team_score: +awayInputValue.value };
+  const slug = `${route.params.slug}`
+  await predictMatch(slug, id, payload)
 };
 
-const handleBlur = () => {
+const handleBlur = (id: number) => {
   if (!homeInputValue.value && !awayInputValue.value) {
     // show prediction cleared
     return handleHideInput();
@@ -149,8 +154,16 @@ const handleBlur = () => {
     // show home prediction is needed
     return;
   }
-  handleSubmit();
+  handleSubmit(id);
 };
+
+onMounted(() => {
+  if (homeTeamScore) {
+    homeInputValue.value = homeTeamScore;
+    awayInputValue.value = awayTeamScore;
+    showInput.value = true;
+  }
+})
 </script>
 
 <style lang="scss" scoped src="./HomePredictionCard.scss"></style>

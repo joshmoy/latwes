@@ -1,7 +1,7 @@
 <template>
   <div class="custom-input" :class="{ 'has-error': !!errorMessage, success: meta.valid }">
-    <label :for="name" class="custom-input-label">{{ label }}</label>
-    <div class="custom-input-field">
+    <label :for="name" class="custom-input-label" :class="labelClass">{{ label }}</label>
+    <div class="custom-input-field" :class="inputClass">
       <input
         :name="name"
         :id="name"
@@ -42,6 +42,8 @@ interface ICustomInputProps {
   placeholder: string;
   rightError?: boolean;
   helperText?: string;
+  labelClass?: string;
+  inputClass?: string
 }
 
 const props = defineProps<ICustomInputProps>();

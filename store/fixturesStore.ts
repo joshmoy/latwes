@@ -15,7 +15,8 @@ export const useFixturesStore = defineStore('fixtures', ()  => {
     getCompetitions: computed(() => state.competitions),
     getTeams: computed(() => state.teams),
     getFixtures: computed(() => state.data),
-    getMatchEvents: computed(() => state.matchEvents)
+    getMatchEvents: computed(() => state.matchEvents),
+    getSingleCompetition: (slug: string) => computed(() => state.competitions.value.find((e: any) => e.slug === slug))
   }
 
   const action = {
@@ -23,12 +24,9 @@ export const useFixturesStore = defineStore('fixtures', ()  => {
         try {
           const res =  await axiosInstance.get(`competition`);
           state.competitions.value = res?.data?.data;
-          console.log('res?.data?.data;', res?.data?.data);
           
           return res?.data?.data
-          
         } catch (error) {
-          console.error(error);
           return error;
         }
       },
@@ -41,7 +39,6 @@ export const useFixturesStore = defineStore('fixtures', ()  => {
           return res?.data?.data
           
         } catch (error) {
-          console.error(error);
           return error;
         }
       },
@@ -52,7 +49,6 @@ export const useFixturesStore = defineStore('fixtures', ()  => {
           return res?.data?.data
           
         } catch (error) {
-          console.error(error);
           return error;
         }
       },
@@ -63,7 +59,6 @@ export const useFixturesStore = defineStore('fixtures', ()  => {
           return res?.data?.data
           
         } catch (error) {
-          console.error(error);
           return error;
         }
       }

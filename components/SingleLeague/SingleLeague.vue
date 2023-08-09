@@ -16,7 +16,7 @@
     />
     <div class="single-league-main">
       <div class="prediction-cards">
-        <div class="prediction-cards__child" v-for="(match, index) in matchData" :key="index">
+        <div class="prediction-cards__child" v-for="(match, index) in fixtures" :key="index">
           <HomePredictionCard :matchData="match"/>
         </div>
       </div>
@@ -31,12 +31,14 @@
             <p>GENERAL RANK</p>
             <img src="/icons/caretDown.svg" />
           </div>
-          <p class="white-text-value">5,000/11,006</p>
+          <div v>
+            <p class="white-text-value"> {{  `${competitionInfo.current_position} / ${competitionInfo.player_count}` }} </p>
+          </div>
         </div>
         <div class="single-league-main-actions-pool">
-          <p class="single-league-main-actions-pool-title">CUrrent pool amount</p>
-          <p class="white-text-value">₦ 5,000,348.00</p>
-          <button>Put money in the pool</button>
+          <p class="single-league-main-actions-pool-title">Current pool amount</p>
+          <p class="white-text-value">{{ formatAmount(competitionInfo.current_pool_prize) }}</p>
+          <button @click="openModal">Put money in the pool</button>
           <NuxtLink to="/dashboard/competitions/epl">
             <p class="single-league-main-actions-pool-helper">What is this?</p>
           </NuxtLink>
@@ -59,18 +61,45 @@
       </div>
     </div>
   </div>
+  <CustomModal v-if="showModal" @close="closeModal">
+    <PaymentForm/>
+  </CustomModal>
 </template>
 
 <script setup lang="ts">
 const props = defineProps();
 import { useFixturesStore } from "@/store/fixturesStore";
+import { formatAmount } from "../../helpers/moneyformatter";
+import { ref } from "vue";
+
+const router = useRouter();
+const route = useRoute();
+
+const showModal = ref(false);
+
+const openModal = () => {
+  showModal.value = true;
+  document.body.classList.add('block-modal');
+};
+
+const closeModal = () => {
+  showModal.value = false;
+  document.body.classList.remove("block-modal");
+};
 
 const fixtureStore = useFixturesStore();
 
 const slug = ref('');
-let leagueFixture = ref(slug);
+const leagueFixture = ref(`${route.params.slug}`);
 
 const events = fixtureStore.getters.getMatchEvents;
+const fixtures = fixtureStore.getters.getFixtures;
+let competitionInfo = {
+  current_position: '-',
+  player_count: '-',
+  current_pool_prize: '0',
+}
+
 
 const matchData = [
   {
@@ -213,16 +242,16 @@ const scoringData = [
   { point: 1, desc: "For predicting who wins" },
 ];
 onMounted(async () => {
-  // slug.value = $route.params.slug;
   try {
     const res = fixtureStore.action.fetchEvents(leagueFixture.value);
-    res.then((res: any) => {
+    res.then(async (res: any) => {
       if (res) {
-        fixtureStore.action.fetchFixtures(leagueFixture.value, res?.current_round);
+        await fixtureStore.action.fetchCompetitions();
       }
+      const competitions = fixtureStore.getters.getCompetitions;
+      competitionInfo = competitions?.value.find((e: any) => e.slug === leagueFixture.value);
     });
   } catch (error) {
-    console.error(error);
     return error;
   }
 });
