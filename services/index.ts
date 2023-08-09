@@ -12,4 +12,11 @@ const axiosInstance = axios.create({
   },
 });
 
+export const axiosWithoutAuth = axios.create({
+  baseURL: BASEURL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
 export default axiosInstance;
