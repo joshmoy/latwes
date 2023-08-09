@@ -34,10 +34,7 @@ export const useFixturesStore = defineStore('fixtures', ()  => {
         try {
           const res =  await axiosInstance.get(`competition/${league}/team`);
           state.teams.value = res?.data?.data;
-          console.log('res?.data?.data;', res?.data?.data);
-          
           return res?.data?.data
-          
         } catch (error) {
           return error;
         }

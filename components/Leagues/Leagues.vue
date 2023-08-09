@@ -103,7 +103,6 @@ const leagueItems = fixtureStore.getters.getCompetitions;
 const getStartDate = (startDate) => {
   const leagueStartDate = new Date(startDate);
   const timeDifference = leagueStartDate - currentDate;
-  console.log("sfdsfsa", timeDifference);
   const diff = daysDifference(timeDifference);
   return `${diff} ${diff === 1 ? "day" : "days"}`;
 };

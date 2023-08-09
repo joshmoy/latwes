@@ -10,8 +10,6 @@ export default class Fixtures {
   public static fetchAllFixtures(competition: string, round: string): void {
     axiosInstance.get(`competition/${competition}/fixture?round=${round}`)
       .then(res => {
-        console.log('this res', res);
-            
         return res;
       })
       .catch(error => {

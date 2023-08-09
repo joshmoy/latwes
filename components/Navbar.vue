@@ -12,8 +12,6 @@ defineProps<INavbarProps>()
 let showNav = ref(false) 
 
 const showNavigation = () => {
-    console.log('clicked nav', showNav.value);
-    
     showNav.value = !showNav.value
 }
 </script>
