@@ -37,7 +37,7 @@
             <p>GENERAL RANK</p>
             <img src="/icons/caretDown.svg" />
           </div>
-          <div v>
+          <div>
             <p class="white-text-value">
               {{
                 `${
