@@ -44,7 +44,7 @@
         <CustomSelect
           label="Location"
           placeholder="Select location"
-          name="country"
+          name="state"
           :options="locations"
         />
         <CustomSelect
@@ -111,7 +111,7 @@ const schema = yup.object().shape({
     .required("Please confirm your password")
     .min(8, "Password can not be less than 8 characters")
     .oneOf([yup.ref("password")], "Passwords do not match"),
-  country: yup.string().required("Country is a required field"),
+  state: yup.string().required("Location is a required field"),
   gender: yup.string().required("Gender is a required field"),
   acceptTerms: yup.boolean().oneOf([true], "You must accept the terms and conditions"),
   over18: yup.boolean().oneOf([true], "You must be above 18 years to sign up"),
@@ -123,7 +123,7 @@ async function onSubmit(values, { resetForm }) {
     delete values?.confirmPassword;
     delete values?.acceptTerms;
     delete values?.over18;
-    await signUpService(values);
+    await signUpService({...values, country: 'Nigeria'});
     $toast.success("Signup successful!", {
       timeout: 5000,
     });
