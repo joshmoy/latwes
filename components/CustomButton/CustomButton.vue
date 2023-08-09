@@ -1,6 +1,7 @@
 <template>
   <button type="submit" :disabled="isLoading">
-    <div class="loadingspinner" v-if="isLoading"></div>
+    <!-- <div class="loadingspinner" ></div> -->
+    <Spinner v-if="isLoading" />
     <template v-else>
      {{ title }}
       <img v-if="showImage" :src="imageUrl" alt="" />

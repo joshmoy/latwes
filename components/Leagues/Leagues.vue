@@ -4,7 +4,8 @@
       <p>Football Leagues</p>
       <div class="leagues-title-border"></div>
     </div>
-    <div class="leagues-grid">
+    <Spinner v-if="isLoading" isCenter />
+    <div class="leagues-grid" v-else>
       <div
         class="leagues-card"
         v-for="(league, index) in leagueItems"
@@ -14,12 +15,15 @@
         <div class="leagues-card-top">
           <div class="leagues-card-top-flex custom-margin-28">
             <div class="leagues-card-top-logo">
-              <img v-if="league?.logo" :src="league?.logo" />
-              <img v-else src="/icons/plLogo.png" alt="premier league logo">
+              <img :src="league?.logo ? league?.logo : '/icons/plLogo.png'" />
             </div>
             <div class="leagues-card-top-meta">
-              <p v-if="league?.hasStarted" class="leagues-card-top-meta-status">Active</p>
-              <p v-else class="leagues-card-top-meta-status">Starts in {{ league?.startsIn }}</p>
+              <p v-if="checkActiveLeague(league.start_date)" class="leagues-card-top-meta-status">
+                Active
+              </p>
+              <p v-else-if="league.is_active" class="leagues-card-top-meta-status">
+                Starts in {{ getStartDate(league.start_date) }}
+              </p>
               <p class="leagues-card-top-meta-name">{{ league?.name }}</p>
               <p class="leagues-card-top-meta-country">{{ league?.tag }}</p>
             </div>
@@ -31,7 +35,9 @@
                 <div class="leagues-card-top-desc-icon">
                   <img src="/icons/Trophy.svg" />
                 </div>
-                <p class="leagues-card-top-desc-num">₦{{ league?.current_pool_prize }}</p>
+                <p class="leagues-card-top-desc-num">
+                  {{ formatAmount(league?.current_pool_prize) }}
+                </p>
               </div>
             </div>
             <div class="leagues-card-top-desc">
@@ -48,36 +54,43 @@
         <div class="leagues-card-bottom">
           <div v-if="!league?.is_active" class="leagues-card-bottom-button">Coming Soon</div>
           <button
-            v-else-if="league?.current_position !== null"
+            v-else
+            @click="
+              league?.current_position !== null
+                ? router.push(`/dashboard/competitions/${league?.slug}`)
+                : openModal(league)
+            "
             class="leagues-card-bottom-button"
-            @click="router.push('/dashboard/competitions/slug')"   
           >
-            Predict
+            {{ league?.current_position !== null ? "Predict" : "Join competition" }}
           </button>
-          <button v-else @click="openModal(league)" class="leagues-card-bottom-button">Join competition</button>
         </div>
       </div>
     </div>
   </div>
   <CustomModal v-if="showModal" @close="closeModal">
-    <TeamSelect :singleLeague="singleLeague"/>
+    <TeamSelect :singleLeague="singleLeague" />
   </CustomModal>
 </template>
 
 <script setup>
 import { ref } from "vue";
-import { useFixturesStore } from '@/store/fixturesStore'
+import { useFixturesStore } from "@/store/fixturesStore";
+import { formatAmount } from "../../helpers/moneyformatter";
+import { daysDifference } from "../../helpers/dataFormatter";
 
 const fixtureStore = useFixturesStore();
 const router = useRouter();
 
 const showModal = ref(false);
-const singleLeague = ref({})
+const isLoading = ref(true);
+const singleLeague = ref({});
+const currentDate = new Date();
 
 const openModal = (league) => {
   showModal.value = true;
   singleLeague.value = league;
-  document.body.classList.add('block-modal');
+  document.body.classList.add("block-modal");
 };
 
 const closeModal = () => {
@@ -87,9 +100,24 @@ const closeModal = () => {
 
 const leagueItems = fixtureStore.getters.getCompetitions;
 
-onMounted(() => {
-  fixtureStore.action.fetchCompetitions();
-})
+const getStartDate = (startDate) => {
+  const leagueStartDate = new Date(startDate);
+  const timeDifference = leagueStartDate - currentDate;
+  const diff = daysDifference(timeDifference);
+  return `${diff} ${diff === 1 ? "day" : "days"}`;
+};
+
+const checkActiveLeague = (startDate) => {
+  const leagueStartDate = new Date(startDate);
+  const timeDifference = leagueStartDate - currentDate;
+  if (timeDifference <= 0) return true;
+  return false;
+};
+
+onMounted(async () => {
+  await fixtureStore.action.fetchCompetitions();
+  isLoading.value = false;
+});
 </script>
 
 <style lang="scss" scoped src="./Leagues.scss"></style>

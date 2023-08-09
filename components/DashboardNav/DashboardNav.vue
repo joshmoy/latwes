@@ -13,7 +13,7 @@
         </nav>
       </div>
       <div class="dashboard-header-avatar">
-        <img src="/icons/signup-bg.svg" />
+        <img src="/icons/people.png" />
       </div>
     </div>
   </header>
