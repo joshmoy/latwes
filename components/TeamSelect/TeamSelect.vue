@@ -121,11 +121,12 @@ const handleRoute = async () => {
         timeout: 5000,
       });
     }
+    document.body.classList.remove("block-modal");
     router.push(`/dashboard/competitions/${props.singleLeague.slug}`);
     isLoading.value = false;
     isSkipLoading.value = false;
   } catch (error) {
-    $toast.error(error?.response?.data?.message, {
+    $toast.error((error as any)?.response?.data?.message, {
       timeout: 5000,
     });
     isLoading.value = false;
