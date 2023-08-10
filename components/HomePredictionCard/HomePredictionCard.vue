@@ -1,7 +1,17 @@
 <template>
   <div>
     <div class="prediction-card">
-      <p class="prediction-card__teams--heading">Enter your prediction</p>
+      <div class="prediction-card_feedback" v-if="showToast">
+        <div class="prediction-card_feedback_icon" v-if="hasPredicted">
+           <img src="/icons/whiteCheck.svg" />
+        </div>
+        <p>{{ toastMessage }}</p>
+      </div>
+      <p class="prediction-card__teams--heading" v-if="!hasPredicted">Enter your prediction</p>
+      <div v-else class="prediction-card__teams--hasPredicted">
+        <img src="/icons/ArchiveBox.svg" />
+        <p>Prediction saved!</p>
+      </div>
       <div class="prediction-card__teams">
         <div class="prediction-card__teams--body">
           <div class="team-input__a">
@@ -29,7 +39,12 @@
             <p class="column">-</p>
             <div class="team-input__b__prediction">
               <div class="plus" @click="handleShowInput">
-                <input type="tel" v-if="showInput" v-model="awayInputValue" @blur="handleBlur(matchData.id)" />
+                <input
+                  type="tel"
+                  v-if="showInput"
+                  v-model="awayInputValue"
+                  @blur="handleBlur(matchData.id)"
+                />
                 <img src="/icons/plus.svg" v-else />
               </div>
             </div>
@@ -90,13 +105,16 @@
 import { ref, nextTick } from "vue";
 import { dateFormatter } from "../../helpers/dataFormatter";
 import { predictMatch } from "../../services/Prediction";
-const route = useRoute();
 
-const router = useRouter();
+const route = useRoute();
 const showInput = ref(false);
+const showToast = ref(false);
+const isLoading = ref(false);
+const hasPredicted = ref(false);
 const homeInput = ref<HTMLInputElement | null>(null);
 const homeInputValue = ref("");
 const awayInputValue = ref("");
+const toastMessage = ref("");
 
 const props = defineProps({
   matchData: {
@@ -126,35 +144,62 @@ const handleShowInput = () => {
 const handleHideInput = () => (showInput.value = false);
 
 const handleSubmit = async (id: number) => {
-  const payload = { home_team_score: +homeInputValue.value, away_team_score: +awayInputValue.value };
-  const slug = `${route.params.slug}`
-  await predictMatch(slug, id, payload)
+  try {
+    isLoading.value = true;
+    showToast.value = true;
+    toastMessage.value = "Predicting...";
+    const payload = {
+      home_team_score: +homeInputValue.value,
+      away_team_score: +awayInputValue.value,
+    };
+    const slug = `${route.params.slug}`;
+    await predictMatch(slug, id, payload);
+    toastMessage.value = "Prediction Saved";
+    isLoading.value = false;
+    hasPredicted.value = true;
+    setTimeout(() => {
+      showToast.value = false;
+    }, 3000);
+  } catch (error) {
+    toastMessage.value = "An error occurred";
+    isLoading.value = false;
+  }
 };
 
 const handleBlur = (id: number) => {
   if (!homeInputValue.value && !awayInputValue.value) {
-    // show prediction cleared
-    return handleHideInput();
+    toastMessage.value = "Prediction Cleared";
+    showToast.value = true;
+    handleHideInput();
+    return setTimeout(() => {
+      showToast.value = false;
+    }, 3000);
   }
   if (homeInputValue.value && !awayInputValue.value) {
-    // show away prediction is needed
-    return;
+    toastMessage.value = "Predict Away Outcome";
+    showToast.value = true;
+    return setTimeout(() => {
+      showToast.value = false;
+    }, 3000);
   }
 
   if (!homeInputValue.value && awayInputValue.value) {
-    // show home prediction is needed
-    return;
+    toastMessage.value = "Predict Home Outcome";
+    showToast.value = true;
+    return setTimeout(() => {
+      showToast.value = false;
+    }, 3000);
   }
   handleSubmit(id);
 };
 
 onMounted(() => {
-  if (Number(homeTeamScore) >= 0) {
+  if (homeTeamScore !== null && Number(homeTeamScore) >= 0) {
     homeInputValue.value = homeTeamScore;
     awayInputValue.value = awayTeamScore;
     showInput.value = true;
   }
-})
+});
 </script>
 
 <style lang="scss" scoped src="./HomePredictionCard.scss"></style>

@@ -3,6 +3,39 @@
   border-radius: 16px;
   padding: 38px;
   margin: auto;
+  position: relative;
+
+  &_feedback {
+    border-radius: 30px;
+    background: $white;
+    box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -23px;
+    left: calc((100% - 180px) / 2);
+    height: 46px;
+    width: 180px;
+
+    &_icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: $light-blue;
+      margin-right: 12px;
+    }
+
+    p {
+      color: $black;
+      font-weight: 600;
+      font-size: 14px;
+    }
+  }
+
   &__teams {
     background-color: #eff3f8;
     border-radius: 8px;
@@ -16,6 +49,19 @@
       text-align: center;
       text-transform: uppercase;
       margin-bottom: 20px;
+    }
+    &--hasPredicted {
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+
+      p {
+        line-height: 14px;
+        color: $white;
+        font-size: 12px;
+        font-weight: 700;
+        margin-left: 4px;
+      }
     }
     &--body {
       display: flex;

@@ -46,7 +46,13 @@
                 <div class="leagues-card-top-desc-icon">
                   <img src="/icons/Medal.svg" />
                 </div>
-                <p class="leagues-card-top-desc-num">{{ league?.player_count }}</p>
+                <p class="leagues-card-top-desc-num">
+                  {{
+                    league?.current_position !== null && +league?.current_position !== 0
+                      ? league?.current_position + "/"
+                      : ""
+                  }}{{ league?.player_count }}
+                </p>
               </div>
             </div>
           </div>
