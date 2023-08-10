@@ -3,7 +3,7 @@
     <div class="prediction-card">
       <div class="prediction-card_feedback" v-if="showToast">
         <div class="prediction-card_feedback_icon" v-if="hasPredicted">
-           <img src="/icons/whiteCheck.svg" />
+          <img src="/icons/whiteCheck.svg" />
         </div>
         <p>{{ toastMessage }}</p>
       </div>
@@ -126,8 +126,8 @@ const props = defineProps({
 const currentDate = new Date();
 const matchDate = new Date(props.matchData.kickoff_time);
 const pointsEarned = currentDate < matchDate ? 0 : props.matchData.points;
-const homeTeamScore = props.matchData.predicted_home_team_score;
-const awayTeamScore = props.matchData.predicted_away_team_score;
+let homeTeamScore = props.matchData.predicted_home_team_score;
+let awayTeamScore = props.matchData.predicted_away_team_score;
 
 const formattedDate = dateFormatter(matchDate);
 
@@ -192,6 +192,25 @@ const handleBlur = (id: number) => {
   }
   handleSubmit(id);
 };
+
+watch(
+  () => props.matchData,
+  (newVal) => {
+    if (newVal) {
+      homeTeamScore = newVal?.predicted_home_team_score;
+      awayTeamScore = newVal?.predicted_away_team_score;
+      hasPredicted.value = false;
+      if (newVal?.predicted_home_team_score !== null) {
+        homeInputValue.value = newVal.predicted_home_team_score;
+        awayInputValue.value = newVal.predicted_away_team_score;
+        return (showInput.value = true);
+      }
+      homeInputValue.value = "";
+      awayInputValue.value = "";
+      showInput.value = false;
+    }
+  }
+);
 
 onMounted(() => {
   if (homeTeamScore !== null && Number(homeTeamScore) >= 0) {
