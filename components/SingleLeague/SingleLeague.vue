@@ -21,8 +21,8 @@
 
     <div class="single-league-main">
       <div class="prediction-cards">
-        <div class="prediction-cards__child" v-for="(match, index) in fixtures" :key="index">
-          <HomePredictionCard :matchData="match" />
+        <div class="prediction-cards__child" v-for="(fixture, index) in fixtures" :key="index">
+          <HomePredictionCard :matchData="fixture" />
         </div>
       </div>
       <div class="single-league-main-actions">
@@ -154,8 +154,8 @@ onMounted(async () => {
   }
 });
 
-const fetchCurrentMatchesSelected = (round: string) => {
-  fixtureStore.action.fetchFixtures(leagueFixture.value, round);
+const fetchCurrentMatchesSelected = async (round: string) => {
+  await fixtureStore.action.fetchFixtures(leagueFixture.value, round);
 };
 </script>
 
