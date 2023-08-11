@@ -14,6 +14,7 @@
       </div>
       <div class="dashboard-header-avatar">
         <img src="/icons/people.png" />
+        <button @click="logout">Logout</button>
       </div>
     </div>
   </header>
@@ -21,3 +22,17 @@
 
 
 <style lang="scss" scoped src="./DashboardNav.scss"></style>
+
+<script setup lang="ts">
+import { useAuthStore } from "~~/store/authStore";
+
+const authStore = useAuthStore();
+const router = useRouter();
+
+const logout = () => {
+  authStore.logoutAction();
+  router.push('/login')
+}
+
+
+</script>

@@ -83,5 +83,11 @@
       object-fit: cover;
       border-radius: 100%;
     }
+
+    button {
+      color: $light-blue;
+      background: transparent;
+      border: none;
+    }
   }
 }

@@ -1,5 +1,5 @@
 
-import axiosInstance from ".";
+import { axiosInstance } from ".";
 
 export default class Fixtures {
   /**

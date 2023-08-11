@@ -1,6 +1,10 @@
 import { defineStore } from 'pinia'
-import axiosInstance from '~~/services'
+import { axiosInstance } from '~~/services'
 import { computed, ref } from 'vue'
+
+import { useAuthStore } from './authStore'
+
+const auth = useAuthStore();
 
 export const useFixturesStore = defineStore('fixtures', ()  => {
   const state = {
@@ -24,7 +28,7 @@ export const useFixturesStore = defineStore('fixtures', ()  => {
         try {
           const res =  await axiosInstance.get(`competition`);
           state.competitions.value = res?.data?.data;
-          
+            
           return res?.data?.data
         } catch (error) {
           return error;

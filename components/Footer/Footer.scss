@@ -9,11 +9,25 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        @media screen and (max-width: 768px) {
+            flex-direction: column;
+            gap: 20px;
+            align-items: flex-start;
+            padding: 10px;
+        }
 
+        
         &__links,
         &__socials {
             display: flex;
             align-items: center;
+        }
+        &__links {
+            @media screen and (max-width: 768px) {
+                flex-direction: column;
+                gap: 20px;
+                align-items: flex-start !important;
+            }
         }
 
         &__socials li {
@@ -56,4 +70,7 @@
     font-optical-sizing: none;
     width: 110vw;
     transform: translateX(-6vw);
+    @media screen and (max-width: 768px) {
+        font-size: 109px;
+    }
 }
