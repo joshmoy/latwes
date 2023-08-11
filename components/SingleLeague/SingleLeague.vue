@@ -21,7 +21,7 @@
 
     <div class="single-league-main">
       <div class="prediction-cards">
-        <div class="prediction-cards__child" v-for="(fixture, index) in fixtures" :key="index">
+`        <div class="prediction-cards__child" v-for="(fixture, index) in fixtures" :key="index">
           <HomePredictionCard :matchData="fixture" />
         </div>
       </div>
@@ -42,8 +42,8 @@
             <p class="white-text-value">
               {{
                 `${
-                  +competitionInfo.current_position === 0 ? "-" : competitionInfo.current_position
-                } / ${competitionInfo.player_count}`
+                  +competitionInfo?.current_position === 0 ? "-" : competitionInfo?.current_position
+                } / ${competitionInfo?.player_count}`
               }}
             </p>
           </div>
@@ -51,7 +51,7 @@
         <div class="single-league-main-actions-pool">
           <p class="single-league-main-actions-pool-title">Current pool amount</p>
           <p class="white-text-value">
-            {{ formatAmount(+competitionInfo.current_pool_prize) }}
+            {{ formatAmount(+competitionInfo?.current_pool_prize) }}
           </p>
           <button @click="openModal">Put money in the pool</button>
           <NuxtLink to="/dashboard/competitions/epl">
@@ -134,7 +134,7 @@ onMounted(async () => {
       fixtureStore.action.fetchCompetitions(),
     ]);
     competitions = fixtureStore.getters.getCompetitions as Record<string, any>;
-    competitionInfo = competitions?.value.find((e: any) => e.slug === leagueFixture.value);
+    competitionInfo = competitions?.value?.find((e: any) => e.slug === leagueFixture.value);
     document.body.classList.remove("block-modal");
     const leagueStartDate: Date = new Date((competitionInfo as Record<string, any>)?.start_date);
     const timeDifference = leagueStartDate ? leagueStartDate.getTime() - currentDate.getTime() : 0;

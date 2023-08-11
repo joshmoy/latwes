@@ -7,7 +7,17 @@
         </div>
         <p>{{ toastMessage }}</p>
       </div>
-      <p class="prediction-card__teams--heading" v-if="!hasPredicted">Enter your prediction</p>
+      <p class="prediction-card__teams--heading" v-if="!hasPredicted">
+        {{
+          matchData?.has_finished
+            ? "Match Ended"
+            : hasMatchStarted
+            ? "Match Started"
+            : homeTeamScore !== null
+            ? "Edit your prediction"
+            : "Enter your prediction"
+        }}
+      </p>
       <div v-else class="prediction-card__teams--hasPredicted">
         <img src="/icons/ArchiveBox.svg" />
         <p>Prediction saved!</p>
@@ -32,6 +42,7 @@
                   v-model="homeInputValue"
                   @blur="handleBlur(matchData.id)"
                   ref="homeInput"
+                  :disabled="hasMatchStarted"
                 />
                 <img src="/icons/plus.svg" v-else />
               </div>
@@ -44,6 +55,7 @@
                   v-if="showInput"
                   v-model="awayInputValue"
                   @blur="handleBlur(matchData.id)"
+                  :disabled="hasMatchStarted"
                 />
                 <img src="/icons/plus.svg" v-else />
               </div>
@@ -86,14 +98,28 @@
             {{
               currentDate < matchDate
                 ? formattedDate
-                : matchData?.home_team_score + "-" + matchData?.away_team_score
+                : matchData?.home_team_score + " - " + matchData?.away_team_score
             }}
           </p>
         </div>
         <div class="prediction-card__stats--right">
           <p class="kick-off">Points earned</p>
-          <div class="points">
-            <p>{{ pointsEarned === 1 ? "1pt" : pointsEarned + "pts" }}</p>
+          <div
+            class="points"
+            :class="{
+              'points-lemon': pointsEarned === 6,
+              'points-orange': pointsEarned > 0 && pointsEarned < 6,
+            }"
+          >
+            <p>
+              {{
+                pointsEarned === 1
+                  ? "1pt"
+                  : pointsEarned === null
+                  ? 0 + "pts"
+                  : pointsEarned + "pts"
+              }}
+            </p>
           </div>
         </div>
       </div>
@@ -110,6 +136,7 @@ const route = useRoute();
 const showInput = ref(false);
 const showToast = ref(false);
 const isLoading = ref(false);
+const showIcon = ref(false);
 const hasPredicted = ref(false);
 const homeInput = ref<HTMLInputElement | null>(null);
 const homeInputValue = ref("");
@@ -124,14 +151,16 @@ const props = defineProps({
 });
 
 const currentDate = new Date();
-const matchDate = new Date(props.matchData.kickoff_time);
-const pointsEarned = currentDate < matchDate ? 0 : props.matchData.points;
+let matchDate = new Date(props.matchData.kickoff_time);
+const pointsEarned = currentDate < matchDate ? 0 : props.matchData?.score;
 let homeTeamScore = props.matchData.predicted_home_team_score;
 let awayTeamScore = props.matchData.predicted_away_team_score;
+let hasMatchStarted = currentDate >= matchDate;
 
-const formattedDate = dateFormatter(matchDate);
+let formattedDate = dateFormatter(matchDate);
 
 const handleShowInput = () => {
+  if (hasMatchStarted) return;
   if (showInput.value === true) return;
   showInput.value = true;
   nextTick(() => {
@@ -155,10 +184,12 @@ const handleSubmit = async (id: number) => {
     const slug = `${route.params.slug}`;
     await predictMatch(slug, id, payload);
     toastMessage.value = "Prediction Saved";
+    showIcon.value = true;
     isLoading.value = false;
     hasPredicted.value = true;
     setTimeout(() => {
       showToast.value = false;
+      showIcon.value = false;
     }, 3000);
   } catch (error) {
     toastMessage.value = "An error occurred";
@@ -199,7 +230,10 @@ watch(
     if (newVal) {
       homeTeamScore = newVal?.predicted_home_team_score;
       awayTeamScore = newVal?.predicted_away_team_score;
+      matchDate = new Date(newVal?.kickoff_time);
+      hasMatchStarted = currentDate >= matchDate;
       hasPredicted.value = false;
+      formattedDate = dateFormatter(matchDate);
       if (newVal?.predicted_home_team_score !== null) {
         homeInputValue.value = newVal.predicted_home_team_score;
         awayInputValue.value = newVal.predicted_away_team_score;
