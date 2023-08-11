@@ -8,4 +8,8 @@
   </NuxtLayout>
 </template>
 
-<script></script>
+<script setup lang="ts">
+onBeforeMount(() => {
+  useAuth();
+})
+</script>

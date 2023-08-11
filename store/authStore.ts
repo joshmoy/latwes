@@ -8,4 +8,11 @@ export const useAuthStore = defineStore('auth', {
     }
   },
   persist: true,
+  actions: {
+    logoutAction() {
+      localStorage.clear();
+      this.authenticated = false,
+      this.userObject = {}
+    }
+  }
 })

@@ -84,6 +84,7 @@ import { ref } from "vue";
 import { useFixturesStore } from "@/store/fixturesStore";
 import { formatAmount } from "../../helpers/moneyformatter";
 import { daysDifference } from "../../helpers/dataFormatter";
+import { useAuthStore } from "~~/store/authStore";
 
 const fixtureStore = useFixturesStore();
 const router = useRouter();
@@ -92,6 +93,12 @@ const showModal = ref(false);
 const isLoading = ref(true);
 const singleLeague = ref({});
 const currentDate = new Date();
+const auth = useAuthStore();
+
+onMounted(async () => {
+  await fixtureStore.action.fetchCompetitions();
+  isLoading.value = false;
+});
 
 const openModal = (league) => {
   showModal.value = true;
@@ -119,11 +126,6 @@ const checkActiveLeague = (startDate) => {
   if (timeDifference <= 0) return true;
   return false;
 };
-
-onMounted(async () => {
-  await fixtureStore.action.fetchCompetitions();
-  isLoading.value = false;
-});
 </script>
 
 <style lang="scss" scoped src="./Leagues.scss"></style>
