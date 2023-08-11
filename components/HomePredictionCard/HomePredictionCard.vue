@@ -42,7 +42,7 @@
                   v-model="homeInputValue"
                   @blur="handleBlur(matchData.id)"
                   ref="homeInput"
-                  :disabled="hasMatchStarted"
+                  :disabled="hasMatchStarted || matchData?.has_finished"
                 />
                 <img src="/icons/plus.svg" v-else />
               </div>
@@ -55,7 +55,7 @@
                   v-if="showInput"
                   v-model="awayInputValue"
                   @blur="handleBlur(matchData.id)"
-                  :disabled="hasMatchStarted"
+                  :disabled="hasMatchStarted || matchData?.has_finished"
                 />
                 <img src="/icons/plus.svg" v-else />
               </div>

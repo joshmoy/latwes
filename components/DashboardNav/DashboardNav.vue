@@ -20,7 +20,6 @@
   </header>
 </template>
 
-
 <style lang="scss" scoped src="./DashboardNav.scss"></style>
 
 <script setup lang="ts">
@@ -28,11 +27,11 @@ import { useAuthStore } from "~~/store/authStore";
 
 const authStore = useAuthStore();
 const router = useRouter();
+const userAuthCookie = useCookie("userAuthCookie");
 
 const logout = () => {
   authStore.logoutAction();
-  router.push('/login')
-}
-
-
+  userAuthCookie.value = '';
+  router.push("/login");
+};
 </script>
