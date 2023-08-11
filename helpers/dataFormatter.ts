@@ -4,7 +4,7 @@ const options: Intl.DateTimeFormatOptions = {
   day: "numeric",
   hour: "numeric",
   minute: "numeric",
-  hour12: true,
+  hour12: false,
 };
 
 export const dateFormatter = (date: Date | undefined) =>

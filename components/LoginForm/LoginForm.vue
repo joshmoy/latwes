@@ -35,8 +35,9 @@ import { Form } from "vee-validate";
 import * as yup from "yup";
 import { logInService } from "../../services/auth";
 import { useToast } from "vue-toastification";
-import { useAuthStore } from '@/store/authStore'
+import { useAuthStore } from "@/store/authStore";
 
+const userAuthCookie = useCookie("userAuthCookie");
 const router = useRouter();
 const $toast = useToast();
 const authStore = useAuthStore();
@@ -55,8 +56,9 @@ async function onSubmit(values, { resetForm }) {
   try {
     isLoading.value = true;
     const loginResponse = await logInService(values);
-    process.client ? localStorage.setItem('userToken', loginResponse?.data?.data?.token) : ''
+    process.client ? localStorage.setItem("userToken", loginResponse?.data?.data?.token) : "";
     authStore.$state.authenticated = true;
+    userAuthCookie.value = true;
     authStore.$state.userObject = loginResponse.data.data;
     $toast.success("Login successful!", {
       timeout: 5000,

@@ -160,18 +160,32 @@
         line-height: 19px;
       }
       .points {
-        background: url("../../assets/icons/hero-win.svg");
-        color: #000;
-        font-size: 20px;
-        font-style: normal;
-        font-weight: 800;
-        line-height: 24px;
-        text-decoration-line: underline;
-        background-size: contain;
+        background: url("/icons/grey.svg");
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        // background-size: contain;
         background-repeat: no-repeat;
-        padding: 20px;
         background-position: center;
-        transform: rotate(12degdeg) translateX(-12px);
+        width: 84.858px;
+        height: 38.978px;
+        // transform: rotate(-7.155deg);
+
+        p {
+          color: #000;
+          font-size: 20px;
+          font-weight: 800;
+          line-height: 24px;
+          text-decoration-line: underline;
+        }
+      }
+
+      .points-lemon {
+        background-image: url("/icons/lemon.svg");
+      }
+
+      .points-orange {
+        background-image: url("/icons/orange.svg");
       }
     }
   }

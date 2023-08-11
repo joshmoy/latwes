@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-onBeforeMount(() => {
-  useAuth();
-})
+definePageMeta({
+  middleware: ["dashboard-auth"],
+});
 </script>

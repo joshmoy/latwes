@@ -55,7 +55,7 @@
           rightError
         />
       </div>
-      <div class="signup-flex">
+      <!-- <div class="signup-flex">
         <CheckBoxInput label="I am over 18 years old" name="over18" />
         <CheckBoxInput
           label="I accept the"
@@ -63,7 +63,7 @@
           linkHref="/terms"
           name="acceptTerms"
         />
-      </div>
+      </div> -->
       <div class="signup-submit">
         <CustomButton
           :isLoading="isLoading"

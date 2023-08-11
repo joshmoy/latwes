@@ -10,3 +10,9 @@
   background-color: #000;
 }
 </style>
+
+<script setup lang="ts">
+definePageMeta({
+  middleware: ["auth"],
+});
+</script>
