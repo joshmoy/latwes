@@ -10,8 +10,6 @@ export const useAuthStore = defineStore('auth', {
   persist: true,
   actions: {
     logoutAction() {
-      console.log('called? ');
-      
       localStorage.clear();
       this.authenticated = false,
       this.userObject = {}
