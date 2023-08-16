@@ -63,7 +63,7 @@ async function onSubmit(values, { resetForm }) {
     $toast.success("Login successful!", {
       timeout: 5000,
     });
-    router.push({ path: "/dashboard/competitions" });
+    window.location.replace(window.location.href.split('/')[0] + '/dashboard/competitions')
     isLoading.value = false;
   } catch (error) {
     $toast.error(error?.response?.data?.message, {
