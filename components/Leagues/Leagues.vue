@@ -61,11 +61,7 @@
           <div v-if="!league?.is_active" class="leagues-card-bottom-button">Coming Soon</div>
           <button
             v-else
-            @click="
-              league?.current_position !== null
-                ? router.push(`/dashboard/competitions/${league?.slug}`)
-                : openModal(league)
-            "
+            @click="openModal(league)"
             class="leagues-card-bottom-button"
           >
             {{ league?.current_position !== null ? "Predict" : "Join competition" }}
