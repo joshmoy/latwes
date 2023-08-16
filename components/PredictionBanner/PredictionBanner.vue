@@ -7,7 +7,7 @@
       </p>
     </div>
     <div class="prediction-banner-images">
-      <img src="/icons/dashboardCurrency.svg" />
+      <img src="/icons/dashboardCurrency.svg" class="first-image"/>
       <img src="/icons/dashboardPool.svg" class="second-image" />
     </div>
   </div>

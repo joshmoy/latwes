@@ -7,6 +7,10 @@
     max-height: 90vh;
   }
 
+  @media screen and (max-width: 1200px) {
+    width: 100%;
+  }
+
   &-top {
     display: flex;
     align-items: center;
@@ -14,6 +18,10 @@
     padding: 0 43px 0 52px;
     height: 126px;
     box-shadow: 0px 6px 12px 0px rgba(2, 23, 89, 0.04);
+
+    @media screen and (max-width: 768px) {
+      padding: 0 20px;
+    }
 
     &-meta {
       display: flex;
@@ -89,6 +97,10 @@
     padding: 39px 146px 52px;
     min-height: 722px;
 
+    @media screen and (max-width: 768px) {
+      padding: 20px;
+    }
+
     &-title {
       color: $black;
       font-size: 24px;
@@ -96,12 +108,20 @@
       font-weight: 700;
       margin-bottom: 39px;
       text-align: center;
+
+      @media screen and (max-width: 768px) {
+        margin-bottom: 20px;
+      }
     }
 
     &-grid {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
       gap: 24px;
+
+      @media screen and (max-width: 768px) {
+         grid-template-columns: repeat(3, 1fr);
+      }
 
       &-team-card {
         background-color: $white;

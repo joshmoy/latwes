@@ -22,6 +22,10 @@
         font-size: 24px;
         font-weight: 700;
         margin-bottom: 8.4px;
+
+        @media screen and (max-width: 768px) {
+          font-size: 20px;
+        }
       }
 
       &-start {
@@ -37,18 +41,22 @@
     justify-content: space-between;
     margin-top: 66px;
 
+    @media screen and (max-width: 1320px) {
+      flex-direction: column;
+    }
+
     .prediction-cards {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(819px, 1fr));
       max-width: 819px;
       row-gap: 40px;
       align-items: stretch;
-      @media screen and (max-width: 768px) {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        padding: 20px;
+
+      @media screen and (max-width: 1320px) {
+        grid-template-columns: 1fr;
+        max-width: 100%;
       }
+
       &__child {
         display: block;
         margin: auto;
@@ -58,6 +66,18 @@
 
     &-actions {
       width: 326px;
+
+      @media screen and (max-width: 1320px) {
+        width: 100%;
+      }
+
+      .hide-mobile {
+        display: block;
+
+        @media screen and (max-width: 1320px) {
+          display: none;
+        }
+      }
 
       .white-text-value {
         color: $white;
@@ -78,6 +98,11 @@
         background: $black;
         margin-bottom: 40px;
         padding: 32px;
+
+        @media screen and (max-width: 1320px) {
+          padding: 15px;
+          height: auto;
+        }
 
         &-title {
           display: flex;
@@ -104,6 +129,12 @@
         padding: 32px;
         text-align: center;
 
+        @media screen and (max-width: 1320px) {
+          margin-top: 50px;
+          padding: 15px;
+          height: auto;
+        }
+
         &-title {
           color: $white;
           font-size: 12px;
@@ -124,6 +155,11 @@
           border: none;
           outline: none;
           margin: 30px 0 14px;
+
+          @media screen and (max-width: 1320px) {
+            margin-top: 20px;
+            height: 35px;
+          }
         }
 
         &-helper {
@@ -152,7 +188,7 @@
 
         &-body {
           background-color: $white;
-          border-radius:  0 0 16px 16px;
+          border-radius: 0 0 16px 16px;
 
           &-flex {
             display: flex;
@@ -178,6 +214,25 @@
           }
         }
       }
+    }
+  }
+
+  .show-mobile {
+    display: none;
+
+    @media screen and (max-width: 1320px) {
+      display: block;
+    }
+    .white-text-value {
+      color: $white;
+      font-weight: 800;
+      font-size: 24px;
+      line-height: 120.4%; /* 38.528px */
+      letter-spacing: -1px;
+    }
+
+    .mb-26 {
+      margin-bottom: 20px;
     }
   }
 }

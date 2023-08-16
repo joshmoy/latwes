@@ -3,6 +3,10 @@
   max-width: 1136px;
   min-height: 400px;
 
+  @media screen and (max-width: 768px) {
+    max-width: 90%;
+  }
+
   &-content {
     background-color: #fff;
     min-width: 500px;
@@ -10,6 +14,10 @@
     overflow-y: auto;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+    @media screen and (max-width: 768px) {
+      min-width: calc(100% - 48px);
+    }
   }
 
   &-overlay {

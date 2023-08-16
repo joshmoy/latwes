@@ -12,21 +12,42 @@
         </p>
       </div>
     </div>
+    <div class="single-league-main-actions-points show-mobile">
+      <div class="single-league-main-actions-points-title">
+        <p>Points this week</p>
+        <img src="/icons/caretDown.svg" />
+      </div>
+      <p class="white-text-value mb-26">
+        {{ events?.events[`${events.current_round - 1}`].points }} pts
+      </p>
+      <div class="single-league-main-actions-points-title">
+        <p>GENERAL RANK</p>
+        <img src="/icons/caretDown.svg" />
+      </div>
+      <div>
+        <p class="white-text-value">
+          {{
+            `${
+              +competitionInfo?.current_position === 0 ? "-" : competitionInfo?.current_position
+            } / ${competitionInfo?.player_count}`
+          }}
+        </p>
+      </div>
+    </div>
 
     <DateScroll
       :events="events?.events"
       :matchRound="events?.current_round"
       @fetchCurrentMatchesSelected="fetchCurrentMatchesSelected"
     />
-
     <div class="single-league-main">
       <div class="prediction-cards">
-`        <div class="prediction-cards__child" v-for="(fixture, index) in fixtures" :key="index">
+        <div class="prediction-cards__child" v-for="(fixture, index) in fixtures" :key="index">
           <HomePredictionCard :matchData="fixture" />
         </div>
       </div>
       <div class="single-league-main-actions">
-        <div class="single-league-main-actions-points">
+        <div class="single-league-main-actions-points hide-mobile">
           <div class="single-league-main-actions-points-title">
             <p>Points this week</p>
             <img src="/icons/caretDown.svg" />
