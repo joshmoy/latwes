@@ -19,6 +19,10 @@
     grid-template-rows: 144px 1fr;
     grid-template-columns: 1fr;
     min-height: 100vh;
+
+    @media screen and (max-width: 768px) {
+      grid-template-rows: 80px 1fr;
+    }
   }
 
   &-section {
@@ -26,6 +30,10 @@
 
     .container {
       padding: 40px 80px 100px;
+
+      @media screen and (max-width: 768px) {
+         padding: 40px 20px 50px;
+      }
     }
   }
 }

@@ -72,7 +72,6 @@
           </div>
         </div>
       </div>
-      <div class="points">4pts</div>
       <div class="prediction-card__stats">
         <div class="prediction-card__stats--left">
           <p class="top">Top predictions</p>

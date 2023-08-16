@@ -22,6 +22,14 @@
     grid-template-columns: repeat(4, 1fr);
     column-gap: 16px;
     row-gap: 40px;
+
+    @media screen and (min-width: 769px) and (max-width: 1300px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media screen and (max-width: 768px) {
+        grid-template-columns: repeat(1, 1fr);
+    }
   }
 
   &-card {
