@@ -79,6 +79,6 @@ const showNavigation = () => {
 const logout = () => {
   authStore.logoutAction();
   userAuthCookie.value = "";
-  router.push("/login");
+  window.location.href = window.location.origin;
 };
 </script>
