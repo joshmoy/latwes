@@ -18,11 +18,14 @@
               <img :src="league?.logo ? league?.logo : '/icons/plLogo.png'" />
             </div>
             <div class="leagues-card-top-meta">
-              <p v-if="checkActiveLeague(league.start_date)" class="leagues-card-top-meta-status">
-                Active
-              </p>
-              <p v-else-if="league.is_active" class="leagues-card-top-meta-status">
-                Starts in {{ getStartDate(league.start_date) }}
+              <p class="leagues-card-top-meta-status">
+                {{
+                  checkActiveLeague(league.start_date) && league.is_active
+                    ? "Active"
+                    : league.is_active
+                    ? `Starts in ${getStartDate(league.start_date)}`
+                    : ""
+                }}
               </p>
               <p class="leagues-card-top-meta-name">{{ league?.name }}</p>
               <p class="leagues-card-top-meta-country">{{ league?.tag }}</p>
@@ -84,7 +87,6 @@ import { ref } from "vue";
 import { useFixturesStore } from "@/store/fixturesStore";
 import { formatAmount } from "../../helpers/moneyformatter";
 import { daysDifference } from "../../helpers/dataFormatter";
-import { useAuthStore } from "~~/store/authStore";
 
 const fixtureStore = useFixturesStore();
 const router = useRouter();
@@ -93,7 +95,6 @@ const showModal = ref(false);
 const isLoading = ref(true);
 const singleLeague = ref({});
 const currentDate = new Date();
-const auth = useAuthStore();
 
 onMounted(async () => {
   await fixtureStore.action.fetchCompetitions();

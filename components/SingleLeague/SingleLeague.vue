@@ -69,6 +69,7 @@
             </p>
           </div>
         </div>
+
         <div class="single-league-main-actions-pool">
           <p class="single-league-main-actions-pool-title">Current pool amount</p>
           <p class="white-text-value">
@@ -79,6 +80,11 @@
             <p class="single-league-main-actions-pool-helper">What is this?</p>
           </NuxtLink>
         </div>
+
+        <div class="single-league-main-actions-leaderboard" v-if="leaderboard?.length > 0">
+          <DashboardLeaderboard :tableData="leaderboard" />
+        </div>
+
         <div class="single-league-main-actions-scoring">
           <div class="single-league-main-actions-scoring-header">
             <p>Scoring System</p>
@@ -133,6 +139,7 @@ const closeModal = () => {
 
 const events = fixtureStore.getters.getMatchEvents;
 const fixtures = fixtureStore.getters.getFixtures;
+let leaderboard = fixtureStore.getters.getLeaderboard;
 let competitions = fixtureStore.getters.getCompetitions as Record<string, any>;
 let competitionInfo = {
   current_position: "-",
@@ -153,12 +160,15 @@ onMounted(async () => {
     await Promise.all([
       fixtureStore.action.fetchEvents(leagueFixture.value),
       fixtureStore.action.fetchCompetitions(),
+      fixtureStore.action.fetchLeaderboard(leagueFixture.value),
     ]);
+    leaderboard = fixtureStore.getters.getLeaderboard;
     competitions = fixtureStore.getters.getCompetitions as Record<string, any>;
     competitionInfo = competitions?.value?.find((e: any) => e.slug === leagueFixture.value);
     document.body.classList.remove("block-modal");
     const leagueStartDate: Date = new Date((competitionInfo as Record<string, any>)?.start_date);
     const timeDifference = leagueStartDate ? leagueStartDate.getTime() - currentDate.getTime() : 0;
+
     if (timeDifference <= 0) {
       isActive.value = true;
     } else {

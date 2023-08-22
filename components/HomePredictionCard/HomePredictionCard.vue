@@ -151,7 +151,7 @@ const props = defineProps({
 
 const currentDate = new Date();
 let matchDate = new Date(props.matchData.kickoff_time);
-const pointsEarned = currentDate < matchDate ? 0 : props.matchData?.score;
+let pointsEarned = currentDate < matchDate ? 0 : props.matchData?.score;
 let homeTeamScore = props.matchData.predicted_home_team_score;
 let awayTeamScore = props.matchData.predicted_away_team_score;
 let hasMatchStarted = currentDate >= matchDate;
@@ -231,6 +231,7 @@ watch(
       awayTeamScore = newVal?.predicted_away_team_score;
       matchDate = new Date(newVal?.kickoff_time);
       hasMatchStarted = currentDate >= matchDate;
+      pointsEarned = currentDate < matchDate ? 0 : newVal?.score;
       hasPredicted.value = false;
       formattedDate = dateFormatter(matchDate);
       if (newVal?.predicted_home_team_score !== null) {

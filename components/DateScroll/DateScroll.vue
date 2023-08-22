@@ -15,7 +15,7 @@
         @click="selectMatch(match.match_day)"
       >
         <p class="matchday">GMW {{ match.match_day }}</p>
-        <p class="points" >{{ match?.points }} pts</p>
+        <p class="points">{{ getPointsOrDate(match) }}</p>
         <!-- <p class="matchdate">{{ match.start_at }}</p> -->
       </div>
     </div>
@@ -27,6 +27,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from "vue";
+import { dateOnlyFormatter } from "../../helpers/dataFormatter";
 
 interface IEventsObject {
   id: number;
@@ -47,6 +48,7 @@ const emit = defineEmits(["fetchCurrentMatchesSelected"]);
 const currentIndex = ref(0);
 const direction = ref(1);
 const activeMatch = ref();
+const currentDate = new Date();
 const visibleMatchEvents = computed(() => {
   return props.events && props.events.slice(currentIndex.value, currentIndex.value + 8);
 });
@@ -65,6 +67,11 @@ watch(activeMatch, (val) => {
     emit("fetchCurrentMatchesSelected", val.match_day);
   }
 });
+
+const getPointsOrDate = (match: Record<string, string | number | any>) => {
+  if (currentDate < new Date(match?.start_at)) return dateOnlyFormatter(new Date(match?.start_at));
+  return match?.points + "pts";
+};
 
 const displayValues = () => {
   const visibleMatches = props.events?.slice(currentIndex.value, currentIndex.value + 8);

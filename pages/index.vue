@@ -1,4 +1,7 @@
 <template>
+  <Head>
+    <Title>Goborr*</Title>
+  </Head>
   <HeroHeader />
   <div class="upcoming-fixtures-pool">
     <SeeUpcomingFixtures />
@@ -11,7 +14,7 @@
 
 <style lang="scss">
 .upcoming-fixtures-pool {
-  background-image: url('../assets/icons/big-arrow.svg');
+  background-image: url("../assets/icons/big-arrow.svg");
   background-repeat: no-repeat;
   background-size: auto;
   @media screen and (min-width: 1512px) {
@@ -19,4 +22,3 @@
   }
 }
 </style>
-
