@@ -1,6 +1,9 @@
 <template>
+  <Head>
+    <Title>Goborr* | Login</Title>
+  </Head>
   <div class="page-container">
-    <SignUpNav pageTitle="login"/>
+    <SignUpNav pageTitle="login" />
     <LoginForm />
   </div>
 </template>

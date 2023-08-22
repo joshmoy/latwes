@@ -1,4 +1,7 @@
 <template>
+  <Head>
+    <Title>Goborr* | Forgot Password</Title>
+  </Head>
   <div class="page-container">
     <SignUpNav pageTitle="forgot-password" />
     <ForgotPasswordForm />
