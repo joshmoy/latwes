@@ -22,42 +22,14 @@
     }
 }
 
-.leaderboard-header {
-    text-align: center;
-    margin-bottom: 64px;
-    padding: 0 20px;
-    h3 {
-        max-width: 728px;   
-        margin: 0 auto;
-        margin-bottom: 32px;
-    }
-}
-
 .leaderboard-container {
-    background: $darker-blue;
-    border-radius: 16px;
-    padding: 70px 52px;
-    color: $white;
-    min-height: 400px;
-    max-height: 780px;
-    overflow: hidden;
-    position: relative;
-    &::after {
-        content: "";
-        background: linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 59, 128, 0) 66.05%);
-        height: 100%;
-        width: 100%;
-        max-height: 590px;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        transform: rotate(-180deg);
-        opacity: 0.5;
-        pointer-events: none;
-    }
-    @media screen and (max-width: 768px) {
-        padding: 20px
-    }
+    background: url(../../assets/icons/leaderboard.svg);
+    background-repeat: no-repeat;
+    height: 279px;
+    height: 779px;
+    max-width: 90%;
+    margin: auto;
+    background-size: cover;
 }
 
 %table-grid {

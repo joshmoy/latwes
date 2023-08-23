@@ -8,14 +8,21 @@
     </div>
     <div class="prediction-cards">
       <div class="prediction-cards__child" v-for="(fixture, index) in matchData" :key="index">
-        <HomePredictionCard :matchData="fixture"/>
+        <PredictionCard :matchData="fixture"/>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-const matchData = [
+import { ref } from 'vue';
+onMounted(() => {
+  console.log(matchData);
+  
+})
+
+
+const matchData = ref([
   {
     id: 11,
     home_team: "Aston Villa",
@@ -23,7 +30,7 @@ const matchData = [
     away_team: "Everton",
     away_team_score: null,
     has_finished: false,
-    kickoff_time: "2023-08-19T14:00:00.000Z",
+    kickoff_time: new Date(),
     competition_slug: "epl",
     home_team_color: null,
     away_team_color: null,
@@ -36,7 +43,7 @@ const matchData = [
     away_team: "Arsenal",
     away_team_score: null,
     has_finished: false,
-    kickoff_time: "2023-08-19T14:00:00.000Z",
+    kickoff_time: new Date(),
     competition_slug: "epl",
     home_team_color: null,
     away_team_color: null,
@@ -49,13 +56,13 @@ const matchData = [
     away_team: "Brentford",
     away_team_score: null,
     has_finished: false,
-    kickoff_time: "2023-08-19T14:00:00.000Z",
+    kickoff_time: new Date(),
     competition_slug: "epl",
     home_team_color: null,
     away_team_color: null,
     top_predictions: [],
   },
-  ];
+]);
 </script>
 
 <style lang="scss" scoped src="./SeeUpcomingFixtures.scss"></style>
