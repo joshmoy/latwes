@@ -1,7 +1,4 @@
 <template>
-  <Head>
-    <Title>Goborr* | Register</Title>
-  </Head>
   <div class="page-container">
     <SignUpNav pageTitle="register" />
     <SignUpForm />
@@ -18,4 +15,8 @@
 definePageMeta({
   middleware: ["auth"],
 });
+
+useHead({
+  title: 'Register',
+})
 </script>

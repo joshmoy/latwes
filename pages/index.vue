@@ -1,7 +1,4 @@
 <template>
-  <Head>
-    <Title>Goborr*</Title>
-  </Head>
   <HeroHeader />
   <div class="upcoming-fixtures-pool">
     <SeeUpcomingFixtures />
