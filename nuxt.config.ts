@@ -13,6 +13,11 @@ export default defineNuxtConfig({
       { name: "viewport", content: "width=device-width, initial-scale=1" },
     ],
   },
+  app: {
+    head: {
+      link: [{ rel: "icon", type: "image/png", href: "/icons/logo.png" }],
+    },
+  },
   modules: [
     [
       "@nuxtjs/google-fonts",
@@ -29,15 +34,15 @@ export default defineNuxtConfig({
       },
     ],
     "@pinia/nuxt",
-    '@pinia-plugin-persistedstate/nuxt',
+    "@pinia-plugin-persistedstate/nuxt",
     "nuxt-svgo",
-    "dayjs-nuxt"
+    "dayjs-nuxt",
   ],
   pinia: {
     autoImports: [
       // automatically imports `defineStore`
-      'defineStore', // import { defineStore } from 'pinia'
-      ['defineStore', 'definePiniaStore'], // import { defineStore as definePiniaStore } from 'pinia'
+      "defineStore", // import { defineStore } from 'pinia'
+      ["defineStore", "definePiniaStore"], // import { defineStore as definePiniaStore } from 'pinia'
     ],
   },
   css: ["~/styles/main.scss", "vue-toastification/dist/index.css"],
@@ -51,7 +56,7 @@ export default defineNuxtConfig({
       },
     },
   },
-  build:{
-    transpile: ['vue-toastification'],
-  }
+  build: {
+    transpile: ["vue-toastification"],
+  },
 });

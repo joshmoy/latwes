@@ -1,7 +1,4 @@
 <template>
-  <Head>
-    <Title>Goborr* | Forgot Password</Title>
-  </Head>
   <div class="page-container">
     <SignUpNav pageTitle="forgot-password" />
     <ForgotPasswordForm />
@@ -18,4 +15,8 @@
 definePageMeta({
   middleware: ["auth"],
 });
+
+useHead({
+  title: 'Forgot Password',
+})
 </script>
