@@ -1,5 +1,5 @@
 <template>
-    <section class="faq-wrapper">
+    <section class="faq-wrapper" id="faqs">
         <div class="faq-header">
             <h3 class="section-title">Frequently asked questions.</h3>
             <p class="section-subtitle">Everything you need to know about {{ state.appName }}.</p>
