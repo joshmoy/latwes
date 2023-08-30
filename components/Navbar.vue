@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import { useAuthStore } from "@/store/authStore";
 
 interface INavbarProps {
   homeNav?: boolean;
@@ -8,11 +9,21 @@ interface INavbarProps {
 
 defineProps<INavbarProps>();
 
+const authStore = useAuthStore();
+
 let showNav = ref(false);
 
 const showNavigation = () => {
   showNav.value = !showNav.value;
 };
+
+const authenticateduser = ref("")
+
+onMounted(() => {
+  const token = process.client ? localStorage.getItem("userToken") : "";
+  authenticateduser.value = token!
+
+})
 </script>
 <template>
   <div class="desktop-header">
@@ -28,7 +39,7 @@ const showNavigation = () => {
           </li>
         </ul>
       </nav>
-      <div>
+      <div v-if="!authenticateduser">
         <button
           :class="{
             homeNavButton: homeNav,
@@ -47,6 +58,17 @@ const showNavigation = () => {
           @click="$router.push('/login')"
         >
           Login
+        </button>
+      </div>
+      <div v-else>
+        <button
+          :class="{
+            homeNavButton: homeNav,
+            authNavButton: authNav,
+          }"
+          @click="$router.push('/dashboard/competitions')"
+        >
+          Go to dashboard
         </button>
       </div>
     </header>

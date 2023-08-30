@@ -53,6 +53,7 @@ const schema = yup.object().shape({
 });
 
 async function onSubmit(values, { resetForm }) {
+  const getRouteBeforeAuth = process.client ? localStorage.getItem("routeBeforeAuth") : "";
   try {
     isLoading.value = true;
     const loginResponse = await logInService(values);
@@ -63,6 +64,13 @@ async function onSubmit(values, { resetForm }) {
     $toast.success("Login successful!", {
       timeout: 5000,
     });
+
+    if (getRouteBeforeAuth !== null && getRouteBeforeAuth !== "") {
+      window.location.replace(window.location.href.split('/')[0] + getRouteBeforeAuth)
+      isLoading.value = false;
+      localStorage.removeItem("routeBeforeAuth");
+      return
+    }
     window.location.replace(window.location.href.split('/')[0] + '/dashboard/competitions')
     isLoading.value = false;
   } catch (error) {

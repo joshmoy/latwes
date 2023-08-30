@@ -114,7 +114,7 @@ const slide = (val: number) => {
 };
 
 const selectMatch = async (id: number) => {
-  const active = await visibleMatchEvents.value.find(
+  const active = await visibleMatchEvents.value?.find(
     (val: { match_day: number }) => val.match_day === id
   );
   activeMatch.value = active;

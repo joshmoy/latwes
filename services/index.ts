@@ -18,7 +18,7 @@ axiosInstance.interceptors.request.use(
     const token: any = process.client ? localStorage.getItem("userToken") : "";
 
     if (!token) {
-      window.location.replace(`${window.location.origin}/login`);
+      // window.location.replace(`${window.location.origin}/login`);
       throw new axios.Cancel("No token");
     }
     request.headers && (request.headers["Authorization"] = `Bearer ${token}`);
