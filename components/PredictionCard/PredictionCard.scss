@@ -97,8 +97,8 @@
     }
 }
 .logo {
-    width: 20px;
-    height: 20px;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
 }
 .team-input {
@@ -110,6 +110,9 @@
         &__color {
             background: #1E59AE;
         }
+        p {
+            font-size: 18px;
+        }
     }
     &__b {
         display: flex;
@@ -118,6 +121,9 @@
         gap: 8px;
         &__color {
             background: #E30613;
+        }
+        p {
+            font-size: 18px;
         }
     }
 }
