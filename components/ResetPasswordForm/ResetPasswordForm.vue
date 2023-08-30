@@ -40,12 +40,12 @@ const schema = yup.object().shape({
 });
 
 const isLoading = ref(false);
+const route = useRoute()
 
 async function onSubmit(values, { resetForm }) {
   try {
     isLoading.value = true;
-    let urlParams = new URLSearchParams(window.location.search);
-    let token = urlParams.get("token");
+    let token = route.query.token
     const payload = { ...values, token };
     const res = await resetPasswordService(payload);
     $toast.success(res?.data?.message, {
