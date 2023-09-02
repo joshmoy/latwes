@@ -16,8 +16,8 @@ const state = reactive({ openQuestion: 0 })
 const questions: IAccordionItem[] = [
     {
         id: 1,
-        title: 'What is offgoal?',
-        content: 'Offgoal is a platform for you to compete with other football fans to get the winner takes all price by predict the outcome of football matches and stacking up points. Start predicting today!'
+        title: 'What is Goborr?',
+        content: 'Goborr is a platform for you to compete with other football fans to get the winner takes all price by predict the outcome of football matches and stacking up points. Start predicting today!'
     },
     {
         id: 2,
