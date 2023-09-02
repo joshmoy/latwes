@@ -106,7 +106,7 @@ onMounted(() => {
               <nuxt-link to="/login">Predictions</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/login">FAQs</nuxt-link>
+              <nuxt-link to="#faqs">FAQs</nuxt-link>
             </li>
           </ul>
         </nav>

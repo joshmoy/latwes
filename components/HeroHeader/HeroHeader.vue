@@ -15,7 +15,7 @@
                 </p>
                 <div class="hero-header-input-wrapper">
                     <input type="email" name="email" id="email" placeholder="Enter your email" class="hero-header-input">
-                    <button type="submit" class="hero-header-button">Register <svgo-arrowright /></button>
+                    <button type="submit" class="hero-header-button">Register</button>
                 </div>
             </div>
         </section>
