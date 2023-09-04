@@ -14,8 +14,8 @@
                     Get the winner takes all prize when you put money in the pool!
                 </p>
                 <div class="hero-header-input-wrapper">
-                    <input type="email" name="email" id="email" placeholder="Enter your email" class="hero-header-input">
-                    <button type="submit" class="hero-header-button">Register</button>
+                    <input type="email" name="email" id="email" placeholder="Enter your email" class="hero-header-input" v-model="email">
+                    <button type="submit" class="hero-header-button" @click="handleClick">Get Started</button>
                 </div>
             </div>
         </section>
@@ -26,3 +26,18 @@
     </main>
 </template>
 <style lang="scss" scoped src="./HeroHeader.scss"></style>
+
+<script setup>
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+
+const email = ref('');
+const router = useRouter();
+
+const handleClick = () => {
+  if (email.value) {
+    localStorage.setItem('goborrUserEmail', email.value);
+    router.push('/register');
+  }
+};
+</script>

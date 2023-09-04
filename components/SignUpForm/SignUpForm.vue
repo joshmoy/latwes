@@ -1,7 +1,7 @@
 <template>
   <div class="container signup">
     <h1 class="signup-title">Create your account</h1>
-    <Form @submit="onSubmit" :validation-schema="schema">
+    <Form @submit="onSubmit" :validation-schema="schema" :initialValues="{ email: email }">
       <CustomInput
         label="Username"
         placeholder="Enter username"
@@ -89,6 +89,7 @@ import { useToast } from "vue-toastification";
 const $toast = useToast();
 
 const isLoading = ref(false);
+const email = ref('');
 const router = useRouter();
 
 const schema = yup.object().shape({
@@ -128,6 +129,7 @@ async function onSubmit(values, { resetForm }) {
       timeout: 5000,
     });
     resetForm();
+    localStorage.removeItem("goborrUserEmail");
     isLoading.value = false;
     router.push("/login");
   } catch (error) {
@@ -137,6 +139,13 @@ async function onSubmit(values, { resetForm }) {
     isLoading.value = false;
   }
 }
+
+onMounted(() => {
+  const existingEmail = process.client ? localStorage.getItem("goborrUserEmail") : "";
+  if(existingEmail) {
+     email.value = existingEmail;
+  }
+})
 </script>
 
 <style lang="scss" scoped src="./SignUpForm.scss"></style>
