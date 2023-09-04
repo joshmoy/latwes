@@ -28,7 +28,10 @@
           v-for="(team, index) in teams"
           :key="index"
           :style="{
-            border: index + 1 === teamIndex ? '1px solid' + team?.image : 'none',
+            border:
+              index + additionalIndex === teamIndex
+                ? `1px solid ${team?.image || 'black'}`
+                : 'none',
           }"
           @click="handleSelectTeam(index)"
         >
@@ -96,17 +99,19 @@ const router = useRouter();
 const teamIndex = ref(0);
 const isLoading = ref(false);
 const isSkipLoading = ref(false);
+const additionalIndex = ref(0);
 
 const user = authStore.$state.userObject as Record<string, string>;
 
 const teams = fixturesStore.getters.getTeams as Record<string, string>[];
 
-onMounted(() => {
-  fixturesStore.action.fetchTeams(props.singleLeague.slug as string);
+onMounted(async () => {
+  const teams = await fixturesStore.action.fetchTeams(props.singleLeague.slug as string);
+  additionalIndex.value = teams[0]?.id || 1;
 });
 
 const handleSelectTeam = (id: number) => {
-  teamIndex.value = id + 1;
+  teamIndex.value = id + additionalIndex.value;
 };
 
 const handleRoute = async () => {
