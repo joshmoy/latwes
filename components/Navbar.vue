@@ -180,7 +180,7 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   gap: 100px;
-  z-index: 999;
+  z-index: 1000000000;
   &__header {
     display: flex;
     align-items: center;
