@@ -16,11 +16,6 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-onMounted(() => {
-  console.log(matchData);
-  
-})
-
 
 const matchData = ref([
   {
