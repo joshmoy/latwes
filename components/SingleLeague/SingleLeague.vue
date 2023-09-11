@@ -20,19 +20,6 @@
       <p class="white-text-value mb-26">
         {{ events?.events[`${events.current_round - 1}`].points }} pts
       </p>
-      <div class="single-league-main-actions-points-title">
-        <p>GENERAL RANK</p>
-        <img src="/icons/caretDown.svg" />
-      </div>
-      <div>
-        <p class="white-text-value">
-          {{
-            `${
-              +competitionInfo?.current_position === 0 ? "-" : competitionInfo?.current_position
-            } / ${competitionInfo?.player_count}`
-          }}
-        </p>
-      </div>
     </div>
 
     <DateScroll
@@ -55,19 +42,6 @@
           <p class="white-text-value">
             {{ events?.events[`${events.current_round - 1}`].points }} pts
           </p>
-          <div class="single-league-main-actions-points-title">
-            <p>GENERAL RANK</p>
-            <img src="/icons/caretDown.svg" />
-          </div>
-          <div>
-            <p class="white-text-value">
-              {{
-                `${
-                  +competitionInfo?.current_position === 0 ? "-" : competitionInfo?.current_position
-                } / ${competitionInfo?.player_count}`
-              }}
-            </p>
-          </div>
         </div>
 
         <div class="single-league-main-actions-pool">
@@ -160,11 +134,12 @@ onMounted(async () => {
     await Promise.all([
       fixtureStore.action.fetchEvents(leagueFixture.value),
       fixtureStore.action.fetchCompetitions(),
-      fixtureStore.action.fetchLeaderboard(leagueFixture.value),
-    ]);
-    leaderboard = fixtureStore.getters.getLeaderboard;
+    ]).then((res) => {
+      fixtureStore.action.fetchLeaderboard(leagueFixture.value, res[0].current_round),
+      leaderboard = fixtureStore.getters.getLeaderboard;
+    })
     competitions = fixtureStore.getters.getCompetitions as Record<string, any>;
-    competitionInfo = competitions?.value?.find((e: any) => e.slug === leagueFixture.value);
+    competitionInfo = competitions?.value?.find((e: any) => e.slug === leagueFixture.value);      
     document.body.classList.remove("block-modal");
     const leagueStartDate: Date = new Date((competitionInfo as Record<string, any>)?.start_date);
     const timeDifference = leagueStartDate ? leagueStartDate.getTime() - currentDate.getTime() : 0;

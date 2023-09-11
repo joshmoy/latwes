@@ -37,9 +37,9 @@ export const useFixturesStore = defineStore('fixtures', ()  => {
         return error;
       }
     },
-    fetchLeaderboard: async (league: string) => {
+    fetchLeaderboard: async (league: string, round?: string) => {
       try {
-        const res = await axiosInstance.get(`competition/${league}/leaderboard`);
+        const res = await axiosInstance.get(`competition/${league}/leaderboard?round=${round}`);
         state.leaderboard.value = res?.data?.data;
 
         return res?.data?.data;
