@@ -12,21 +12,11 @@
         </p>
       </div>
     </div>
-    <div class="single-league-main-actions-points show-mobile">
-      <div class="single-league-main-actions-points-title">
-        <p>Points this week</p>
-        <img src="/icons/caretDown.svg" />
-      </div>
-      <p class="white-text-value mb-26">
-        {{ events?.events[`${events.current_round - 1}`].points }} pts
-      </p>
-    </div>
 
     <DateScroll
       :events="events?.events"
       :matchRound="events?.current_round"
       @fetchCurrentMatchesSelected="fetchCurrentMatchesSelected"
-      @updateLeaderboard="updateLeaderboard"
     />
     <div class="single-league-main">
       <div class="prediction-cards">
@@ -35,16 +25,6 @@
         </div>
       </div>
       <div class="single-league-main-actions">
-        <div class="single-league-main-actions-points hide-mobile">
-          <div class="single-league-main-actions-points-title">
-            <p>Points this week</p>
-            <img src="/icons/caretDown.svg" />
-          </div>
-          <p class="white-text-value">
-            {{ events?.events[`${events.current_round - 1}`].points }} pts
-          </p>
-        </div>
-
         <div class="single-league-main-actions-pool">
           <p class="single-league-main-actions-pool-title">Current pool amount</p>
           <p class="white-text-value">
@@ -57,7 +37,7 @@
         </div>
 
         <div class="single-league-main-actions-leaderboard" v-if="leaderboard?.length > 0">
-          <DashboardLeaderboard :tableData="leaderboard" />
+          <DashboardLeaderboard :tableData="leaderboard" :events="events" @updateLeaderboard="updateLeaderboard" />
         </div>
 
         <div class="single-league-main-actions-scoring">
@@ -164,8 +144,8 @@ const fetchCurrentMatchesSelected = async (round: string) => {
   await fixtureStore.action.fetchFixtures(leagueFixture.value, round);
 };
 
-const updateLeaderboard = (res: string|undefined) => {
-  fixtureStore.action.fetchLeaderboard(leagueFixture.value, res),
+const updateLeaderboard = (value: string|undefined) => {
+  fixtureStore.action.fetchLeaderboard(leagueFixture.value, value),
   leaderboard = fixtureStore.getters.getLeaderboard;
 }
 </script>
