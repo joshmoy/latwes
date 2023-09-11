@@ -26,6 +26,7 @@
       :events="events?.events"
       :matchRound="events?.current_round"
       @fetchCurrentMatchesSelected="fetchCurrentMatchesSelected"
+      @updateLeaderboard="updateLeaderboard"
     />
     <div class="single-league-main">
       <div class="prediction-cards">
@@ -135,8 +136,7 @@ onMounted(async () => {
       fixtureStore.action.fetchEvents(leagueFixture.value),
       fixtureStore.action.fetchCompetitions(),
     ]).then((res) => {
-      fixtureStore.action.fetchLeaderboard(leagueFixture.value, res[0].current_round),
-      leaderboard = fixtureStore.getters.getLeaderboard;
+      updateLeaderboard(res[0].current_round);
     })
     competitions = fixtureStore.getters.getCompetitions as Record<string, any>;
     competitionInfo = competitions?.value?.find((e: any) => e.slug === leagueFixture.value);      
@@ -163,6 +163,11 @@ onMounted(async () => {
 const fetchCurrentMatchesSelected = async (round: string) => {
   await fixtureStore.action.fetchFixtures(leagueFixture.value, round);
 };
+
+const updateLeaderboard = (res: string|undefined) => {
+  fixtureStore.action.fetchLeaderboard(leagueFixture.value, res),
+  leaderboard = fixtureStore.getters.getLeaderboard;
+}
 </script>
 
 <style lang="scss" scoped src="./SingleLeague.scss"></style>

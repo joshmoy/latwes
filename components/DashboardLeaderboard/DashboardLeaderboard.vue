@@ -3,7 +3,7 @@
     <div class="container leaderboard-container">
       <div class="off-table">
         <div class="off-table-body">
-          <div class="off-table-row" v-for="(el, id) in data" :key="id">
+          <div class="off-table-row" v-for="(el, id) in tableData" :key="id">
             <span class="off-table-name">
               {{ id + 1 }}. <span class="off-table-color"></span>
               {{ el?.username }}

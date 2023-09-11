@@ -43,7 +43,7 @@ interface IEventsObject {
 }
 
 const props = defineProps(["events", "matchRound"]);
-const emit = defineEmits(["fetchCurrentMatchesSelected"]);
+const emit = defineEmits(["fetchCurrentMatchesSelected","updateLeaderboard"]);
 
 const currentIndex = ref(0);
 const direction = ref(1);
@@ -65,6 +65,7 @@ watch(visibleMatchEvents, (val) => {
 watch(activeMatch, (val) => {
   if (val) {
     emit("fetchCurrentMatchesSelected", val.match_day);
+    emit("updateLeaderboard", val.match_day);
   }
 });
 
