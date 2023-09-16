@@ -97,7 +97,7 @@
             {{
               currentDate < matchDate
                 ? formattedDate
-                : matchData?.home_team_score + " - " + matchData?.away_team_score
+                : (matchData?.home_team_score || 0) + " - " + (matchData?.away_team_score || 0)
             }}
           </p>
         </div>
