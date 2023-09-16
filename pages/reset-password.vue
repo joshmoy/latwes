@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
 definePageMeta({
-  middleware: ["auth"],
+  middleware: ["trailing-slash","auth"],
 });
 
 useHead({

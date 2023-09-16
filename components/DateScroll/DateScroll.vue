@@ -14,9 +14,8 @@
         :key="match.id"
         @click="selectMatch(match.match_day)"
       >
-        <p class="matchday">GMW {{ match.match_day }}</p>
+        <p class="matchday">{{ match.short_name }}</p>
         <p class="points">{{ getPointsOrDate(match) }}</p>
-        <!-- <p class="matchdate">{{ match.start_at }}</p> -->
       </div>
     </div>
     <div class="fixtures__right" @click="slide(1)">
@@ -69,7 +68,8 @@ watch(activeMatch, (val) => {
 });
 
 const getPointsOrDate = (match: Record<string, string | number | any>) => {
-  if (currentDate < new Date(match?.start_at)) return dateOnlyFormatter(new Date(match?.start_at));
+  const today = new Date()
+  if (today < new Date(match?.start_at.split('T')[0])) return dateOnlyFormatter(new Date(match?.start_at));
   return match?.points + "pts";
 };
 

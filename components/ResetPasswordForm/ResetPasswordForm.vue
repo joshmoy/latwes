@@ -40,7 +40,7 @@ const schema = yup.object().shape({
 });
 
 const isLoading = ref(false);
-const route = useRoute()
+const route = useRoute();
 
 async function onSubmit(values, { resetForm }) {
   try {
