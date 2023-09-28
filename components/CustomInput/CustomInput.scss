@@ -11,6 +11,19 @@
     line-height: 29.568px;
   }
 
+  .label-12 {
+    font-size: 12px;
+    line-height: 20px;
+  }
+
+  .disabled {
+    opacity: 0.8;
+    input {
+      cursor: not-allowed;
+    }
+  }
+  
+
   &-field {
     width: 100%;
     height: 50px;
@@ -31,7 +44,7 @@
       border: none;
       outline: none;
       height: 40px;
-      color: #9ca5b0;
+      color: #333;
       font-size: 14px;
       font-weight: 400;
       width: 90%;

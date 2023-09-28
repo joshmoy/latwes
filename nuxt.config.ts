@@ -37,6 +37,7 @@ export default defineNuxtConfig({
     "@pinia-plugin-persistedstate/nuxt",
     "nuxt-svgo",
     "dayjs-nuxt",
+    "@nuxtjs/cloudinary",
   ],
   pinia: {
     autoImports: [
@@ -44,6 +45,9 @@ export default defineNuxtConfig({
       "defineStore", // import { defineStore } from 'pinia'
       ["defineStore", "definePiniaStore"], // import { defineStore as definePiniaStore } from 'pinia'
     ],
+  },
+  cloudinary: {
+    cloudName: "goborr",
   },
   css: ["~/styles/main.scss", "vue-toastification/dist/index.css"],
   vite: {

@@ -1,6 +1,6 @@
 <template>
   <div class="custom-select" :class="{ 'has-error': !!errorMessage, success: meta.valid }">
-    <label :for="name" class="custom-select-label">{{ label }}</label>
+    <label :for="name" class="custom-select-label" :class="labelClass">{{ label }}</label>
     <div class="custom-select-field">
       <select :name="name" :id="name" :value="inputValue" @input="handleChange" @blur="handleBlur">
         <option value="">{{ placeholder }}</option>
@@ -8,7 +8,7 @@
           {{ option.label }}
         </option>
       </select>
-      <label :for="name">
+      <label :for="name" >
         <img src="/icons/dropdown.svg" alt="" />
       </label>
     </div>
@@ -34,6 +34,10 @@ const props = defineProps({
   label: {
     type: String,
     required: true,
+  },
+  labelClass: {
+    type: String,
+    required: false,
   },
   placeholder: {
     type: String,
