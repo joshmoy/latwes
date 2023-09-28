@@ -7,14 +7,25 @@
         </NuxtLink>
         <nav class="dashboard-header-navigation">
           <ul class="dashboard-header-navigation-links">
-            <!-- <NuxtLink to="/dashboard/competitions"> <li>Dashboard</li> </NuxtLink> -->
-            <NuxtLink to="/dashboard/competitions"> <li class="active">Competitions</li> </NuxtLink>
+            <NuxtLink to="/dashboard/competitions" v-slot="{ isActive }">
+              <li :class="{ active: isActive }">Competitions</li>
+            </NuxtLink>
           </ul>
         </nav>
       </div>
       <div class="dashboard-header-avatar">
-        <img src="/icons/people.png" />
-        <button @click="logout">Logout</button>
+        <img class="avatar_icon" src="/icons/people.png" />
+        <div class="dashboard-header-avatar-flex" @click="toggleDropdown">
+          <div>
+            <p class="dashboard-header-avatar-flex-title">Username</p>
+            <p class="dashboard-header-avatar-flex-name">Dummy Username</p>
+          </div>
+          <img src="/icons/headerCaret.svg" />
+        </div>
+        <div class="dashboard-header-avatar-dropdown" v-if="showDropDown">
+          <NuxtLink to="/dashboard/profile"> <p>Profile</p> </NuxtLink>
+          <div><button @click="logout">Logout</button></div>
+        </div>
       </div>
     </div>
   </header>
@@ -47,8 +58,8 @@
         </div>
         <nav class="mobileDrawer__nav">
           <ul>
-            <!-- <NuxtLink to="/dashboard"> <li>Dashboard</li> </NuxtLink> -->
             <NuxtLink to="/dashboard/competitions"> <li class="active">Competitions</li> </NuxtLink>
+            <NuxtLink to="/dashboard/profile"> <li>Profile</li> </NuxtLink>
           </ul>
         </nav>
         <div class="dashboard-header-avatar logout">
@@ -71,9 +82,14 @@ const router = useRouter();
 const userAuthCookie = useCookie("userAuthCookie");
 
 let showNav = ref(false);
+let showDropDown = ref(false);
 
 const showNavigation = () => {
   showNav.value = !showNav.value;
+};
+
+const toggleDropdown = () => {
+  showDropDown.value = !showDropDown.value;
 };
 
 const logout = () => {
