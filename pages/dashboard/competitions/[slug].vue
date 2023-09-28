@@ -2,7 +2,7 @@
   <NuxtLayout name="dashboard-layout">
     <div>
       <PageTitle title="competitions" />
-      <PredictionBanner />
+      <PoolBanner />
       <SingleLeague />
     </div>
   </NuxtLayout>

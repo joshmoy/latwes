@@ -25,17 +25,6 @@
         </div>
       </div>
       <div class="single-league-main-actions">
-        <div class="single-league-main-actions-pool">
-          <p class="single-league-main-actions-pool-title">Current pool amount</p>
-          <p class="white-text-value">
-            {{ formatAmount(+competitionInfo?.current_pool_prize) }}
-          </p>
-          <button @click="openModal">Put money in the pool</button>
-          <NuxtLink to="/dashboard/competitions/epl">
-            <p class="single-league-main-actions-pool-helper">What is this?</p>
-          </NuxtLink>
-        </div>
-
         <div class="single-league-main-actions-leaderboard" v-if="leaderboard?.length > 0">
           <DashboardLeaderboard :tableData="leaderboard" :events="events" @updateLeaderboard="updateLeaderboard" />
         </div>
@@ -58,15 +47,11 @@
       </div>
     </div>
   </div>
-  <CustomModal v-if="showModal" @close="closeModal">
-    <PaymentForm />
-  </CustomModal>
+
 </template>
 
 <script setup lang="ts">
-const props = defineProps();
 import { useFixturesStore } from "@/store/fixturesStore";
-import { formatAmount } from "../../helpers/moneyformatter";
 import { daysDifference } from "../../helpers/dataFormatter";
 import { ref } from "vue";
 import { useToast } from "vue-toastification";
@@ -76,21 +61,10 @@ const route = useRoute();
 const fixtureStore = useFixturesStore();
 const leagueFixture = ref(`${route.params.slug}`);
 
-const showModal = ref(false);
 const isLoading = ref(true);
 const isActive = ref(false);
 const daysDiff = ref("");
 const currentDate = new Date();
-
-const openModal = () => {
-  showModal.value = true;
-  document.body.classList.add("block-modal");
-};
-
-const closeModal = () => {
-  showModal.value = false;
-  document.body.classList.remove("block-modal");
-};
 
 const events = fixtureStore.getters.getMatchEvents;
 const fixtures = fixtureStore.getters.getFixtures;

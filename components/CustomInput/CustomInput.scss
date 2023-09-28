@@ -22,7 +22,17 @@
       cursor: not-allowed;
     }
   }
-  
+
+  /* Hide the input spinner */
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
 
   &-field {
     width: 100%;
@@ -76,5 +86,9 @@
     @media screen and (max-width: 768px) {
       text-align: left !important;
     }
+  }
+
+  .border-black {
+      border: 1px solid $black !important;
   }
 }
