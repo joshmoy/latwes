@@ -3,7 +3,7 @@
     <div class="select-top">
       <div class="select-top-meta">
         <div class="select-top-meta-image">
-          <img src="/icons/plLogo.png" />
+          <img :src="singleLeague?.logo" />
         </div>
         <div class="select-top-meta-desc">
           <p class="select-top-meta-desc-name">{{ singleLeague?.name }}</p>

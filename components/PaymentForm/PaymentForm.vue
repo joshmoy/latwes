@@ -8,7 +8,7 @@
         name="amount"
         type="number"
         rightError
-        inputClass="amount-form-input"
+        inputClass="amount-form-input border-black"
         labelClass="amount-form-label"
       />
       <div class="amount-form-submit">

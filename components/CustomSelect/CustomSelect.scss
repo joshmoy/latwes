@@ -31,7 +31,8 @@
       border: none;
       outline: none;
       height: 40px;
-      color: #9ca5b0;
+      color: #333
+      ;
       font-size: 14px;
       font-weight: 400;
       width: 90%;
@@ -49,6 +50,11 @@
     text-align: left;
     font-size: 14px;
     line-height: 29.568px;
+  }
+
+  .label-12 {
+    font-size: 12px;
+    line-height: 20px;
   }
 
   .right-error {

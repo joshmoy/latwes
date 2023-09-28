@@ -11,6 +11,29 @@
     line-height: 29.568px;
   }
 
+  .label-12 {
+    font-size: 12px;
+    line-height: 20px;
+  }
+
+  .disabled {
+    opacity: 0.8;
+    input {
+      cursor: not-allowed;
+    }
+  }
+
+  /* Hide the input spinner */
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+
   &-field {
     width: 100%;
     height: 50px;
@@ -31,7 +54,7 @@
       border: none;
       outline: none;
       height: 40px;
-      color: #9ca5b0;
+      color: #333;
       font-size: 14px;
       font-weight: 400;
       width: 90%;
@@ -63,5 +86,9 @@
     @media screen and (max-width: 768px) {
       text-align: left !important;
     }
+  }
+
+  .border-black {
+      border: 1px solid $black !important;
   }
 }

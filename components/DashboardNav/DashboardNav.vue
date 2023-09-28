@@ -7,14 +7,25 @@
         </NuxtLink>
         <nav class="dashboard-header-navigation">
           <ul class="dashboard-header-navigation-links">
-            <!-- <NuxtLink to="/dashboard/competitions"> <li>Dashboard</li> </NuxtLink> -->
-            <NuxtLink to="/dashboard/competitions"> <li class="active">Competitions</li> </NuxtLink>
+            <NuxtLink to="/dashboard/competitions" v-slot="{ isActive }">
+              <li :class="{ active: isActive }">Competitions</li>
+            </NuxtLink>
           </ul>
         </nav>
       </div>
       <div class="dashboard-header-avatar">
-        <img src="/icons/people.png" />
-        <button @click="logout">Logout</button>
+        <img class="avatar_icon"  :src="profile?.profile_photo || `/icons/people.png`"  />
+        <div class="dashboard-header-avatar-flex" @click="toggleDropdown">
+          <div>
+            <p class="dashboard-header-avatar-flex-title">Username</p>
+            <p class="dashboard-header-avatar-flex-name">{{ profile.username || '' }}</p>
+          </div>
+          <img src="/icons/headerCaret.svg" />
+        </div>
+        <div class="dashboard-header-avatar-dropdown" v-if="showDropDown">
+          <NuxtLink to="/dashboard/profile"> <p>Profile</p> </NuxtLink>
+          <div><button @click="logout">Logout</button></div>
+        </div>
       </div>
     </div>
   </header>
@@ -47,12 +58,15 @@
         </div>
         <nav class="mobileDrawer__nav">
           <ul>
-            <!-- <NuxtLink to="/dashboard"> <li>Dashboard</li> </NuxtLink> -->
-            <NuxtLink to="/dashboard/competitions"> <li class="active">Competitions</li> </NuxtLink>
+            <NuxtLink to="/dashboard/competitions" v-slot="{ isActive }">
+              <li :class="{ active: isActive }">Competitions</li>
+            </NuxtLink>
+            <NuxtLink to="/dashboard/profile" v-slot="{ isActive }">
+              <li :class="{ active: isActive }">Profile</li>
+            </NuxtLink>
           </ul>
         </nav>
         <div class="dashboard-header-avatar logout">
-          <img src="/icons/people.png" />
           <button @click="logout">Logout</button>
         </div>
       </div>
@@ -65,15 +79,23 @@
 <script setup lang="ts">
 import { useAuthStore } from "~~/store/authStore";
 import { ref } from "vue";
+import { useProfileStore } from "@/store/profile";
 
+const profileStore = useProfileStore();
+
+const profile = profileStore.getters.getProfile;
 const authStore = useAuthStore();
-const router = useRouter();
 const userAuthCookie = useCookie("userAuthCookie");
 
 let showNav = ref(false);
+let showDropDown = ref(false);
 
 const showNavigation = () => {
   showNav.value = !showNav.value;
+};
+
+const toggleDropdown = () => {
+  showDropDown.value = !showDropDown.value;
 };
 
 const logout = () => {

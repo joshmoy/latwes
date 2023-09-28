@@ -1,7 +1,7 @@
 <template>
   <div class="custom-input" :class="{ 'has-error': !!errorMessage, success: meta.valid }">
     <label :for="name" class="custom-input-label" :class="labelClass">{{ label }}</label>
-    <div class="custom-input-field" :class="inputClass">
+    <div class="custom-input-field" :class="[inputClass, { 'disabled': isDisabled }]">
       <input
         :name="name"
         :id="name"
@@ -10,6 +10,7 @@
         :placeholder="placeholder"
         @input="handleChange"
         @blur="handleBlur"
+        :disabled="isDisabled"
       />
       <img :src="passwordIcon" alt="" v-if="type === 'password'" @click="onClickPasswordIcon" />
     </div>
@@ -43,7 +44,8 @@ interface ICustomInputProps {
   rightError?: boolean;
   helperText?: string;
   labelClass?: string;
-  inputClass?: string
+  inputClass?: string;
+  isDisabled?: boolean;
 }
 
 const props = defineProps<ICustomInputProps>();

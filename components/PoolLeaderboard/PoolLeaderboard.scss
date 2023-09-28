@@ -39,9 +39,9 @@
 
 %table-grid {
   display: grid;
-  grid-template-columns: minmax(200px, auto) repeat(2, auto);
+  grid-template-columns: minmax(200px, auto) repeat(3, auto);
   @media screen and (max-width: 768px) {
-    grid-template-columns: minmax(140px, auto) repeat(2, auto);
+    grid-template-columns: minmax(140px, auto) repeat(3, auto);
   }
 }
 
@@ -71,7 +71,12 @@
       display: flex;
       align-items: center;
     }
+
+    .off-table-amount {
+      margin-left: 10px
+    }
     .off-table-color {
+      display: inline-block;
       margin: 0 12px 0 15px;
     }
   }
