@@ -26,7 +26,19 @@
       </div>
       <div class="single-league-main-actions">
         <div class="single-league-main-actions-leaderboard" v-if="leaderboard?.length > 0">
-          <DashboardLeaderboard :tableData="leaderboard" :events="events" @updateLeaderboard="updateLeaderboard" />
+          <DashboardLeaderboard
+            :tableData="leaderboard"
+            :events="events"
+            @updateLeaderboard="updateLeaderboard"
+          />
+        </div>
+
+        <div class="single-league-main-actions-leaderboard" v-if="leaderboard?.length > 0">
+          <PoolLeaderboard
+            :tableData="poolLeaderboard"
+            :events="events"
+            @updateLeaderboard="updatePoolLeaderboard"
+          />
         </div>
 
         <div class="single-league-main-actions-scoring">
@@ -47,7 +59,6 @@
       </div>
     </div>
   </div>
-
 </template>
 
 <script setup lang="ts">
@@ -69,6 +80,7 @@ const currentDate = new Date();
 const events = fixtureStore.getters.getMatchEvents;
 const fixtures = fixtureStore.getters.getFixtures;
 let leaderboard = fixtureStore.getters.getLeaderboard;
+let poolLeaderboard = fixtureStore.getters.getPoolLeaderboard;
 let competitions = fixtureStore.getters.getCompetitions as Record<string, any>;
 let competitionInfo = {
   current_position: "-",
@@ -91,9 +103,10 @@ onMounted(async () => {
       fixtureStore.action.fetchCompetitions(),
     ]).then((res) => {
       updateLeaderboard(res[0].current_round);
-    })
+      updatePoolLeaderboard(res[0].current_round);
+    });
     competitions = fixtureStore.getters.getCompetitions as Record<string, any>;
-    competitionInfo = competitions?.value?.find((e: any) => e.slug === leagueFixture.value);      
+    competitionInfo = competitions?.value?.find((e: any) => e.slug === leagueFixture.value);
     document.body.classList.remove("block-modal");
     const leagueStartDate: Date = new Date((competitionInfo as Record<string, any>)?.start_date);
     const timeDifference = leagueStartDate ? leagueStartDate.getTime() - currentDate.getTime() : 0;
@@ -118,10 +131,15 @@ const fetchCurrentMatchesSelected = async (round: string) => {
   await fixtureStore.action.fetchFixtures(leagueFixture.value, round);
 };
 
-const updateLeaderboard = (value: string|undefined) => {
+const updateLeaderboard = (value: string | undefined) => {
   fixtureStore.action.fetchLeaderboard(leagueFixture.value, value),
-  leaderboard = fixtureStore.getters.getLeaderboard;
-}
+    (leaderboard = fixtureStore.getters.getLeaderboard);
+};
+
+const updatePoolLeaderboard = (value: string | undefined) => {
+  fixtureStore.action.fetchPoolLeaderboard(leagueFixture.value, value),
+    (poolLeaderboard = fixtureStore.getters.getPoolLeaderboard);
+};
 </script>
 
 <style lang="scss" scoped src="./SingleLeague.scss"></style>

@@ -12,6 +12,7 @@ export const useFixturesStore = defineStore('fixtures', ()  => {
     competitions: ref([]),
     teams: ref([]),
     leaderboard: ref([]),
+    poolLeaderboard: ref([]),
     data: ref([]),
     matchEvents: ref<IEvents>(),
   };
@@ -21,6 +22,7 @@ export const useFixturesStore = defineStore('fixtures', ()  => {
     getTeams: computed(() => state.teams),
     getFixtures: computed(() => state.data),
     getLeaderboard: computed(() => state.leaderboard),
+    getPoolLeaderboard: computed(() => state.poolLeaderboard),
     getMatchEvents: computed(() => state.matchEvents),
     getSingleCompetition: (slug: string) =>
       computed(() => state.competitions.value.find((e: any) => e.slug === slug)),
@@ -41,6 +43,16 @@ export const useFixturesStore = defineStore('fixtures', ()  => {
       try {
         const res = await axiosInstance.get(`competition/${league}/leaderboard?round=${round}`);
         state.leaderboard.value = res?.data?.data;
+
+        return res?.data?.data;
+      } catch (error) {
+        return error;
+      }
+    },
+    fetchPoolLeaderboard: async (league: string, round?: string) => {
+      try {
+        const res = await axiosInstance.get(`competition/${league}/leaderboard?round=${round}&for_pool=yes`);
+        state.poolLeaderboard.value = res?.data?.data;
 
         return res?.data?.data;
       } catch (error) {
