@@ -58,12 +58,11 @@
         </div>
         <nav class="mobileDrawer__nav">
           <ul>
-            <NuxtLink to="/dashboard/competitions"> <li class="active">Competitions</li> </NuxtLink>
-            <NuxtLink to="/dashboard/profile"> <li>Profile</li> </NuxtLink>
+            <NuxtLink to="/dashboard/competitions"  v-slot="{ isActive }"> <li :class="{ active: isActive }">Competitions</li> </NuxtLink>
+            <NuxtLink to="/dashboard/profile"  v-slot="{ isActive }"> <li :class="{ active: isActive }">Profile</li> </NuxtLink>
           </ul>
         </nav>
         <div class="dashboard-header-avatar logout">
-          <img src="/icons/people.png" />
           <button @click="logout">Logout</button>
         </div>
       </div>
