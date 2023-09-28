@@ -1,10 +1,9 @@
 <template>
-  <section class="leaderboard-wrapper" v-if="tableData && tableData.length > 0">
+  <section class="leaderboard-wrapper">
     <div class="container leaderboard-container">
       <div class="leaderboard-container__filter">
         <select name="leaderboard" id="leaderboardId" @change="update" v-model="filter">
           <option value="real" disabled selected>Filter Pool Leaderboard</option>
-          <option value="all">All Time</option>
           <option v-for="(val, id) in filteredEvent" :key="id" :value="val.match_day">
             {{ val.name }}
           </option>
@@ -12,7 +11,7 @@
       </div>
       <div class="off-table">
         <div class="off-table-body">
-          <div class="off-table-row" v-for="(el, id) in tableData" :key="id">
+          <div class="off-table-row" v-for="(el, id) in tableData?.leaderboard" :key="id">
             <span class="off-table-name">
               {{ id + 1 }}.
               <span class="off-table-color">
@@ -21,7 +20,7 @@
             </span>
             <span class="off-table-points">{{ el?.score }}</span>
             <span class="off-table-amount">{{
-              "₦ " + (id === 0 ? formatAmount(+competitionInfo?.current_pool_prize) : 0)
+              id === 0 ? formatSymbolAmount(+tableData?.poolAmount) : `₦0`
             }}</span>
           </div>
         </div>
@@ -32,8 +31,7 @@
 <style lang="scss" scoped src="./PoolLeaderboard.scss"></style>
 
 <script setup lang="ts">
-import { useFixturesStore } from "@/store/fixturesStore";
-import { formatAmount } from "../../helpers/moneyformatter";
+import { formatSymbolAmount } from "../../helpers/moneyformatter";
 
 const props = defineProps({
   tableData: {
@@ -47,22 +45,6 @@ const props = defineProps({
 });
 
 const emit = defineEmits(["updateLeaderboard"]);
-
-const route = useRoute();
-
-const fixtureStore = useFixturesStore();
-
-const leagueFixture = ref(`${route.params.slug}`);
-
-let competitions = fixtureStore.getters.getCompetitions as Record<string, any>;
-
-let competitionInfo = {
-  current_pool_prize: "0",
-};
-
-watch(competitions, (newValue) => {
-  competitionInfo = newValue?.find((e: any) => e.slug === leagueFixture.value);
-});
 
 const filter = ref("real");
 
