@@ -2,7 +2,12 @@
   <div class="container bank">
     <h1 class="bank-title">Bank</h1>
     <Spinner v-if="isBankLoading" />
-    <Form @submit="onSubmit" :validation-schema="schema" :initial-values="initialBankDetails" v-else>
+    <Form
+      @submit="onSubmit"
+      :validation-schema="schema"
+      :initial-values="initialBankDetails"
+      v-else
+    >
       <div class="bank-flex">
         <CustomSelect
           label="Select Bank"
@@ -58,10 +63,10 @@ const initialBankDetails = ref({
 const schema = yup.object().shape({
   code: yup.string().required("Bank is required"),
   accountNumber: yup
-    .number()
-    .typeError("Invalid Account Number")
+    .string()
+    .matches(/^\d+$/, "Only numbers are allowed")
+    .max(10, "Maximum length is 10")
     .required("Account Number is a required field")
-    .test("len", "Account Number must be 10 digits", (value) => value?.toString().length === 10),
 });
 
 async function onSubmit(values: any) {
