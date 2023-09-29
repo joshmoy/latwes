@@ -4,7 +4,7 @@
       <img src="/icons/newDashboardCurrency.svg" class="first-image" />
       <div class="pool-banner-text">
         <p class="pool-banner-text-title">Current pool amount</p>
-        <p>{{ '₦ '+formatAmount(+competitionInfo?.current_pool_prize) }}</p>
+        <p>{{ formatSymbolAmount(+competitionInfo?.current_pool_prize) }}</p>
       </div>
     </div>
     <div class="pool-banner-flex">
@@ -19,7 +19,7 @@
 
 <script setup lang="ts">
 import { useFixturesStore } from "@/store/fixturesStore";
-import { formatAmount } from "../../helpers/moneyformatter";
+import { formatSymbolAmount } from "../../helpers/moneyformatter";
 
 const route = useRoute();
 
@@ -27,14 +27,14 @@ const fixtureStore = useFixturesStore();
 const leagueFixture = ref(`${route.params.slug}`);
 
 let competitions = fixtureStore.getters.getCompetitions as Record<string, any>;
-let competitionInfo = {
+let competitionInfo = ref({
   current_pool_prize: "0",
-};
+});
 const showModal = ref(false);
 
 
 watch(competitions, (newValue) => {
-  competitionInfo = newValue?.find((e: any) => e.slug === leagueFixture.value);
+  competitionInfo.value = newValue?.find((e: any) => e.slug === leagueFixture.value);
 });
 
 const openModal = () => {

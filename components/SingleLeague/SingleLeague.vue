@@ -25,19 +25,19 @@
         </div>
       </div>
       <div class="single-league-main-actions">
-        <div class="single-league-main-actions-leaderboard" v-if="leaderboard?.length > 0">
-          <DashboardLeaderboard
-            :tableData="leaderboard"
-            :events="events"
-            @updateLeaderboard="updateLeaderboard"
-          />
-        </div>
-
-        <div class="single-league-main-actions-leaderboard" v-if="leaderboard?.length > 0">
+          <div class="single-league-main-actions-leaderboard" v-if="poolLeaderboard?.leaderboard?.length > 0">
           <PoolLeaderboard
             :tableData="poolLeaderboard"
             :events="events"
             @updateLeaderboard="updatePoolLeaderboard"
+          />
+        </div>
+
+        <div class="single-league-main-actions-leaderboard" v-if="leaderboard?.leaderboard?.length > 0">
+          <DashboardLeaderboard
+            :tableData="leaderboard"
+            :events="events"
+            @updateLeaderboard="updateLeaderboard"
           />
         </div>
 

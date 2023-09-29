@@ -12,7 +12,7 @@
       </div>
       <div class="off-table">
         <div class="off-table-body">
-          <div class="off-table-row" v-for="(el, id) in tableData" :key="id">
+          <div class="off-table-row" v-for="(el, id) in tableData.leaderboard" :key="id">
             <span class="off-table-name">
               {{ id + 1 }}.
               <span class="off-table-color">
