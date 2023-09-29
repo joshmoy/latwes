@@ -1,7 +1,6 @@
 <template>
   <NuxtLayout name="dashboard-layout">
     <div>
-      <PageTitle title="competitions" />
       <PoolBanner />
       <SingleLeague />
     </div>
