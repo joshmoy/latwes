@@ -59,7 +59,7 @@ async function onSubmit(values, { resetForm }) {
       competition_slug: `${route.params.slug}`,
       round_id: events.value.current_round
     });
-    window.open(data.data.authorization_url, '_blank');
+    window.location.replace(data.data.authorization_url);
     isLoading.value = false;
   } catch (error) {
     $toast.error(error?.response?.data?.message, {
