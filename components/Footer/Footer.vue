@@ -3,12 +3,12 @@
         <nav class="footer__navigation container">
             <ul class="footer__navigation__links">
                 <li>
-                    <NuxtLink to="/">
+                    <NuxtLink to="/privacy-policy">
                         Privacy Policy
                     </NuxtLink>
                 </li>
                 <li>
-                    <NuxtLink to="/">
+                    <NuxtLink to="/terms-and-conditions">
                         Terms & Conditions
                     </NuxtLink>
                 </li>
