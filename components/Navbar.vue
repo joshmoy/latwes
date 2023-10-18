@@ -17,20 +17,22 @@ const showNavigation = () => {
   showNav.value = !showNav.value;
 };
 
-const authenticateduser = ref("")
+const authenticateduser = ref("");
 
 onMounted(() => {
   const token = process.client ? localStorage.getItem("userToken") : "";
-  authenticateduser.value = token!
-
-})
+  authenticateduser.value = token!;
+});
 </script>
 <template>
   <div class="desktop-header">
     <header class="header">
-      <div class="logo">Goborr!</div>
+      <nuxt-link to="/"><div class="logo">Goborr!</div></nuxt-link>
       <nav>
         <ul>
+          <li>
+            <nuxt-link to="/about">About</nuxt-link>
+          </li>
           <li>
             <nuxt-link to="/login">Predictions</nuxt-link>
           </li>
@@ -102,6 +104,9 @@ onMounted(() => {
         </div>
         <nav class="mobileDrawer__nav">
           <ul>
+            <li>
+              <nuxt-link to="/about">About</nuxt-link>
+            </li>
             <li>
               <nuxt-link to="/login">Predictions</nuxt-link>
             </li>
