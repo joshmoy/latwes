@@ -44,15 +44,19 @@ interface IEventsObject {
 const props = defineProps(["events", "matchRound"]);
 const emit = defineEmits(["fetchCurrentMatchesSelected"]);
 
-const currentIndex = ref(0);
-const direction = ref(1);
 const activeMatch = ref();
-const currentDate = new Date();
+const currentMatchDayIndex = ref(props.matchRound - 1).value
+const currentIndex = +currentMatchDayIndex < 7 ? ref(0) : ref(+currentMatchDayIndex - 3);
+const lastMatchIndex = ref(+currentMatchDayIndex + 5);
 const visibleMatchEvents = computed(() => {
-  return props.events && props.events.slice(currentIndex.value, currentIndex.value + 8);
+  if (+currentMatchDayIndex < 7) {
+    return props.events && props.events.slice(currentIndex.value, currentIndex.value + 8);
+  }
+  return props.events && props.events.slice(currentIndex.value, lastMatchIndex.value);
 });
 
 watch(visibleMatchEvents, (val) => {
+  
   if (val) {
     const id =
       props.events &&
@@ -74,8 +78,11 @@ const getPointsOrDate = (match: Record<string, string | number | any>) => {
 };
 
 const displayValues = () => {
-  const visibleMatches = props.events?.slice(currentIndex.value, currentIndex.value + 8);
-  return visibleMatches;
+  if (+currentMatchDayIndex < 7) {
+    return props.events && props.events?.slice(currentIndex.value, currentIndex.value + 8);
+  }
+  const events = props.events && props.events?.slice(currentIndex.value, lastMatchIndex.value);
+  return events;
 };
 const triggerSliderAnimation = (val: number) => {
   const sliderElement: any = document.getElementById("match-fixtures");
@@ -99,14 +106,16 @@ const triggerSliderAnimation = (val: number) => {
 };
 const slide = (val: number) => {
   if (val === 1) {
-    if (currentIndex.value + 9 < props.events.length) {
+    if (currentIndex.value + 9 <= props.events.length) {
       currentIndex.value++;
+      lastMatchIndex.value++;
       displayValues();
       triggerSliderAnimation(val);
     }
   } else if (val === -1) {
-    if (currentIndex.value !== 0 && currentIndex.value + 9 <= props.events.length) {
+    if (currentIndex.value !== 0 && currentIndex.value + 9 <= props.events.length) {  
       currentIndex.value--;
+      lastMatchIndex.value--;
       displayValues();
       triggerSliderAnimation(val);
     }
