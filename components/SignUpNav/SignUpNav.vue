@@ -18,7 +18,7 @@
         </ul>
       </nav>
       <ul class="signup-header-navigation-links">
-         <li v-if="pageTitle !== 'login'">
+        <li v-if="pageTitle !== 'login'">
           <NuxtLink to="/login">Login</NuxtLink>
         </li>
         <li v-if="pageTitle === 'login'">

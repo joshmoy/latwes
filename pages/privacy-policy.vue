@@ -15,10 +15,11 @@
   <div class="container content">
     <p class="bold mb-20">Effective Date: 10 October 2023</p>
     <p class="mb-20">
-      Welcome to GoBorr! We are committed to protecting your privacy and ensuring that your personal
-      information is handled in a safe and responsible manner. This Privacy Policy outlines how
-      GoBorr collects, uses, and safeguards your information on our website and through our football
-      prediction platform.
+      Welcome to Goborr! We are committed to protecting your privacy and
+      ensuring that your personal information is handled in a safe and
+      responsible manner. This Privacy Policy outlines how Goborr collects,
+      uses, and safeguards your information on our website and through our
+      football prediction platform.
     </p>
 
     <ol>
@@ -28,15 +29,16 @@
           <ul>
             <li>
               <p>
-                <span class="bold">Personal Information:</span> When you create an account with GoBorr, we may
-                collect personal information such as your name, email address, and other relevant
-                details.
+                <span class="bold">Personal Information:</span> When you create
+                an account with Goborr, we may collect personal information such
+                as your name, email address, and other relevant details.
               </p>
             </li>
             <li>
               <p>
-                <span class="bold">Non-Personal Information:</span> We collect non-personal information like
-                browser type, device type, operating system, and IP addresses to enhance your user
+                <span class="bold">Non-Personal Information:</span> We collect
+                non-personal information like browser type, device type,
+                operating system, and IP addresses to enhance your user
                 experience.
               </p>
             </li>
@@ -47,9 +49,9 @@
         <div>
           <h3>Information Usage</h3>
           <p>
-            Your information helps us personalize and improve your experience on GoBorr. It enables
-            us to manage your account, respond to inquiries, and administer our leaderboard
-            competitions.
+            Your information helps us personalize and improve your experience on
+            Goborr. It enables us to manage your account, respond to inquiries,
+            and administer our leaderboard competitions.
           </p>
         </div>
       </li>
@@ -57,9 +59,9 @@
         <div>
           <h3>Information Sharing</h3>
           <p>
-            GoBorr does not sell, trade, or rent your personal information to third parties. We may
-            share non-personal aggregate statistics about our users with partners or advertisers in
-            a non-identifiable format.
+            Goborr does not sell, trade, or rent your personal information to
+            third parties. We may share non-personal aggregate statistics about
+            our users with partners or advertisers in a non-identifiable format.
           </p>
         </div>
       </li>
@@ -67,8 +69,8 @@
         <div>
           <h3>Cookies and Tracking Technologies</h3>
           <p>
-            We employ cookies and other tracking technologies to collect information to enhance your
-            user experience and improve our website.
+            We employ cookies and other tracking technologies to collect
+            information to enhance your user experience and improve our website.
           </p>
         </div>
       </li>
@@ -76,9 +78,9 @@
         <div>
           <h3>Security</h3>
           <p>
-            We implement stringent security measures to protect your personal information. However,
-            no system can be completely secure, and we cannot guarantee the absolute security of
-            your information.
+            We implement stringent security measures to protect your personal
+            information. However, no system can be completely secure, and we
+            cannot guarantee the absolute security of your information.
           </p>
         </div>
       </li>
@@ -86,8 +88,9 @@
         <div>
           <h3>Children’s Privacy</h3>
           <p>
-            GoBorr is not intended for use by individuals under the age of 18. We do not knowingly
-            collect personal information from children under 18.
+            Goborr is not intended for use by individuals under the age of 18.
+            We do not knowingly collect personal information from children under
+            18.
           </p>
         </div>
       </li>
@@ -95,8 +98,8 @@
         <div>
           <h3>Changes to This Privacy Policy</h3>
           <p>
-            We may update our Privacy Policy from time to time. Any changes will be posted on this
-            page with an updated effective date.
+            We may update our Privacy Policy from time to time. Any changes will
+            be posted on this page with an updated effective date.
           </p>
         </div>
       </li>
@@ -104,21 +107,22 @@
         <div>
           <h3>Contact Us</h3>
           <p>
-            If you have any questions or concerns regarding our Privacy Policy, please contact us at
-            [your contact email/phone].
+            If you have any questions or concerns regarding our Privacy Policy,
+            please contact us at [your contact email/phone].
           </p>
         </div>
       </li>
     </ol>
     <p class="mb-20">
-      Your privacy is of utmost importance to us, and we strive to ensure a transparent and secure
-      environment on GoBorr. By using our platform, you agree to the terms laid out in this Privacy
-      Policy.
+      Your privacy is of utmost importance to us, and we strive to ensure a
+      transparent and secure environment on Goborr. By using our platform, you
+      agree to the terms laid out in this Privacy Policy.
     </p>
     <p>
-      <span class="bold">Note:</span> It's advisable to consult with a legal professional to ensure that your privacy policy
-      complies with all applicable laws and regulations, especially if you have specific concerns or
-      unique circumstances surrounding your platform.
+      <span class="bold">Note:</span> It's advisable to consult with a legal
+      professional to ensure that your privacy policy complies with all
+      applicable laws and regulations, especially if you have specific concerns
+      or unique circumstances surrounding your platform.
     </p>
   </div>
   <Footer />
@@ -190,7 +194,7 @@
   h3 {
     font-weight: 700;
     font-size: 20px;
-      margin-bottom: 20px;
+    margin-bottom: 20px;
 
     @media screen and (max-width: 768px) {
       font-size: 18px;

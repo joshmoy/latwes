@@ -2,7 +2,10 @@
   <div class="container profile">
     <div class="avatar-div">
       <div class="avatar-div-img">
-        <img :src="profileDetails?.profile_photo || `/icons/avatar.webp`" alt="profile" />
+        <img
+          :src="profileDetails?.profile_photo || `/icons/avatar.webp`"
+          alt="profile"
+        />
       </div>
       <div class="avatar-div-label">
         <SmallSpinner v-if="isUploadLoading" />
@@ -22,7 +25,11 @@
       </div>
     </div>
     <h1 class="profile-title">Personal Details</h1>
-    <Form @submit="onSubmit" :validation-schema="schema" :initial-values="profileDetails">
+    <Form
+      @submit="onSubmit"
+      :validation-schema="schema"
+      :initial-values="profileDetails"
+    >
       <div class="profile-flex">
         <CustomInput
           label="First Name"
@@ -131,14 +138,14 @@ const handleFileChange = async (event: any) => {
   if (selectedFile) {
     const formData = new FormData();
     formData.append("file", selectedFile);
-    formData.append("upload_preset", "goborr-bucket");
+    formData.append("upload_preset", "Goborr-bucket");
 
     try {
       const response = await axios.post(
-        "https://api.cloudinary.com/v1_1/goborr/image/upload",
+        "https://api.cloudinary.com/v1_1/Goborr/image/upload",
         formData
       );
-      onUpdateProfileDetails({profile_photo: response.data?.secure_url});
+      onUpdateProfileDetails({ profile_photo: response.data?.secure_url });
       await updateProfile({ profile_photo: response.data?.secure_url });
       $toast.success("Image updated successfully!", {
         timeout: 5000,
@@ -157,7 +164,9 @@ async function onSubmit(values: any) {
   try {
     isLoading.value = true;
     const changedValues = Object.fromEntries(
-      Object.entries(values).filter(([key, value]) => value !== profileDetails[key])
+      Object.entries(values).filter(
+        ([key, value]) => value !== profileDetails[key]
+      )
     );
     if (Object.keys(changedValues).length > 0) {
       await updateProfile(changedValues as Record<string, string>);
@@ -167,9 +176,13 @@ async function onSubmit(values: any) {
     }
     isLoading.value = false;
   } catch (error: any) {
-    $toast.error(error?.response?.data?.message || "Something went wrong. Please try again later", {
-      timeout: 5000,
-    });
+    $toast.error(
+      error?.response?.data?.message ||
+        "Something went wrong. Please try again later",
+      {
+        timeout: 5000,
+      }
+    );
     isLoading.value = false;
   }
 }

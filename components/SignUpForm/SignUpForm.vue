@@ -1,7 +1,11 @@
 <template>
   <div class="container signup">
     <h1 class="signup-title">Create your account</h1>
-    <Form @submit="onSubmit" :validation-schema="schema" :initialValues="{ email: email }">
+    <Form
+      @submit="onSubmit"
+      :validation-schema="schema"
+      :initialValues="{ email: email }"
+    >
       <CustomInput
         label="Username"
         placeholder="Enter username"
@@ -9,7 +13,13 @@
         type="text"
         rightError
       />
-      <CustomInput label="Email" placeholder="Enter email" name="email" type="text" rightError />
+      <CustomInput
+        label="Email"
+        placeholder="Enter email"
+        name="email"
+        type="text"
+        rightError
+      />
       <div class="signup-flex">
         <CustomInput
           label="Password"
@@ -89,7 +99,7 @@ import { useToast } from "vue-toastification";
 const $toast = useToast();
 
 const isLoading = ref(false);
-const email = ref('');
+const email = ref("");
 const router = useRouter();
 
 const schema = yup.object().shape({
@@ -102,7 +112,10 @@ const schema = yup.object().shape({
     ),
   first_name: yup.string().required("First Name is a required field"),
   last_name: yup.string().required("Last Name is a required field"),
-  email: yup.string().required("Email is a required field").email("Input a valid email address"),
+  email: yup
+    .string()
+    .required("Email is a required field")
+    .email("Input a valid email address"),
   password: yup
     .string()
     .required("Password is a required field")
@@ -114,7 +127,9 @@ const schema = yup.object().shape({
     .oneOf([yup.ref("password")], "Passwords do not match"),
   state: yup.string().required("Location is a required field"),
   gender: yup.string().required("Gender is a required field"),
-  acceptTerms: yup.boolean().oneOf([true], "You must accept the terms and conditions"),
+  acceptTerms: yup
+    .boolean()
+    .oneOf([true], "You must accept the terms and conditions"),
   over18: yup.boolean().oneOf([true], "You must be above 18 years to sign up"),
 });
 
@@ -124,12 +139,12 @@ async function onSubmit(values, { resetForm }) {
     delete values?.confirmPassword;
     delete values?.acceptTerms;
     delete values?.over18;
-    await signUpService({...values, country: 'Nigeria'});
+    await signUpService({ ...values, country: "Nigeria" });
     $toast.success("Signup successful!", {
       timeout: 5000,
     });
     resetForm();
-    localStorage.removeItem("goborrUserEmail");
+    localStorage.removeItem("GoborrUserEmail");
     isLoading.value = false;
     router.push("/login");
   } catch (error) {
@@ -141,11 +156,13 @@ async function onSubmit(values, { resetForm }) {
 }
 
 onMounted(() => {
-  const existingEmail = process.client ? localStorage.getItem("goborrUserEmail") : "";
-  if(existingEmail) {
-     email.value = existingEmail;
+  const existingEmail = process.client
+    ? localStorage.getItem("GoborrUserEmail")
+    : "";
+  if (existingEmail) {
+    email.value = existingEmail;
   }
-})
+});
 </script>
 
 <style lang="scss" scoped src="./SignUpForm.scss"></style>

@@ -1,7 +1,11 @@
-import axios, { AxiosError, AxiosRequestConfig, InternalAxiosRequestConfig } from "axios";
+import axios, {
+  AxiosError,
+  AxiosRequestConfig,
+  InternalAxiosRequestConfig,
+} from "axios";
 import { clearUserSession } from "~~/helpers/logout";
 
-const BASEURL: string = "https://staging-api.goborr.com/api/v1";
+const BASEURL: string = "https://staging-api.Goborr.com/api/v1";
 const token: any = process.client ? localStorage.getItem("userToken") : "";
 
 export const axiosInstance = axios.create({
@@ -14,7 +18,9 @@ export const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use(
-  async (request: AxiosRequestConfig): Promise<InternalAxiosRequestConfig<any>> => {
+  async (
+    request: AxiosRequestConfig
+  ): Promise<InternalAxiosRequestConfig<any>> => {
     const token: any = process.client ? localStorage.getItem("userToken") : "";
 
     if (!token) {

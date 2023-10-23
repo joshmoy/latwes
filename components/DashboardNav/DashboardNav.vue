@@ -14,11 +14,16 @@
         </nav>
       </div>
       <div class="dashboard-header-avatar">
-        <img class="avatar_icon"  :src="profile?.profile_photo || `/icons/people.png`"  />
+        <img
+          class="avatar_icon"
+          :src="profile?.profile_photo || `/icons/people.png`"
+        />
         <div class="dashboard-header-avatar-flex" @click="toggleDropdown">
           <div>
             <p class="dashboard-header-avatar-flex-title">Username</p>
-            <p class="dashboard-header-avatar-flex-name">{{ profile.username || '' }}</p>
+            <p class="dashboard-header-avatar-flex-name">
+              {{ profile.username || "" }}
+            </p>
           </div>
           <img src="/icons/headerCaret.svg" />
         </div>
@@ -88,7 +93,6 @@ const profileStore = useProfileStore();
 const profile = profileStore.getters.getProfile;
 const authStore = useAuthStore();
 const userAuthCookie = useCookie("userAuthCookie");
-
 
 onMounted(async () => {
   try {
