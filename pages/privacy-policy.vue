@@ -86,8 +86,8 @@
         <div>
           <h3>Children’s Privacy</h3>
           <p>
-            GoBorr is not intended for use by individuals under the age of 13. We do not knowingly
-            collect personal information from children under 13.
+            GoBorr is not intended for use by individuals under the age of 18. We do not knowingly
+            collect personal information from children under 18.
           </p>
         </div>
       </li>
