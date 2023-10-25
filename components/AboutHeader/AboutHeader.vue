@@ -3,7 +3,7 @@
     <Navbar :home-nav="true" />
     <section class="hero-header">
       <div class="container hero-header-container">
-        <h1 class="hero-header-title">About <span>Us</span></h1>
+        <h1 class="hero-header-title">{{ mainText || 'About' }} <span>{{ spanText || 'Us' }}</span></h1>
       </div>
     </section>
     <div class="hero__icons">
@@ -13,3 +13,13 @@
   </main>
 </template>
 <style lang="scss" scoped src="./AboutHeader.scss"></style>
+
+<script setup lang="ts">
+
+interface IHeroProps {
+  mainText?: string;
+  spanText?: string;
+}
+
+defineProps<IHeroProps>();
+</script>
