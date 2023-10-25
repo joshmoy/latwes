@@ -12,6 +12,11 @@
                         Terms & Conditions
                     </NuxtLink>
                 </li>
+                  <li>
+                    <NuxtLink to="/how-to-play">
+                        How To Play
+                    </NuxtLink>
+                </li>
             </ul>
             <ul class="footer__navigation__socials">
                 <li>

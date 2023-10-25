@@ -63,7 +63,7 @@
       <li class="mb-20" v-for="(el, id) in examples" :key="id">
         <p class="bold mb-20">Example {{ id + 1 }}: Real-life score - Arsenal 1, Man City 3</p>
         <div class="play-flex">
-          <p>Prediction: Arsenal {{ el?.homeTeamScore }} - {{ el?.awayTeamScore }} Man City</p>
+          <p class="bold">Prediction: Arsenal {{ el?.homeScore }} - {{ el?.awayScore }} Man City</p>
           <PointsComponent :pointsEarned="el?.totalPoints" />
         </div>
         <ul>
