@@ -10,14 +10,14 @@
             <NuxtLink to="/dashboard/competitions" v-slot="{ isActive }">
               <li :class="{ active: isActive }">Competitions</li>
             </NuxtLink>
+            <NuxtLink to="/how-to-play" v-slot="{ isActive }">
+              <li :class="{ active: isActive }">How To Play</li>
+            </NuxtLink>
           </ul>
         </nav>
       </div>
       <div class="dashboard-header-avatar">
-        <img
-          class="avatar_icon"
-          :src="profile?.profile_photo || `/icons/people.png`"
-        />
+        <img class="avatar_icon" :src="profile?.profile_photo || `/icons/people.png`" />
         <div class="dashboard-header-avatar-flex" @click="toggleDropdown">
           <div>
             <p class="dashboard-header-avatar-flex-title">Username</p>
@@ -65,6 +65,9 @@
           <ul>
             <NuxtLink to="/dashboard/competitions" v-slot="{ isActive }">
               <li :class="{ active: isActive }">Competitions</li>
+            </NuxtLink>
+              <NuxtLink to="/how-to-play" v-slot="{ isActive }">
+              <li :class="{ active: isActive }">How To Play</li>
             </NuxtLink>
             <NuxtLink to="/dashboard/profile" v-slot="{ isActive }">
               <li :class="{ active: isActive }">Profile</li>
