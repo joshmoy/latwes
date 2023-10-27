@@ -12,6 +12,12 @@ export default defineNuxtConfig({
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
     ],
+    noscript: [
+      {
+        innerHTML: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NNSMBWK8"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe>`
+      }
+    ]
   },
   app: {
     head: {
