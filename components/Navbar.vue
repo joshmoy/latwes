@@ -37,7 +37,7 @@ onMounted(() => {
             <nuxt-link to="/how-to-play">How To Play</nuxt-link>
           </li>
           <li>
-            <nuxt-link to="#faqs">FAQs</nuxt-link>
+            <nuxt-link to="/#faqs">FAQs</nuxt-link>
           </li>
         </ul>
       </nav>
@@ -111,7 +111,7 @@ onMounted(() => {
               <nuxt-link to="/how-to-play">How To Play</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="#faqs">FAQs</nuxt-link>
+              <nuxt-link to="/#faqs">FAQs</nuxt-link>
             </li>
           </ul>
         </nav>
