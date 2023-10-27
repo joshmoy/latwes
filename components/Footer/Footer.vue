@@ -20,20 +20,20 @@
             </ul>
             <ul class="footer__navigation__socials">
                 <li>
-                    <NuxtLink to="https://twitter.com/**" class="footer__navigation__icon">
+                    <NuxtLink to=" https://x.com/playgoborr?t=thpjzTZMNjRg8nlN_N46FQ&s=08" class="footer__navigation__icon">
                         <svgo-twitter />
                     </NuxtLink>
                 </li>
                 <li>
-                    <NuxtLink to="https://instagram.com/**" class="footer__navigation__icon">
+                    <NuxtLink to="https://instagram.com/playgoborr?igshid=MzRlODBiNWFlZA==" class="footer__navigation__icon">
                         <svgo-instagram />
                     </NuxtLink>
                 </li>
-                <li>
+                <!-- <li>
                     <NuxtLink to="https://facebook/**" class="footer__navigation__icon">
                         <svgo-facebook />
                     </NuxtLink>
-                </li>
+                </li> -->
             </ul>
         </nav>
 
