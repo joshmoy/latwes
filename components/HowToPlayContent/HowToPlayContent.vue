@@ -1,5 +1,5 @@
 <template>
-  <div class="container about-content">
+  <div class="container how-to-play">
     <h1>Welcome to Goborr!</h1>
     <p>
       Whether you're a seasoned football enthusiast or a novice looking to test your prediction
@@ -69,26 +69,28 @@
         <ul>
           <li>
             <div class="play-flex">
-              <p>Home team correct score -</p>
-              <PointsComponent :pointsEarned="el?.homeCorrectScore" />
+              <p>
+                Home team correct score - {{ el?.homeCorrectScore }}
+                {{ el?.homeCorrectScore === 1 ? "pt" : "pts" }}
+              </p>
             </div>
           </li>
           <li>
             <div class="play-flex">
-              <p>Away team correct score -</p>
-              <PointsComponent :pointsEarned="el?.awayCorrectScore" />
+              <p>Away team correct score - {{ el?.awayCorrectScore }}
+                {{ el?.awayCorrectScore === 1 ? "pt" : "pts" }}</p>
             </div>
           </li>
           <li>
             <div class="play-flex">
-              <p>Correct goal difference -</p>
-              <PointsComponent :pointsEarned="el?.goalDifference" />
+              <p>Correct goal difference - {{ el?.goalDifference }}
+                {{ el?.goalDifference === 1 ? "pt" : "pts" }}</p>
             </div>
           </li>
           <li>
             <div class="play-flex">
-              <p>Correct outcome -</p>
-              <PointsComponent :pointsEarned="el?.correctOutcome" />
+              <p>Correct outcome - {{ el?.correctOutcome }}
+                {{ el?.correctOutcome === 1 ? "pt" : "pts" }}</p>
             </div>
           </li>
         </ul>
@@ -105,11 +107,18 @@
       Dive into the world of football predictions, showcase your skills, and enjoy the thrill of the
       beautiful game!
     </p>
+
+    <button
+      class="button"
+      @click="$router.push(!authenticateduser ? '/login' : '/dashboard/competitions')"
+    >
+      {{ !authenticateduser ? "Login" : "Predict Now" }}
+    </button>
   </div>
 </template>
 <style lang="scss" scoped src="./HowToPlayContent.scss"></style>
 
-<script setup>
+<script setup lang="ts">
 const examples = [
   {
     homeScore: 2,
@@ -184,4 +193,11 @@ const examples = [
     correctOutcome: 3,
   },
 ];
+
+const authenticateduser = ref("");
+
+onMounted(() => {
+  const token = process.client ? localStorage.getItem("userToken") : "";
+  authenticateduser.value = token!;
+});
 </script>
