@@ -20,7 +20,7 @@
             </ul>
             <ul class="footer__navigation__socials">
                 <li>
-                    <NuxtLink to=" https://x.com/playgoborr?t=thpjzTZMNjRg8nlN_N46FQ&s=08" class="footer__navigation__icon">
+                    <NuxtLink to="https://x.com/playgoborr?t=thpjzTZMNjRg8nlN_N46FQ&s=08" class="footer__navigation__icon">
                         <svgo-twitter />
                     </NuxtLink>
                 </li>
