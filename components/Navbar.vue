@@ -34,7 +34,7 @@ onMounted(() => {
             <nuxt-link to="/about">About</nuxt-link>
           </li>
           <li>
-            <nuxt-link to="/login">Predictions</nuxt-link>
+            <nuxt-link to="/how-to-play">How To Play</nuxt-link>
           </li>
           <li>
             <nuxt-link to="#faqs">FAQs</nuxt-link>
@@ -84,7 +84,7 @@ onMounted(() => {
       </div>
       <div :class="{ mobileDrawer: showNav, hide: !showNav }">
         <div class="mobileDrawer__header">
-          <div class="mobileDrawer__header--logo">Goborr!</div>
+          <nuxt-link to="/"><div class="mobileDrawer__header--logo">Goborr!</div></nuxt-link>
           <div @click="showNavigation">
             <svg
               stroke="#0052C5"
@@ -108,7 +108,7 @@ onMounted(() => {
               <nuxt-link to="/about">About</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/login">Predictions</nuxt-link>
+              <nuxt-link to="/how-to-play">How To Play</nuxt-link>
             </li>
             <li>
               <nuxt-link to="#faqs">FAQs</nuxt-link>
