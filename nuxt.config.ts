@@ -11,12 +11,6 @@ export default defineNuxtConfig({
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-    ],
-    noscript: [
-      {
-        innerHTML: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NNSMBWK8"
-        height="0" width="0" style="display:none;visibility:hidden"></iframe>`
-      }
     ]
   },
   app: {
@@ -43,12 +37,19 @@ export default defineNuxtConfig({
     "@pinia-plugin-persistedstate/nuxt",
     "nuxt-svgo",
     "dayjs-nuxt",
+    'nuxt-gtag'
   ],
   pinia: {
     autoImports: [
       "defineStore", // import { defineStore } from 'pinia'
       ["defineStore", "definePiniaStore"], // import { defineStore as definePiniaStore } from 'pinia'
     ],
+  },
+  gtag: {
+    id: 'G-2G1L6BZS5Q',
+    config: {
+      page_title: 'Goborr'
+    }
   },
   css: ["~/styles/main.scss", "vue-toastification/dist/index.css"],
   vite: {
