@@ -108,7 +108,7 @@
           <h3>Contact Us</h3>
           <p>
             If you have any questions or concerns regarding our Privacy Policy,
-            please contact us at [your contact email/phone].
+            please contact us <a href="mailto:comms@goborr.com" class="link">here</a>.
           </p>
         </div>
       </li>
@@ -117,12 +117,6 @@
       Your privacy is of utmost importance to us, and we strive to ensure a
       transparent and secure environment on Goborr. By using our platform, you
       agree to the terms laid out in this Privacy Policy.
-    </p>
-    <p>
-      <span class="bold">Note:</span> It's advisable to consult with a legal
-      professional to ensure that your privacy policy complies with all
-      applicable laws and regulations, especially if you have specific concerns
-      or unique circumstances surrounding your platform.
     </p>
   </div>
   <Footer />
@@ -224,6 +218,10 @@
 
   .mb-20 {
     margin-bottom: 20px;
+  }
+
+  .link {
+    color: $light-blue;
   }
 }
 </style>
