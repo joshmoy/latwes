@@ -8,14 +8,6 @@
   <FrequentlyAskedQuestions />
   <Footer />
 </template>
-<script setup>
-const { gtag } = useGtag()
-
-gtag('event', 'screen_view', {
-  app_name: 'Goborr',
-  screen_name: 'Home'
-})
-</script>
 
 <style lang="scss">
 .upcoming-fixtures-pool {

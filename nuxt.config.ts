@@ -37,7 +37,8 @@ export default defineNuxtConfig({
     "@pinia-plugin-persistedstate/nuxt",
     "nuxt-svgo",
     "dayjs-nuxt",
-    'nuxt-gtag'
+    'nuxt-gtag',
+    '@zadigetvoltaire/nuxt-gtm'
   ],
   pinia: {
     autoImports: [
@@ -50,6 +51,9 @@ export default defineNuxtConfig({
     config: {
       page_title: 'Goborr'
     }
+  },
+  gtm: {
+    id: 'GTM-NNSMBWK8'
   },
   css: ["~/styles/main.scss", "vue-toastification/dist/index.css"],
   vite: {
