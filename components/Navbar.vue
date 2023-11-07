@@ -84,7 +84,9 @@ onMounted(() => {
       </div>
       <div :class="{ mobileDrawer: showNav, hide: !showNav }">
         <div class="mobileDrawer__header">
-          <nuxt-link to="/"><div class="mobileDrawer__header--logo">Goborr!</div></nuxt-link>
+          <nuxt-link to="/"
+            ><div class="mobileDrawer__header--logo">Goborr!</div></nuxt-link
+          >
           <div @click="showNavigation">
             <svg
               stroke="#0052C5"
@@ -115,7 +117,7 @@ onMounted(() => {
             </li>
           </ul>
         </nav>
-        <div>
+        <div v-if="!authenticateduser">
           <button
             :class="{
               homeNavButton: homeNav,
@@ -135,6 +137,17 @@ onMounted(() => {
             @click="$router.push('/login')"
           >
             Login
+          </button>
+        </div>
+        <div v-else>
+          <button
+            :class="{
+              homeNavButton: homeNav,
+              authNavButton: authNav,
+            }"
+            @click="$router.push('/dashboard/competitions')"
+          >
+            Go to dashboard
           </button>
         </div>
       </div>
