@@ -19,9 +19,9 @@ useSeoMeta({
   ogDescription:
     "Predict. Compete. Win. Goborr offers you a front-row seat to the world of soccer forecasting. Rise up the ranks, and grab your weekly jackpot! Ready for the challenge?",
   ogImage:
-    "https://res.cloudinary.com/demp/image/upload/v1693431921/Compete_With_zrkmza.jpg",
+    "https://res.cloudinary.com/demp/image/upload/v1699383189/Compete_With_io6fec.jpg",
   twitterImage:
-    "https://res.cloudinary.com/demp/image/upload/v1693431921/Compete_With_zrkmza.jpg",
+    "https://res.cloudinary.com/demp/image/upload/v1699383189/Compete_With_io6fec.jpg",
   twitterCard: "summary_large_image",
   twitterTitle: "Goborr",
   twitterDescription:
