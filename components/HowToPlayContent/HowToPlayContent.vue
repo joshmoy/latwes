@@ -110,9 +110,9 @@
 
     <button
       class="button"
-      @click="$router.push(!authenticateduser ? '/login' : '/dashboard/competitions')"
+      @click="$router.push('/dashboard/competitions')"
     >
-      {{ !authenticateduser ? "Login" : "Predict Now" }}
+      {{ "Predict Now" }}
     </button>
   </div>
 </template>
