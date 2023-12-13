@@ -12,7 +12,7 @@
               </span>
             </span>
             <span class="off-table-points">{{ el?.home_team_score }} - {{ el?.away_team_score }}</span>
-            <span class="off-table-amount">{{ el?.score }}</span>
+            <span class="off-table-amount">{{ el?.score }} points</span>
           </div>
         </div>
       </div>
