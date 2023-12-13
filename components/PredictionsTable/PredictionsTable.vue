@@ -6,7 +6,7 @@
           <div class="off-table-row" v-for="(el, id) in predictions" :key="id">
             <span class="off-table-name">
              <span class="tableIndex"> {{ id + 1 }}</span>
-              <img :src="`${el?.profile_photo}` || '/icons/avatar.webp'" alt="user_profile_photo"/>
+              <img :src="el?.profile_photo || '/icons/avatar.webp'" alt="user_profile_photo"/>
               <span class="off-table-color">
                 {{ el?.username }}
               </span>
@@ -23,7 +23,7 @@
 
 <script setup lang="ts">
 interface ITableProps {
-  predictions: Record<string, string | number>[];
+  predictions: Record<string, any>[];
 }
 
 const props = defineProps<ITableProps>();
