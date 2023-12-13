@@ -7,21 +7,32 @@
         </div>
         <p>{{ toastMessage }}</p>
       </div>
-      <p class="prediction-card__teams--heading" v-if="!hasPredicted">
-        {{
-          matchData?.has_finished
-            ? "Match Ended"
-            : hasMatchStarted
-            ? "Match Started"
-            : homeTeamScore !== null
-            ? "Edit your prediction"
-            : "Enter your prediction"
-        }}
-      </p>
-      <div v-else class="prediction-card__teams--hasPredicted">
-        <img src="/icons/ArchiveBox.svg" />
-        <p>Prediction saved!</p>
+      <div class="prediction-card__teams--flex">
+        <div style="width: 114px" class="empty-div"></div>
+        <p class="prediction-card__teams--heading" v-if="!hasPredicted">
+          {{
+            matchData?.has_finished
+              ? "Match Ended"
+              : hasMatchStarted
+              ? "Match Started"
+              : homeTeamScore !== null
+              ? "Edit your prediction"
+              : "Enter your prediction"
+          }}
+        </p>
+        <div v-else class="prediction-card__teams--hasPredicted">
+          <img src="/icons/ArchiveBox.svg" />
+          <p>Prediction saved!</p>
+        </div>
+        <NuxtLink
+          :to="`/dashboard/competitions/${leagueFixture}/fixtures/${matchData?.id}`"
+          v-if="hasMatchStarted || matchData?.has_finished"
+        >
+          <p class="prediction-card__teams--heading">View predictions</p>
+        </NuxtLink>
+        <p v-else class="prediction-card__teams--heading prediction-disabled">View predictions</p>
       </div>
+
       <div class="prediction-card__teams">
         <div class="prediction-card__teams--body">
           <div class="team-input__a">
@@ -130,8 +141,11 @@
 import { ref, nextTick } from "vue";
 import { dateFormatter } from "../../helpers/dataFormatter";
 import { predictMatch } from "../../services/Prediction";
+import { useToast } from "vue-toastification";
+
 
 const route = useRoute();
+const leagueFixture = ref(`${route.params.slug}`);
 const showInput = ref(false);
 const showToast = ref(false);
 const isLoading = ref(false);

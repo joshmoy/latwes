@@ -1,0 +1,124 @@
+.pool-banner {
+  background-color: $black;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 168px;
+  margin-bottom: 40px;
+  padding: 0 53px;
+
+  @media screen and (max-width: 768px) {
+    padding: 0 20px;
+  }
+
+  @media screen and (max-width: 768px) {
+    max-height: 130px;
+    height: 130px;
+  }
+
+  &-flex {
+    display: flex;
+    align-items: center;
+
+    .first-image,
+    .second-image {
+      @media screen and (max-width: 768px) {
+        display: none;
+      }
+    }
+
+    &--right {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      @media screen and (max-width: 500px) {
+        grid-column: span 2;
+        margin-top: 15px;
+      }
+      .kick-off {
+        color: #b3d6ff;
+        text-align: center;
+        font-size: 16px;
+        font-weight: 800;
+        line-height: 19px;
+
+        @media screen and (max-width: 768px) {
+          font-size: 14px;
+        }
+      }
+      .points {
+        background: url("/icons/grey.svg");
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-repeat: no-repeat;
+        background-position: center;
+        width: 84.858px;
+        height: 38.978px;
+
+        p {
+          color: #000;
+          font-size: 20px;
+          font-weight: 800;
+          line-height: 24px;
+          text-decoration-line: underline;
+        }
+      }
+
+      .points-lemon {
+        background-image: url("/icons/lemon.svg");
+      }
+
+      .points-orange {
+        background-image: url("/icons/orange.svg");
+      }
+    }
+
+    button {
+      background-color: $light-blue;
+      height: 60px;
+      width: 261px;
+      border-radius: 10px;
+      color: $white;
+      font-size: 18px;
+      font-weight: 500;
+      border: none;
+      margin-right: 58px;
+
+      @media screen and (min-width: 461px) and (max-width: 768px) {
+        width: 180px;
+        font-size: 14px;
+        margin-right: 20px;
+      }
+
+      @media screen and (max-width: 460px) {
+        width: 120px;
+        font-size: 14px;
+        margin-right: 20px;
+      }
+    }
+  }
+
+  &-text {
+    p {
+      color: $white;
+      font-size: 52px;
+      font-weight: 800;
+
+      @media screen and (max-width: 768px) {
+        font-size: 20px;
+      }
+    }
+
+    &-title {
+      font-size: 16px !important;
+      font-weight: 500 !important;
+      margin-bottom: 11px;
+
+      @media screen and (max-width: 768px) {
+        font-size: 18px !important;
+      }
+    }
+  }
+}

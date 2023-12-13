@@ -15,11 +15,10 @@
   <div class="container content">
     <p class="bold mb-20">Effective Date: 10 October 2023</p>
     <p class="mb-20">
-      Welcome to Goborr! We are committed to protecting your privacy and
-      ensuring that your personal information is handled in a safe and
-      responsible manner. This Privacy Policy outlines how Goborr collects,
-      uses, and safeguards your information on our website and through our
-      football prediction platform.
+      Welcome to Goborr! We are committed to protecting your privacy and ensuring that your personal
+      information is handled in a safe and responsible manner. This Privacy Policy outlines how
+      Goborr collects, uses, and safeguards your information on our website and through our football
+      prediction platform.
     </p>
 
     <ol>
@@ -29,17 +28,28 @@
           <ul>
             <li>
               <p>
-                <span class="bold">Personal Information:</span> When you create
-                an account with Goborr, we may collect personal information such
-                as your name, email address, and other relevant details.
+                <span class="bold">Personal Information:</span> When you create an account with
+                Goborr, we may collect personal information such as your name, email address, and
+                other relevant details.
               </p>
             </li>
             <li>
               <p>
-                <span class="bold">Non-Personal Information:</span> We collect
-                non-personal information like browser type, device type,
-                operating system, and IP addresses to enhance your user
-                experience.
+                <span class="bold">Non-Personal Information:</span> We collect non-personal
+                information like browser type, device type, operating system, and IP addresses to
+                enhance your user experience.
+                <br />
+                <br />
+                We partner with Microsoft Clarity and Microsoft Advertising to capture how you use
+                and interact with our website through behavioral metrics, heatmaps, and session
+                replay to improve and market our products/services. Website usage data is captured
+                using first and third-party cookies and other tracking technologies to determine the
+                popularity of products/services and online activity. Additionally, we use this
+                information for site optimization, fraud/security purposes, and advertising. For
+                more information about how Microsoft collects and uses your data, visit the
+                <NuxtLink to="https://privacy.microsoft.com/en-US/privacystatement" class="link"
+                  >Microsoft Privacy Statement.</NuxtLink
+                >
               </p>
             </li>
           </ul>
@@ -49,9 +59,9 @@
         <div>
           <h3>Information Usage</h3>
           <p>
-            Your information helps us personalize and improve your experience on
-            Goborr. It enables us to manage your account, respond to inquiries,
-            and administer our leaderboard competitions.
+            Your information helps us personalize and improve your experience on Goborr. It enables
+            us to manage your account, respond to inquiries, and administer our leaderboard
+            competitions.
           </p>
         </div>
       </li>
@@ -59,9 +69,9 @@
         <div>
           <h3>Information Sharing</h3>
           <p>
-            Goborr does not sell, trade, or rent your personal information to
-            third parties. We may share non-personal aggregate statistics about
-            our users with partners or advertisers in a non-identifiable format.
+            Goborr does not sell, trade, or rent your personal information to third parties. We may
+            share non-personal aggregate statistics about our users with partners or advertisers in
+            a non-identifiable format.
           </p>
         </div>
       </li>
@@ -69,8 +79,8 @@
         <div>
           <h3>Cookies and Tracking Technologies</h3>
           <p>
-            We employ cookies and other tracking technologies to collect
-            information to enhance your user experience and improve our website.
+            We employ cookies and other tracking technologies to collect information to enhance your
+            user experience and improve our website.
           </p>
         </div>
       </li>
@@ -78,9 +88,9 @@
         <div>
           <h3>Security</h3>
           <p>
-            We implement stringent security measures to protect your personal
-            information. However, no system can be completely secure, and we
-            cannot guarantee the absolute security of your information.
+            We implement stringent security measures to protect your personal information. However,
+            no system can be completely secure, and we cannot guarantee the absolute security of
+            your information.
           </p>
         </div>
       </li>
@@ -88,9 +98,8 @@
         <div>
           <h3>Children’s Privacy</h3>
           <p>
-            Goborr is not intended for use by individuals under the age of 18.
-            We do not knowingly collect personal information from children under
-            18.
+            Goborr is not intended for use by individuals under the age of 18. We do not knowingly
+            collect personal information from children under 18.
           </p>
         </div>
       </li>
@@ -98,8 +107,8 @@
         <div>
           <h3>Changes to This Privacy Policy</h3>
           <p>
-            We may update our Privacy Policy from time to time. Any changes will
-            be posted on this page with an updated effective date.
+            We may update our Privacy Policy from time to time. Any changes will be posted on this
+            page with an updated effective date.
           </p>
         </div>
       </li>
@@ -107,16 +116,16 @@
         <div>
           <h3>Contact Us</h3>
           <p>
-            If you have any questions or concerns regarding our Privacy Policy,
-            please contact us <a href="mailto:comms@goborr.com" class="link">here</a>.
+            If you have any questions or concerns regarding our Privacy Policy, please contact us
+            <a href="mailto:comms@goborr.com" class="link">here</a>.
           </p>
         </div>
       </li>
     </ol>
     <p class="mb-20">
-      Your privacy is of utmost importance to us, and we strive to ensure a
-      transparent and secure environment on Goborr. By using our platform, you
-      agree to the terms laid out in this Privacy Policy.
+      Your privacy is of utmost importance to us, and we strive to ensure a transparent and secure
+      environment on Goborr. By using our platform, you agree to the terms laid out in this Privacy
+      Policy.
     </p>
   </div>
   <Footer />
@@ -128,10 +137,9 @@ definePageMeta({
 });
 
 useHead({
-  title: 'Privacy Policy',
+  title: "Privacy Policy",
 });
 </script>
-
 
 <style lang="scss" scoped>
 .hero {
