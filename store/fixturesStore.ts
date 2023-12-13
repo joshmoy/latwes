@@ -51,7 +51,9 @@ export const useFixturesStore = defineStore('fixtures', ()  => {
     },
     fetchPoolLeaderboard: async (league: string, round?: string) => {
       try {
-        const res = await axiosInstance.get(`competition/${league}/leaderboard?round=${round}&for_pool=yes`);
+        const res = await axiosInstance.get(
+          `competition/${league}/leaderboard?round=${round}&for_pool=yes`
+        );
         state.poolLeaderboard.value = res?.data?.data;
 
         return res?.data?.data;
@@ -81,6 +83,14 @@ export const useFixturesStore = defineStore('fixtures', ()  => {
       try {
         const res = await axiosInstance.get(`competition/${competition}/event`);
         state.matchEvents.value = res?.data?.data;
+        return res?.data?.data;
+      } catch (error) {
+        return error;
+      }
+    },
+    fetchSingleFixture: async (competition: string, fixtureId: string) => {
+      try {
+        const res = await axiosInstance.get(`competition/${competition}/fixture/${fixtureId}`);
         return res?.data?.data;
       } catch (error) {
         return error;
