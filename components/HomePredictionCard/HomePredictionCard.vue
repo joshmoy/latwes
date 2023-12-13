@@ -25,7 +25,7 @@
           <p>Prediction saved!</p>
         </div>
         <NuxtLink
-          :to="`/dashboard/competitions/${leagueFixture}/fixture/${matchData?.id}`"
+          :to="`/dashboard/competitions/${leagueFixture}/fixtures/${matchData?.id}`"
           v-if="hasMatchStarted || matchData?.has_finished"
         >
           <p class="prediction-card__teams--heading">View predictions</p>
