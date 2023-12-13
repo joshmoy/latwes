@@ -5,9 +5,6 @@
 </template>
 
 <script lang="ts" setup>
-definePageMeta({
-  middleware: ["auth"],
-});
 
 useHead({
   title: 'How To Play',

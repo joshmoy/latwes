@@ -140,10 +140,6 @@
 </template>
 
 <script lang="ts" setup>
-definePageMeta({
-  middleware: ["auth"],
-});
-
 useHead({
   title: "Terms and Condition",
 });

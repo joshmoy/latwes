@@ -41,9 +41,9 @@
 
 %table-grid {
   display: grid;
-  grid-template-columns: minmax(200px, 300px) repeat(3, 1fr);
+  grid-template-columns: minmax(200px, auto) repeat(2, auto);
   @media screen and (max-width: 768px) {
-    grid-template-columns: minmax(140px, 160px) repeat(3, 1fr);
+    grid-template-columns: minmax(140px, auto) repeat(2, auto);
   }
 }
 

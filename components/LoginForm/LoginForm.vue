@@ -74,7 +74,7 @@ async function onSubmit(values, { resetForm }) {
     window.location.replace(window.location.href.split('/')[0] + '/dashboard/competitions')
     isLoading.value = false;
   } catch (error) {
-    $toast.error(error?.response?.data?.message, {
+    $toast.error(error?.response?.data?.message || 'Something went wrong. Please try again', {
       timeout: 5000,
     });
     isLoading.value = false;

@@ -1,16 +1,11 @@
 <template>
-  <AboutHeaderVue />
-  <AboutContentVue />
-  <FooterVue />
+  <AboutHeader />
+  <AboutContent />
+  <Footer />
 </template>
 
 <script lang="ts" setup>
-definePageMeta({
-  middleware: ["auth"],
-});
-
 useHead({
-  title: 'About',
+  title: "About",
 });
 </script>
-
