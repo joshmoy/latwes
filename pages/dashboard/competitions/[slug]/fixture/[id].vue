@@ -12,6 +12,6 @@ definePageMeta({
 });
 
 useHead({
-  title: `${route.params.slug as string} predictions`,
+  title: `${route.params.slug as string} fixture`,
 });
 </script>
