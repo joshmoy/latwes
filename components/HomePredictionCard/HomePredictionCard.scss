@@ -272,6 +272,38 @@
   }
 }
 .team-input {
+  &__stats-div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 15px;
+      width: 15px;
+      border-radius: 4px;
+
+      p {
+        color: $white;
+        font-size: 9px;
+        text-transform: capitalize;
+      }
+    }
+
+    .red {
+      background-color: $red;
+    }
+
+    .green {
+      background-color: green;
+    }
+
+    .gray {
+      background-color: gray;
+    }
+  }
   &__a {
     display: flex;
     flex-direction: column;

@@ -43,6 +43,19 @@
               }"
             ></div>
             <p>{{ matchData?.home_team }}</p>
+            <div class="team-input__stats-div">
+              <div
+                v-for="(stat, index) in dummyStats"
+                :class="{
+                  red: stat?.toLowerCase() === 'l',
+                  green: stat?.toLowerCase() === 'w',
+                  gray: stat?.toLowerCase() === 'd',
+                }"
+                :key="index"
+              >
+                <p>{{ stat }}</p>
+              </div>
+            </div>
           </div>
           <div class="team-prediction">
             <div class="team-input__a__prediction">
@@ -80,6 +93,19 @@
               }"
             ></div>
             <p>{{ matchData?.away_team }}</p>
+             <div class="team-input__stats-div">
+              <div
+                v-for="(stat, index) in dummyStats"
+                :class="{
+                  red: stat?.toLowerCase() === 'l',
+                  green: stat?.toLowerCase() === 'w',
+                  gray: stat?.toLowerCase() === 'd',
+                }"
+                :key="index"
+              >
+                <p>{{ stat }}</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -143,7 +169,6 @@ import { dateFormatter } from "../../helpers/dataFormatter";
 import { predictMatch } from "../../services/Prediction";
 import { useToast } from "vue-toastification";
 
-
 const route = useRoute();
 const leagueFixture = ref(`${route.params.slug}`);
 const showInput = ref(false);
@@ -171,6 +196,8 @@ let awayTeamScore = props.matchData.predicted_away_team_score;
 let hasMatchStarted = currentDate >= matchDate;
 
 let formattedDate = dateFormatter(matchDate);
+
+const dummyStats = ['D', 'D', 'L', 'L', 'W']
 
 const handleShowInput = () => {
   if (hasMatchStarted) return;
