@@ -45,7 +45,7 @@
             <p>{{ matchData?.home_team }}</p>
             <div class="team-input__stats-div">
               <div
-                v-for="(stat, index) in matchData?.home_team_form"
+                v-for="(stat, index) in matchData?.home_team_form.slice(0,5).reverse()"
                 :class="{
                   red: stat?.outcome?.toLowerCase() === 'l',
                   green: stat?.outcome?.toLowerCase() === 'w',
@@ -95,7 +95,7 @@
             <p>{{ matchData?.away_team }}</p>
              <div class="team-input__stats-div">
               <div
-                v-for="(stat, index) in matchData?.away_team_form"
+                v-for="(stat, index) in matchData?.away_team_form.slice(0,5).reverse()"
                 :class="{
                   red: stat?.outcome?.toLowerCase() === 'l',
                   green: stat?.outcome?.toLowerCase() === 'w',
