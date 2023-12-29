@@ -45,15 +45,15 @@
             <p>{{ matchData?.home_team }}</p>
             <div class="team-input__stats-div">
               <div
-                v-for="(stat, index) in dummyStats"
+                v-for="(stat, index) in matchData?.home_team_form"
                 :class="{
-                  red: stat?.toLowerCase() === 'l',
-                  green: stat?.toLowerCase() === 'w',
-                  gray: stat?.toLowerCase() === 'd',
+                  red: stat?.outcome?.toLowerCase() === 'l',
+                  green: stat?.outcome?.toLowerCase() === 'w',
+                  gray: stat?.outcome?.toLowerCase() === 'd',
                 }"
                 :key="index"
               >
-                <p>{{ stat }}</p>
+                <p>{{ stat?.outcome }}</p>
               </div>
             </div>
           </div>
@@ -95,15 +95,15 @@
             <p>{{ matchData?.away_team }}</p>
              <div class="team-input__stats-div">
               <div
-                v-for="(stat, index) in dummyStats"
+                v-for="(stat, index) in matchData?.away_team_form"
                 :class="{
-                  red: stat?.toLowerCase() === 'l',
-                  green: stat?.toLowerCase() === 'w',
-                  gray: stat?.toLowerCase() === 'd',
+                  red: stat?.outcome?.toLowerCase() === 'l',
+                  green: stat?.outcome?.toLowerCase() === 'w',
+                  gray: stat?.outcome?.toLowerCase() === 'd',
                 }"
                 :key="index"
               >
-                <p>{{ stat }}</p>
+                <p>{{ stat?.outcome }}</p>
               </div>
             </div>
           </div>
