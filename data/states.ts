@@ -6,7 +6,7 @@ export const locations = [
   { label: "Bauchi", value: "bauchi" },
   { label: "Bayelsa", value: "bayelsa" },
   { label: "Benue", value: "benue" },
-  { label: "Borno", value: "borno" },
+  { label: "Borno", value: "borno" },   
   { label: "Cross River", value: "cross-river" },
   { label: "Delta", value: "delta" },
   { label: "Ebonyi", value: "ebonyi" },
@@ -37,4 +37,3 @@ export const locations = [
   { label: "Yobe", value: "yobe" },
   { label: "Zamfara", value: "zamfara" },
 ];
-

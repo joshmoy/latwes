@@ -36,11 +36,14 @@
           @click="handleSelectTeam(index)"
         >
           <div class="select-bottom-grid-team-card-top">
-            <p v-if="team?.is_active">{{ team?.short_name }}</p>
+          <p v-if="slug === 'afcon'">
+            {{ flags[`${team.name}`] }} &nbsp;
+          </p> 
+          <p v-if="team?.is_active">{{ team?.short_name }}</p>
           </div>
           <div
             :style="{
-              backgroundColor: team?.image,
+              backgroundColor: team?.image || 'green',
               height: '40px',
               borderRadius: '0 0 8px 8px',
             }"
@@ -67,6 +70,7 @@ import { useToast } from "vue-toastification";
 import { useAuthStore } from "@/store/authStore";
 import { useFixturesStore } from "@/store/fixturesStore";
 import { joinLeague } from "~~/services/Prediction";
+import { flags } from "~~/data/countryflags";
 
 const authStore = useAuthStore();
 const fixturesStore = useFixturesStore();
@@ -104,6 +108,7 @@ const additionalIndex = ref(0);
 const user = authStore.$state.userObject as Record<string, string>;
 
 const teams = fixturesStore.getters.getTeams as Record<string, string>[];
+const slug = props.singleLeague.slug as string;
 
 onMounted(async () => {
   const teams = await fixturesStore.action.fetchTeams(props.singleLeague.slug as string);

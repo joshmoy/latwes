@@ -36,16 +36,17 @@
       <div class="prediction-card__teams">
         <div class="prediction-card__teams--body">
           <div class="team-input__a">
-            <div
+            <div v-if="slug !== 'afcon'"
               class="team-input__a__color logo"
               :style="{
                 background: matchData?.home_team_color,
               }"
             ></div>
+            <p v-else> {{ flags[`${matchData?.home_team}`] }}</p>
             <p>{{ matchData?.home_team }}</p>
-            <div class="team-input__stats-div">
+            <div class="team-input__stats-div" v-if="!(hasMatchStarted || matchData?.has_finished)">
               <div
-                v-for="(stat, index) in matchData?.home_team_form.slice(0,5).reverse()"
+                v-for="(stat, index) in matchData?.home_team_form?.slice(0,5).reverse()"
                 :class="{
                   red: stat?.outcome?.toLowerCase() === 'l',
                   green: stat?.outcome?.toLowerCase() === 'w',
@@ -87,15 +88,17 @@
           </div>
           <div class="team-input__b">
             <div
+              v-if="slug !== 'afcon'"
               class="team-input__b__color logo"
               :style="{
                 background: matchData?.away_team_color,
               }"
             ></div>
+            <p v-else> {{ flags[`${matchData?.away_team}`] }}</p>
             <p>{{ matchData?.away_team }}</p>
-             <div class="team-input__stats-div">
+             <div class="team-input__stats-div" v-if="!(hasMatchStarted || matchData?.has_finished)">
               <div
-                v-for="(stat, index) in matchData?.away_team_form.slice(0,5).reverse()"
+                v-for="(stat, index) in matchData?.away_team_form?.slice(0,5).reverse()"
                 :class="{
                   red: stat?.outcome?.toLowerCase() === 'l',
                   green: stat?.outcome?.toLowerCase() === 'w',
@@ -138,7 +141,7 @@
             }}
           </p>
         </div>
-        <div class="prediction-card__stats--right">
+        <div class="prediction-card__stats--right" v-if="hasMatchStarted || matchData?.has_finished">
           <p class="kick-off">Points earned</p>
           <div
             class="points"
@@ -167,6 +170,7 @@
 import { ref, nextTick } from "vue";
 import { dateFormatter } from "../../helpers/dataFormatter";
 import { predictMatch } from "../../services/Prediction";
+import { flags } from "../../data/countryflags";
 import { useToast } from "vue-toastification";
 
 const route = useRoute();
@@ -180,6 +184,7 @@ const homeInput = ref<HTMLInputElement | null>(null);
 const homeInputValue = ref("");
 const awayInputValue = ref("");
 const toastMessage = ref("");
+const slug = `${route.params.slug}`;
 
 const props = defineProps({
   matchData: {
@@ -221,7 +226,6 @@ const handleSubmit = async (id: number) => {
       home_team_score: +homeInputValue.value,
       away_team_score: +awayInputValue.value,
     };
-    const slug = `${route.params.slug}`;
     await predictMatch(slug, id, payload);
     toastMessage.value = "Prediction Saved";
     showIcon.value = true;
