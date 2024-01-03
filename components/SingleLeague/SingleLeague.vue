@@ -25,7 +25,10 @@
         </div>
       </div>
       <div class="single-league-main-actions">
-          <div class="single-league-main-actions-leaderboard" v-if="poolLeaderboard?.leaderboard?.length > 0">
+        <div
+          class="single-league-main-actions-leaderboard"
+          v-if="poolLeaderboard?.leaderboard?.length > 0  && competitionInfo?.slug !== 'afcon'"
+        >
           <PoolLeaderboard
             :tableData="poolLeaderboard"
             :events="events"
@@ -33,7 +36,10 @@
           />
         </div>
 
-        <div class="single-league-main-actions-leaderboard" v-if="leaderboard?.leaderboard?.length > 0">
+        <div
+          class="single-league-main-actions-leaderboard"
+          v-if="leaderboard?.leaderboard?.length > 0"
+        >
           <DashboardLeaderboard
             :tableData="leaderboard"
             :events="events"
@@ -88,6 +94,7 @@ let competitionInfo = {
   current_pool_prize: "0",
   logo: "",
   name: "",
+  slug: "",
 };
 
 const scoringData = [
