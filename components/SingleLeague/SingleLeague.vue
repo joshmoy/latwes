@@ -27,18 +27,23 @@
       <div class="single-league-main-actions">
         <div
           class="single-league-main-actions-leaderboard"
-          v-if="poolLeaderboard?.leaderboard?.length > 0  && competitionInfo?.slug !== 'afcon'"
+          v-if="
+            isAfcon
+              ? leaderboard?.leaderboard?.length > 0
+              : poolLeaderboard?.leaderboard?.length > 0
+          "
         >
           <PoolLeaderboard
-            :tableData="poolLeaderboard"
+            :tableData="isAfcon ? leaderboard : poolLeaderboard"
             :events="events"
             @updateLeaderboard="updatePoolLeaderboard"
+            :isAfcon="isAfcon"
           />
         </div>
 
         <div
           class="single-league-main-actions-leaderboard"
-          v-if="leaderboard?.leaderboard?.length > 0"
+          v-if="leaderboard?.leaderboard?.length > 0 && !isAfcon"
         >
           <DashboardLeaderboard
             :tableData="leaderboard"
@@ -96,6 +101,9 @@ let competitionInfo = {
   name: "",
   slug: "",
 };
+let firstMatchDate = new Date(fixtures[0]?.kickoff_time);
+let hasMatchStarted = currentDate >= firstMatchDate;
+const isAfcon = leagueFixture.value === "afcon";
 
 const scoringData = [
   { point: 3, desc: "Correct outcome" },
@@ -144,6 +152,7 @@ const updateLeaderboard = (value: string | undefined) => {
 };
 
 const updatePoolLeaderboard = (value: string | undefined) => {
+  if (isAfcon) return updateLeaderboard(value);
   fixtureStore.action.fetchPoolLeaderboard(leagueFixture.value, value),
     (poolLeaderboard = fixtureStore.getters.getPoolLeaderboard);
 };
