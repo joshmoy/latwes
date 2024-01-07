@@ -63,38 +63,17 @@ const update = () => {
 };
 
 const determineAmount = (rowIndex: number): string | number => {
-  if (props?.isAfcon && filter.value === "real") {
+  if (props?.isAfcon) {
     switch (rowIndex) {
-      case 0:
-        return formatSymbolAmount(5000000);
-      case 1:
-        return formatSymbolAmount(3000000);
-      case 2:
-        return formatSymbolAmount(2000000);
-      case 3:
-        return formatSymbolAmount(1000000);
-      case 4:
-        return formatSymbolAmount(1000000);
-      default:
-        return "₦0";
-    }
-  } else if (props?.isAfcon) {
-    switch (rowIndex) {
-      case 0:
-        return formatSymbolAmount(1000000);
-      case 1:
-        return formatSymbolAmount(400000);
-      case 2:
-        return formatSymbolAmount(300000);
-      case 3:
-        return formatSymbolAmount(200000);
-      case 4:
-        return formatSymbolAmount(100000);
-      default:
-        return "₦0";
+      case 0: return formatSymbolAmount(1000000);
+      case 1: return formatSymbolAmount(400000);
+      case 2: return formatSymbolAmount(300000);
+      case 3: return formatSymbolAmount(200000);
+      case 4: return formatSymbolAmount(100000);
+      default: return '₦0';
     }
   } else {
-    return rowIndex === 0 ? formatSymbolAmount(+props?.tableData?.poolAmount) : "₦0";
+    return rowIndex === 0 ? formatSymbolAmount(+props?.tableData?.poolAmount) : '₦0';
   }
 };
 </script>
