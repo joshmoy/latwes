@@ -3,7 +3,10 @@
     <div class="container leaderboard-container">
       <div class="leaderboard-container__filter">
         <select name="leaderboard" id="leaderboardId" @change="update" v-model="filter">
-          <option value="real" disabled selected>Filter Pool Leaderboard</option>
+          <option value="real" disabled selected>
+            Filter {{ !isAfcon ? "Pool" : "" }} Leaderboard
+          </option>
+          <option value="all" v-if="isAfcon">All Time</option>
           <option v-for="(val, id) in filteredEvent" :key="id" :value="val.match_day">
             {{ val.name }}
           </option>
@@ -19,9 +22,7 @@
               </span>
             </span>
             <span class="off-table-points">{{ el?.score }}</span>
-            <span class="off-table-amount">{{
-              id === 0 ? formatSymbolAmount(+tableData?.poolAmount) : `₦0`
-            }}</span>
+            <span class="off-table-amount">{{ determineAmount(id) }}</span>
           </div>
         </div>
       </div>
@@ -42,6 +43,10 @@ const props = defineProps({
     type: Object,
     required: true,
   },
+  isAfcon: {
+    type: Boolean,
+    required: true,
+  },
 });
 
 const emit = defineEmits(["updateLeaderboard"]);
@@ -54,7 +59,42 @@ const filteredEvent = props.events.events.filter(
 
 const update = () => {
   const payload = filter.value.toString();
-
   emit("updateLeaderboard", payload);
+};
+
+const determineAmount = (rowIndex: number): string | number => {
+  if (props?.isAfcon && (filter.value === "real" || filter.value === "all")) {
+    switch (rowIndex) {
+      case 0:
+        return formatSymbolAmount(5000000);
+      case 1:
+        return formatSymbolAmount(3000000);
+      case 2:
+        return formatSymbolAmount(2000000);
+      case 3:
+        return formatSymbolAmount(1000000);
+      case 4:
+        return formatSymbolAmount(1000000);
+      default:
+        return "₦0";
+    }
+  } else if (props?.isAfcon) {
+    switch (rowIndex) {
+      case 0:
+        return formatSymbolAmount(1000000);
+      case 1:
+        return formatSymbolAmount(400000);
+      case 2:
+        return formatSymbolAmount(300000);
+      case 3:
+        return formatSymbolAmount(200000);
+      case 4:
+        return formatSymbolAmount(100000);
+      default:
+        return "₦0";
+    }
+  } else {
+    return rowIndex === 0 ? formatSymbolAmount(+props?.tableData?.poolAmount) : "₦0";
+  }
 };
 </script>
