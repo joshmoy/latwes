@@ -193,11 +193,4 @@ const examples = [
     correctOutcome: 3,
   },
 ];
-
-const authenticateduser = ref("");
-
-onMounted(() => {
-  const token = process.client ? localStorage.getItem("userToken") : "";
-  authenticateduser.value = token!;
-});
 </script>
