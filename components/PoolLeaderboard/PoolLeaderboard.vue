@@ -63,7 +63,7 @@ const update = () => {
 };
 
 const determineAmount = (rowIndex: number): string | number => {
-  if (props?.isAfcon) {
+  if (props?.isAfcon && (filter.value === "real" || filter.value === "all")) {
     switch (rowIndex) {
       case 0: return formatSymbolAmount(1000000);
       case 1: return formatSymbolAmount(400000);
