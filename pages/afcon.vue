@@ -3,7 +3,7 @@
   <div class="container how-to-play">
     <h1>Unveiling Exciting Afcon Prizes!</h1>
     <p>
-      Hello Goborr community! We're thrilled to share some fantastic news about the upcoming Afcon
+      Hello Goborr community! We're thrilled to share some fantastic news about the upcoming AFCON
       tournament on Goborr.com. Brace yourselves for an exhilarating competition filled with skill,
       strategy, and, of course, incredible prizes! Here's the breakdown of the exciting rewards
       awaiting our top performers:
@@ -75,7 +75,7 @@ useHead({
 
 const roundPrizes = [
   { position: "1st", prize: "₦10,000" },
-  { position: "2nd", prize: "₦5,000" },
+  { position: "2nd", prize: "₦4,000" },
   { position: "3rd", prize: "₦3,000" },
   { position: "4th", prize: "₦2,000" },
   { position: "5th", prize: "₦1,000" },
