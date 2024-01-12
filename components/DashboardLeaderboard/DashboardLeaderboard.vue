@@ -11,6 +11,11 @@
         </select>
       </div>
       <div class="off-table">
+        <div class="off-table-header">
+                    <span>Username</span>
+                    <span>Points</span>
+                    <span>Six Points</span>
+        </div>
         <div class="off-table-body">
           <div class="off-table-row" v-for="(el, id) in tableData.leaderboard" :key="id">
             <span class="off-table-name">
@@ -20,6 +25,10 @@
               </span>
             </span>
             <span class="off-table-points">{{ el?.score }}</span>
+            <span class="off-table-points" v-if="isFullVersion">{{ el?.six_points }}</span>
+            <span class="off-table-points" v-if="isFullVersion">{{ el?.four_points }}</span>
+            <span class="off-table-points" v-if="isFullVersion">{{ el?.three_points }}</span>
+            <span class="off-table-points" v-if="isFullVersion">{{ el?.one_point }}</span>
           </div>
         </div>
       </div>
@@ -40,6 +49,10 @@ const props = defineProps({
     type: Object,
     required: true,
   },
+  isFullVersion: {
+    type: Boolean,
+    required: false
+  }
 });
 
 const emit = defineEmits(["updateLeaderboard"]);
@@ -52,6 +65,8 @@ const fixtureStore = useFixturesStore();
 const filteredEvent = props.events.events.filter(
   (val: { match_day: number }) => val.match_day <= props.events.current_round
 );
+
+const isFullVersion = props.isFullVersion;
 
 const update = () => {
   const payload = filter.value.toString();

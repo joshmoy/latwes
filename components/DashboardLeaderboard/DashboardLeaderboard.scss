@@ -51,6 +51,21 @@
   border-spacing: 0;
   max-height: 585px;
   overflow: auto;
+  .off-table-header {
+    @extend %table-grid;
+    position: sticky;
+    top: 0;
+    background: $light-blue;
+    border: 1px solid $white;
+    border-radius: 20px;
+    padding: 20px 22px;
+    font-size: 16px;
+    font-weight: 700;
+
+    span:first-child {
+      padding-left: 8px;
+    }
+  }
 
   .off-table-body {
     .off-table-row {
@@ -68,8 +83,6 @@
     .off-table-name,
     .off-table-predictions,
     .off-table-points {
-      display: flex;
-      align-items: center;
     }
     .off-table-color {
       margin: 0 12px 0 15px;
