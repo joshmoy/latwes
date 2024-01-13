@@ -121,7 +121,7 @@
 <script setup lang="ts">
 const examples = [
   {
-    homeScore: 2,
+    homeScore: 3,
     awayScore: 1,
     totalPoints: 0,
     homeCorrectScore: 0,

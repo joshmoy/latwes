@@ -33,6 +33,11 @@
               : poolLeaderboard?.leaderboard?.length > 1 
           "
         >
+        <nuxt-link :to="fullLeaderboardLinkPlusPool" class="expand_leaderboard_text">
+            <div>
+              <p> View expanded leaderboard</p>
+            </div>
+        </nuxt-link>
           <PoolLeaderboard
             :tableData="isAfcon ? leaderboard : poolLeaderboard"
             :events="events"
@@ -40,7 +45,12 @@
             :isAfcon="isAfcon"
           />
         </div>
-
+        <nuxt-link :to="fullLeaderboardLink" class="expand_leaderboard_text" v-if="!isAfcon">
+            <div>
+              <p> View expanded leaderboard</p>
+            </div>
+        </nuxt-link>
+        
         <div
           class="single-league-main-actions-leaderboard"
           v-if="leaderboard?.leaderboard?.length > 1 && !isAfcon "
@@ -111,6 +121,9 @@ const scoringData = [
   { point: 1, desc: "Away team correct score" },
   { point: 1, desc: "Correct goal difference" },
 ];
+
+const fullLeaderboardLink = `/dashboard/competitions/${leagueFixture.value}/leaderboard`;
+const fullLeaderboardLinkPlusPool = `/dashboard/competitions/${leagueFixture.value}/leaderboard?for_pool=yes`
 onMounted(async () => {
   try {
     await Promise.all([
