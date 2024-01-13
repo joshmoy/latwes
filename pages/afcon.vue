@@ -46,7 +46,7 @@
         <p>
           <span class="bold">No Gree For Anybody:</span>
           Engage with the matches, make strategic match predictions, and climb up the leaderboard.
-          Every round is an opportunity to win up to ₦70,000 during this tournament!
+          Every round is an opportunity to win up to ₦10,000 during this tournament!
         </p>
       </li>
       <li>
