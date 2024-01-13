@@ -101,8 +101,6 @@ let competitionInfo = {
   name: "",
   slug: "",
 };
-let firstMatchDate = new Date(fixtures[0]?.kickoff_time);
-let hasMatchStarted = currentDate >= firstMatchDate;
 const isAfcon = leagueFixture.value === "afcon";
 
 const scoringData = [
@@ -117,8 +115,10 @@ onMounted(async () => {
       fixtureStore.action.fetchEvents(leagueFixture.value),
       fixtureStore.action.fetchCompetitions(),
     ]).then((res) => {
+      if (!isAfcon) {
+        updatePoolLeaderboard(res[0].current_round);
+      }
       updateLeaderboard(res[0].current_round);
-      updatePoolLeaderboard(res[0].current_round);
     });
     competitions = fixtureStore.getters.getCompetitions as Record<string, any>;
     competitionInfo = competitions?.value?.find((e: any) => e.slug === leagueFixture.value);

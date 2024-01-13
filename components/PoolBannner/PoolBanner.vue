@@ -3,12 +3,12 @@
     <div class="pool-banner-flex">
       <img src="/icons/newDashboardCurrency.svg" class="first-image" />
       <div class="pool-banner-text">
-        <p class="pool-banner-text-title">Current pool amount</p>
-        <p>{{ formatSymbolAmount(+competitionInfo?.current_pool_prize) }}</p>
+        <p class="pool-banner-text-title">{{ isAfcon ? 'Win cash prizes from a pool of' : 'Current pool amount' }}</p>
+        <p>{{ formatSymbolAmount(+competitionInfo?.current_pool_prize || 25000000) }}</p>
       </div>
     </div>
     <div class="pool-banner-flex">
-      <button @click="openModal">Put money in the pool</button>
+      <button @click="openModal" v-if="!isAfcon">Put money in the pool</button>
       <img src="/icons/newPool.svg" class="second-image" />
     </div>
   </div>
@@ -25,6 +25,8 @@ const route = useRoute();
 
 const fixtureStore = useFixturesStore();
 const leagueFixture = ref(`${route.params.slug}`);
+
+const isAfcon = leagueFixture.value === 'afcon'
 
 let competitions = fixtureStore.getters.getCompetitions as Record<string, any>;
 let competitionInfo = ref({
