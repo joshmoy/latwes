@@ -1,16 +1,13 @@
 <template>
-  <NuxtLayout name="dashboard-layout"> 
-    <div
-          class="single-league-main-actions-leaderboard"
-          v-if="leaderboard?.leaderboard?.length > 0"
-        >
-          <DashboardLeaderboard
-            :tableData="leaderboard"
-            :events="events"
-            @updateLeaderboard="updateLeaderboard"
-            :isFullVersion="true"
-          />
-        </div>
+  <NuxtLayout name="dashboard-layout">
+    <div class="single-league-main-actions-leaderboard" v-if="leaderboard?.leaderboard?.length > 0">
+      <DashboardLeaderboard
+        :tableData="leaderboard"
+        :events="events"
+        @updateLeaderboard="updateLeaderboard"
+        :isFullVersion="true"
+      />
+    </div>
   </NuxtLayout>
 </template>
 
@@ -25,7 +22,7 @@ const isLoading = ref(true);
 const route = useRoute();
 const fixtureStore = useFixturesStore();
 const leagueFixture = ref(`${route.params.slug}`);
-let leaderboard = (fixtureStore.getters.getLeaderboard);
+let leaderboard = fixtureStore.getters.getLeaderboard;
 let poolLeaderboard = fixtureStore.getters.getPoolLeaderboard;
 const events = fixtureStore.getters.getMatchEvents;
 console.log(events);

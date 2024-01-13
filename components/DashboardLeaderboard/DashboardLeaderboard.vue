@@ -11,13 +11,21 @@
         </select>
       </div>
       <div class="off-table">
-        <div class="off-table-header">
-                    <span>Username</span>
-                    <span>Points</span>
-                    <span>Six Points</span>
+        <div :class="isFullVersion ? 'leaderboard-header' : 'off-table-header'">
+          <span>Username</span>
+          <span>Points</span>
+          <span>Six Points</span>
+          <span>Username</span>
+          <span>Points</span>
+          <span>Six Points</span>
+          <span>Six Points</span>
         </div>
         <div class="off-table-body">
-          <div class="off-table-row" v-for="(el, id) in tableData.leaderboard" :key="id">
+          <div
+            :class="isFullVersion ? 'leaderboard-row' : 'off-table-row'"
+            v-for="(el, id) in tableData.leaderboard"
+            :key="id"
+          >
             <span class="off-table-name">
               {{ id + 1 }}.
               <span class="off-table-color">
@@ -28,6 +36,7 @@
             <span class="off-table-points" v-if="isFullVersion">{{ el?.six_points }}</span>
             <span class="off-table-points" v-if="isFullVersion">{{ el?.four_points }}</span>
             <span class="off-table-points" v-if="isFullVersion">{{ el?.three_points }}</span>
+            <span class="off-table-points" v-if="isFullVersion">{{ el?.one_point }}</span>
             <span class="off-table-points" v-if="isFullVersion">{{ el?.one_point }}</span>
           </div>
         </div>
@@ -51,8 +60,8 @@ const props = defineProps({
   },
   isFullVersion: {
     type: Boolean,
-    required: false
-  }
+    required: false,
+  },
 });
 
 const emit = defineEmits(["updateLeaderboard"]);

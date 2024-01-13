@@ -29,8 +29,8 @@
           class="single-league-main-actions-leaderboard"
           v-if="
             isAfcon
-              ? leaderboard?.leaderboard?.length > 0
-              : poolLeaderboard?.leaderboard?.length > 0
+              ? leaderboard?.leaderboard?.length > 1 
+              : poolLeaderboard?.leaderboard?.length > 1 
           "
         >
           <PoolLeaderboard
@@ -43,7 +43,7 @@
 
         <div
           class="single-league-main-actions-leaderboard"
-          v-if="leaderboard?.leaderboard?.length > 0 && !isAfcon"
+          v-if="leaderboard?.leaderboard?.length > 1 && !isAfcon "
         >
           <DashboardLeaderboard
             :tableData="leaderboard"
