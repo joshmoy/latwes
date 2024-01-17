@@ -76,6 +76,10 @@ const slug = props?.slug;
 
 const filter = ref("real");
 const fixtureStore = useFixturesStore();
+const route = useRoute();
+
+const query: string | undefined = (route.query && route.query.for_pool)?.toString();
+const forPool = query === "yes"
 
 const filteredEvent = props.events.events.filter(
   (val: { match_day: number }) => val.match_day <= props.events.current_round
@@ -121,6 +125,6 @@ const determineAmount = (rowIndex: number): string | number => {
 const update = () => {
   const payload = filter.value.toString();
 
-  emit("updateLeaderboard", payload);
+  emit("updateLeaderboard", payload, forPool);
 };
 </script>

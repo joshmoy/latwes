@@ -1,6 +1,9 @@
 <template>
   <NuxtLayout name="dashboard-layout">
-    <div class="single-league-main-actions-leaderboard" v-if="leaderboard?.leaderboard?.length > 0">
+    <div
+      class="single-league-main-actions-leaderboard"
+      v-if="finalLeaderBoard?.leaderboard?.length > 0"
+    >
       <DashboardLeaderboard
         :tableData="finalLeaderBoard"
         :events="events"
@@ -27,18 +30,16 @@ const fixtureStore = useFixturesStore();
 const leagueFixture = ref(`${route.params.slug}`);
 let leaderboard = fixtureStore.getters.getLeaderboard;
 let poolLeaderboard = fixtureStore.getters.getPoolLeaderboard;
-let finalLeaderBoard = query === 'yes' ? poolLeaderboard : leaderboard;
+let finalLeaderBoard = query === "yes" ? poolLeaderboard : leaderboard;
 const events = fixtureStore.getters.getMatchEvents;
 const updateLeaderboard = (value: string | undefined, forPool: boolean) => {
-  if (forPool && slug !== 'afcon') {
+  if (forPool && slug !== "afcon") {
     fixtureStore.action.fetchPoolLeaderboard(leagueFixture.value, value),
-    (poolLeaderboard = fixtureStore.getters.getPoolLeaderboard);
-  } else if (slug === 'afcon') {
-
-  }
-  else {
+      (poolLeaderboard = fixtureStore.getters.getPoolLeaderboard);
+  } else if (slug === "afcon") {
+  } else {
     fixtureStore.action.fetchLeaderboard(leagueFixture.value, value),
-    (leaderboard = fixtureStore.getters.getLeaderboard);
+      (leaderboard = fixtureStore.getters.getLeaderboard);
   }
 };
 
@@ -50,7 +51,7 @@ onMounted(async () => {
       fixtureStore.action.fetchEvents(leagueFixture.value),
       fixtureStore.action.fetchCompetitions(),
     ]).then((res) => {
-      updateLeaderboard(res[0].current_round, query === 'yes');
+      updateLeaderboard(res[0].current_round, query === "yes");
     });
     isLoading.value = false;
   } catch (error) {
