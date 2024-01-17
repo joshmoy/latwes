@@ -239,4 +239,16 @@
       margin-bottom: 20px;
     }
   }
+  .expand_leaderboard_text {
+    text-align: right;
+    color: $light-blue;
+    font-size: 12px;
+
+    p {
+      margin-bottom: 10px;
+      @media screen and (max-width: 768px) {
+        margin-top: 10px;
+      }
+    }
+  }
 }
