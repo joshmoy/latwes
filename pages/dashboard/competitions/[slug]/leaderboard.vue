@@ -30,20 +30,19 @@ const fixtureStore = useFixturesStore();
 const leagueFixture = ref(`${route.params.slug}`);
 let leaderboard = fixtureStore.getters.getLeaderboard;
 let poolLeaderboard = fixtureStore.getters.getPoolLeaderboard;
-let finalLeaderBoard = query === "yes" ? poolLeaderboard : leaderboard;
+const slug = leagueFixture.value;
+let finalLeaderBoard = query === "yes" && slug !== "afcon" ? poolLeaderboard : leaderboard;
 const events = fixtureStore.getters.getMatchEvents;
 const updateLeaderboard = (value: string | undefined, forPool: boolean) => {
   if (forPool && slug !== "afcon") {
     fixtureStore.action.fetchPoolLeaderboard(leagueFixture.value, value),
       (poolLeaderboard = fixtureStore.getters.getPoolLeaderboard);
-  } else if (slug === "afcon") {
   } else {
     fixtureStore.action.fetchLeaderboard(leagueFixture.value, value),
       (leaderboard = fixtureStore.getters.getLeaderboard);
   }
 };
 
-const slug = leagueFixture.value;
 
 onMounted(async () => {
   try {
