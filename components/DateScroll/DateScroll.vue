@@ -56,6 +56,9 @@ const currentMatchDayIndex = ref(props.matchRound - 1).value;
 const currentIndex = +currentMatchDayIndex < getCurrentIndexByScreenSize() ? ref(0) : ref(+currentMatchDayIndex - getSubtractionValueByScreenSize());
 const lastMatchIndex = ref(+currentMatchDayIndex + 5);
 const visibleMatchEvents = computed(() => {
+  if (props.events?.length < 4) {
+    return props.events;
+  }
   if (+currentMatchDayIndex < getCurrentIndexByScreenSize()) {
     return props.events && props.events.slice(currentIndex.value, currentIndex.value + getAdditionValueByScreenSize());
   }
@@ -85,6 +88,9 @@ const getPointsOrDate = (match: Record<string, string | number | any>) => {
 };
 
 const displayValues = () => {
+  if (props.events?.length < 4) {
+    return props.events;
+  }
   if (+currentMatchDayIndex < getCurrentIndexByScreenSize()) {
     return props.events && props.events?.slice(currentIndex.value, currentIndex.value + getAdditionValueByScreenSize());
   }
