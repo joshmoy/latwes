@@ -20,7 +20,7 @@
     />
     <div class="single-league-main">
       <div class="prediction-cards">
-        <TieBreakerForm :tieBreaker="tieBreaker" :slug="leagueFixture"/>
+        <TieBreakerForm :tieBreaker="tieBreaker" :slug="leagueFixture" :firstMatchKickoff="fixtures[0]?.kickoff_time"/>
         <div class="prediction-cards__child" v-for="(fixture, index) in fixtures" :key="index">
           <HomePredictionCard :matchData="fixture" />
         </div>

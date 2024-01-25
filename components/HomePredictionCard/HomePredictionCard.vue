@@ -202,8 +202,6 @@ let hasMatchStarted = currentDate >= matchDate;
 
 let formattedDate = dateFormatter(matchDate);
 
-const dummyStats = ['D', 'D', 'L', 'L', 'W']
-
 const handleShowInput = () => {
   if (hasMatchStarted) return;
   if (showInput.value === true) return;
