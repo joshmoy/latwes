@@ -20,6 +20,7 @@
     />
     <div class="single-league-main">
       <div class="prediction-cards">
+        <TieBreakerForm :tieBreaker="tieBreaker" :slug="leagueFixture" :firstMatchKickoff="fixtures[0]?.kickoff_time"/>
         <div class="prediction-cards__child" v-for="(fixture, index) in fixtures" :key="index">
           <HomePredictionCard :matchData="fixture" />
         </div>
@@ -100,6 +101,7 @@ const currentDate = new Date();
 
 const events = fixtureStore.getters.getMatchEvents;
 const fixtures = fixtureStore.getters.getFixtures;
+const tieBreaker = fixtureStore.getters.getTieBreaker;
 let leaderboard = fixtureStore.getters.getLeaderboard;
 let poolLeaderboard = fixtureStore.getters.getPoolLeaderboard;
 let competitions = fixtureStore.getters.getCompetitions as Record<string, any>;

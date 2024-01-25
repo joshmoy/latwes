@@ -10,3 +10,6 @@ export const joinLeague = (
 ) => {
   return axiosInstance.post(`/competition/${slug}/join`, payload);
 };
+
+export const answerTieBreaker = (slug: string, tieBreakerId: string, payload: Record<string, string>) =>
+  axiosInstance.post(`competition/${slug}/tiebreaker/${tieBreakerId}/answer`, payload);

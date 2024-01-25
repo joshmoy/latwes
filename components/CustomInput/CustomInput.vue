@@ -1,6 +1,6 @@
 <template>
   <div class="custom-input" :class="{ 'has-error': !!errorMessage, success: meta.valid }">
-    <label :for="name" class="custom-input-label" :class="labelClass">{{ label }}</label>
+    <label :for="name" class="custom-input-label" :class="labelClass" v-if="label">{{ label }}</label>
     <div class="custom-input-field" :class="[inputClass, { 'disabled': isDisabled }]">
       <input
         :name="name"
