@@ -5,7 +5,7 @@ import axios, {
 } from "axios";
 import { clearUserSession } from "~~/helpers/logout";
 
-const BASEURL: string = "https://59c4-41-76-192-13.ngrok-free.app/api/v1";
+const BASEURL: string = "https://staging-api.Goborr.com/api/v1";
 const token: any = process.client ? localStorage.getItem("userToken") : "";
 
 export const axiosInstance = axios.create({
