@@ -4,7 +4,7 @@
       <img src="/icons/newDashboardCurrency.svg" class="first-image" />
       <div class="pool-banner-text">
         <p class="pool-banner-text-title">{{ isAfcon ? 'Win cash prizes from a pool of' : 'Current pool amount' }}</p>
-        <p>{{ formatSymbolAmount(+competitionInfo?.current_pool_prize || 25000000) }}</p>
+        <p>{{ formatSymbolAmount(isAfcon ? 25000000 : (+competitionInfo?.current_pool_prize || 0)) }}</p>
       </div>
     </div>
     <div class="pool-banner-flex">

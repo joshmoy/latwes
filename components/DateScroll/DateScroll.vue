@@ -28,6 +28,8 @@
 import { ref, computed } from "vue";
 import { dateOnlyFormatter } from "../../helpers/dataFormatter";
 
+const screenWidth = window.innerWidth;
+
 interface IEventsObject {
   id: number;
   competition_slug: string;
@@ -43,20 +45,28 @@ interface IEventsObject {
 
 const props = defineProps(["events", "matchRound"]);
 const emit = defineEmits(["fetchCurrentMatchesSelected"]);
+const isSmallScreen = () => screenWidth < 768;
+const getCurrentIndexByScreenSize = () => isSmallScreen() ? 3 : 7;
+const getSubtractionValueByScreenSize = () => isSmallScreen() ? 1 : 3;
+const getAdditionValueByScreenSize = () => isSmallScreen() ? 1 : 8;
+const getLengthValueByScreenSize = () => isSmallScreen() ? 4 : 9;
 
 const activeMatch = ref();
-const currentMatchDayIndex = ref(props.matchRound - 1).value
-const currentIndex = +currentMatchDayIndex < 7 ? ref(0) : ref(+currentMatchDayIndex - 3);
+const currentMatchDayIndex = ref(props.matchRound - 1).value;
+const currentIndex = +currentMatchDayIndex < getCurrentIndexByScreenSize() ? ref(0) : ref(+currentMatchDayIndex - getSubtractionValueByScreenSize());
 const lastMatchIndex = ref(+currentMatchDayIndex + 5);
 const visibleMatchEvents = computed(() => {
-  if (+currentMatchDayIndex < 7) {
-    return props.events && props.events.slice(currentIndex.value, currentIndex.value + 8);
+  if (props.events?.length < 4) {
+    return props.events;
+  }
+  if (+currentMatchDayIndex < getCurrentIndexByScreenSize()) {
+    return props.events && props.events.slice(currentIndex.value, currentIndex.value + getAdditionValueByScreenSize());
   }
   return props.events && props.events.slice(currentIndex.value, lastMatchIndex.value);
 });
 
 watch(visibleMatchEvents, (val) => {
-  
+
   if (val) {
     const id =
       props.events &&
@@ -78,8 +88,11 @@ const getPointsOrDate = (match: Record<string, string | number | any>) => {
 };
 
 const displayValues = () => {
-  if (+currentMatchDayIndex < 7) {
-    return props.events && props.events?.slice(currentIndex.value, currentIndex.value + 8);
+  if (props.events?.length < 4) {
+    return props.events;
+  }
+  if (+currentMatchDayIndex < getCurrentIndexByScreenSize()) {
+    return props.events && props.events?.slice(currentIndex.value, currentIndex.value + getAdditionValueByScreenSize());
   }
   const events = props.events && props.events?.slice(currentIndex.value, lastMatchIndex.value);
   return events;
@@ -106,14 +119,14 @@ const triggerSliderAnimation = (val: number) => {
 };
 const slide = (val: number) => {
   if (val === 1) {
-    if (currentIndex.value + 9 <= props.events.length) {
+    if (currentIndex.value + getLengthValueByScreenSize() <= props.events.length) {
       currentIndex.value++;
       lastMatchIndex.value++;
       displayValues();
       triggerSliderAnimation(val);
     }
   } else if (val === -1) {
-    if (currentIndex.value !== 0 && currentIndex.value + 9 <= props.events.length) {  
+    if (currentIndex.value !== 0 && currentIndex.value + getLengthValueByScreenSize() <= props.events.length) {  
       currentIndex.value--;
       lastMatchIndex.value--;
       displayValues();
