@@ -15,6 +15,7 @@ export const useFixturesStore = defineStore('fixtures', ()  => {
     poolLeaderboard: ref([]),
     data: ref([]),
     matchEvents: ref<IEvents>(),
+    tieBreaker: ref({}),
   };
 
   const getters = {
@@ -24,6 +25,7 @@ export const useFixturesStore = defineStore('fixtures', ()  => {
     getLeaderboard: computed(() => state.leaderboard),
     getPoolLeaderboard: computed(() => state.poolLeaderboard),
     getMatchEvents: computed(() => state.matchEvents),
+    getTieBreaker: computed(() => state.tieBreaker),
     getSingleCompetition: (slug: string) =>
       computed(() => state.competitions.value.find((e: any) => e.slug === slug)),
   };
@@ -73,7 +75,8 @@ export const useFixturesStore = defineStore('fixtures', ()  => {
     fetchFixtures: async (competition: string, round: string) => {
       try {
         const res = await axiosInstance.get(`competition/${competition}/fixture?round=${round}`);
-        state.data.value = res?.data?.data;
+        state.data.value = res?.data?.data.fixtures;
+        state.tieBreaker.value = res?.data?.data.tiebreaker;
         return res?.data?.data;
       } catch (error) {
         return error;
