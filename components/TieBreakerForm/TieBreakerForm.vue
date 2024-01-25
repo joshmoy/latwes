@@ -2,7 +2,7 @@
   <div class="tie-breaker">
     <h1 class="tie-breaker-title">Tie Breaker</h1>
     <p class="helper">Results are restricted to full time results, excluding penalties.</p>
-    <p><span>Question:</span> How many corners will there be in total?</p>
+    <p><span>Question:</span> {{ tieBreaker?.question }}</p>
     <Form @submit="onSubmit" :validation-schema="schema" :initial-values="initialDetails">
       <div class="tie-breaker-flex">
         <CustomInput
