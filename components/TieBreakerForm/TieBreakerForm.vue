@@ -1,7 +1,7 @@
 <template>
   <div class="tie-breaker" v-if="tieBreakerData.question">
     <h1 class="tie-breaker-title">Tie Breaker</h1>
-    <p class="helper">Results are restricted to full time results, excluding penalties.</p>
+    <p class="helper">Results are restricted to extra time results, excluding penalties.</p>
     <p><span>Question:</span> {{ tieBreakerData.question }}</p>
     <Form @submit="onSubmit" :validation-schema="schema" :initial-values="initialDetails">
       <div class="tie-breaker-flex">
