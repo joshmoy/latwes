@@ -41,9 +41,13 @@ export const useFixturesStore = defineStore('fixtures', ()  => {
         return error;
       }
     },
-    fetchLeaderboard: async (league: string, round?: string) => {
+    fetchLeaderboard: async (league: string, round?: string, circleId?: string) => {
       try {
-        const res = await axiosInstance.get(`competition/${league}/leaderboard?round=${round}`);
+        let url = `competition/${league}/leaderboard?round=${round}`;
+        if (circleId) {
+          url = `competition/${league}/leaderboard?round=${round}&circle_id=${circleId}`;
+        }
+        const res = await axiosInstance.get(url);
         state.leaderboard.value = res?.data?.data;
 
         return res?.data?.data;
@@ -51,10 +55,14 @@ export const useFixturesStore = defineStore('fixtures', ()  => {
         return error;
       }
     },
-    fetchPoolLeaderboard: async (league: string, round?: string) => {
+    fetchPoolLeaderboard: async (league: string, round?: string, circleId?: string) => {
       try {
+        let url = `competition/${league}/leaderboard?round=${round}`;
+        if (circleId) {
+          url = `competition/${league}/leaderboard?round=${round}&circle_id=${circleId}`;
+        }
         const res = await axiosInstance.get(
-          `competition/${league}/leaderboard?round=${round}&for_pool=yes`
+          `${url}&for_pool=yes`
         );
         state.poolLeaderboard.value = res?.data?.data;
 

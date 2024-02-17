@@ -80,7 +80,7 @@ const route = useRoute();
 
 const query: string | undefined = (route.query && route.query.for_pool)?.toString();
 const forPool = query === "yes"
-
+const circleId = route.query && route.query.circle_id;
 const filteredEvent = props.events.events.filter(
   (val: { match_day: number }) => val.match_day <= props.events.current_round
 );
@@ -125,6 +125,6 @@ const determineAmount = (rowIndex: number): string | number => {
 const update = () => {
   const payload = filter.value.toString();
 
-  emit("updateLeaderboard", payload, forPool);
+  emit("updateLeaderboard", payload, forPool, circleId);
 };
 </script>
