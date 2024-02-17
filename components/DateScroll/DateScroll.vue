@@ -46,17 +46,22 @@ interface IEventsObject {
 const props = defineProps(["events", "matchRound"]);
 const emit = defineEmits(["fetchCurrentMatchesSelected"]);
 const isSmallScreen = () => screenWidth < 768;
+const eventLength = props.events.length;
+const currentMatchDayIndex = ref(props.matchRound - 1).value;
+const roundsRemaining = eventLength - (currentMatchDayIndex + 1);
 const getCurrentIndexByScreenSize = () => isSmallScreen() ? 3 : 7;
 const getSubtractionValueByScreenSize = () => isSmallScreen() ? 1 : 3;
 const getAdditionValueByScreenSize = () => isSmallScreen() ? 1 : 8;
 const getLengthValueByScreenSize = () => isSmallScreen() ? 4 : 9;
 
 const activeMatch = ref();
-const currentMatchDayIndex = ref(props.matchRound - 1).value;
 const currentIndex = +currentMatchDayIndex < getCurrentIndexByScreenSize() ? ref(0) : ref(+currentMatchDayIndex - getSubtractionValueByScreenSize());
-const lastMatchIndex = ref(+currentMatchDayIndex + 5);
+const lastMatchIndex = roundsRemaining > 5 ? ref(+currentMatchDayIndex + 5) : ref(roundsRemaining);
 const visibleMatchEvents = computed(() => {
   if (props.events?.length <= 4) {
+    return props.events;
+  }
+  if (isSmallScreen()) {
     return props.events;
   }
   if (+currentMatchDayIndex < getCurrentIndexByScreenSize()) {
@@ -90,6 +95,9 @@ const getPointsOrDate = (match: Record<string, string | number | any>) => {
 const displayValues = () => {
   if (props.events?.length <= 4) {
     return props.events;
+  }
+  if (isSmallScreen()) {
+    return props.events.slice(-4);
   }
   if (+currentMatchDayIndex < getCurrentIndexByScreenSize()) {
     return props.events && props.events?.slice(currentIndex.value, currentIndex.value + getAdditionValueByScreenSize());
