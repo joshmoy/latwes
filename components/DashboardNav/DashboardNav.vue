@@ -93,7 +93,7 @@ import { useToast } from "vue-toastification";
 const $toast = useToast();
 const profileStore = useProfileStore();
 
-const profile = profileStore.getters.getProfile;
+const profile: any = profileStore.getters.getProfile;
 const authStore = useAuthStore();
 const userAuthCookie = useCookie("userAuthCookie");
 

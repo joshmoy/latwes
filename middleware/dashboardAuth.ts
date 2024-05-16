@@ -9,8 +9,7 @@ export default defineNuxtRouteMiddleware((to, from) => {
     setTimeout(() => {
       router.replace("/login");
     }, 100);
-    
-  } else if (!token.value) {
-    return navigateTo("/login");
+  } else {
+    return navigateTo(route.fullPath);
   }
 });
