@@ -36,7 +36,7 @@
       <div class="prediction-card__teams">
         <div class="prediction-card__teams--body">
           <div class="team-input__a">
-            <div v-if="slug !== 'afcon'"
+            <div v-if="!['afcon', 'euro'].includes(slug)"
               class="team-input__a__color logo"
               :style="{
                 background: matchData?.home_team_color,
@@ -88,7 +88,7 @@
           </div>
           <div class="team-input__b">
             <div
-              v-if="slug !== 'afcon'"
+              v-if="!['afcon', 'euro'].includes(slug)"
               class="team-input__b__color logo"
               :style="{
                 background: matchData?.away_team_color,

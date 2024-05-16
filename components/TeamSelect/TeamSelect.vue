@@ -36,7 +36,7 @@
           @click="handleSelectTeam(index)"
         >
           <div class="select-bottom-grid-team-card-top">
-          <p v-if="slug === 'afcon'">
+          <p v-if="['afcon', 'euro'].includes(slug)">
             {{ flags[`${team.name}`] }} &nbsp;
           </p> 
           <p v-if="team?.is_active">{{ team?.short_name }}</p>
