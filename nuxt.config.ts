@@ -5,6 +5,7 @@ export default defineNuxtConfig({
   typescript: {
     strict: true,
   },
+  ssr: true,
   head: {
     title: APP_NAME,
     titleTemplate: `%s - ${APP_NAME}`,
